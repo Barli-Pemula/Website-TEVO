@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* ================================================================
+   TEVO Design System — Astana Angkasa Company Profile
+   Sinkron dengan PRD v2.0 & SKILL v2.0 (UI/UX Spec v4)
+   ================================================================ */
+
+@theme {
+  /* ─── Brand Core ─────────────────────────────────────── */
+  --color-crimson:        #A83931;  /* CTA utama, active state, aksen berani */
+  --color-forest-dark:    #2C440C;  /* Hero background, footer, heading berat */
+  --color-gold-warm:      #D4A678;  /* Divider, ornamen, badge, focus ring */
+  --color-sky-vivid:      #03ABF6;  /* Aksen interaktif, link hover, highlight */
+  --color-sage-mid:       #9AAC69;  /* Badge Care, tag kategori */
+  --color-sky-pale:       #93D4E8;  /* Card bg sekunder, panel info ringan */
+  --color-cream-soft:     #FEF8BC;  /* Card Visi/Misi, teks di atas bg gelap */
+  --color-bark:           #614C3B;  /* Caption, label, teks sekunder */
+  --color-amber:          #F9D253;  /* Badge highlight, ornamen aktif, glow pedang */
+  --color-smoke:          #F5F4F0;  /* Background section netral */
+  --color-ink:            #1A1A1A;  /* Teks utama */
+
+  /* ─── Sword Animation Tokens ─────────────────────────── */
+  --gold-light:           #F9D253;
+  --crimson-glow:         rgba(168, 57, 49, 0.4);
+  --text-secondary:       #B0A090;
+  --font-heading:         var(--font-display);
+
+  /* ─── Tipografi ───────────────────────────────────────── */
+  --font-display:   'Plus Jakarta Sans', 'Poppins', sans-serif;
+  --font-body:      'Inter', 'Plus Jakarta Sans', sans-serif;
+  --font-editorial: 'Playfair Display', 'Merriweather', serif;
+
+  /* ─── Shape ───────────────────────────────────────────── */
+  --radius-card:    10px;
+  --radius-pill:    9999px;
+  --radius-sm:      6px;
+
+  /* ─── Shadow ──────────────────────────────────────────── */
+  --shadow-card:    0 2px 16px 0 rgba(0,0,0,0.07);
+  --shadow-lift:    0 6px 28px 0 rgba(0,0,0,0.12);
+  --shadow-crimson: 0 4px 20px 0 rgba(168,57,49,0.22);
+  --shadow-amber:   0 4px 20px 0 rgba(249,210,83,0.18);
+}
+
+/* ================================================================
+   Base Styles
+   ================================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* ================================================================
+   Focus Ring — WAJIB, tidak boleh dihapus
+   ================================================================ */
+*:focus-visible {
+  outline: 2px solid var(--color-gold-warm);
+  outline-offset: 2px;
+}
+
+/* ================================================================
+   Reduced Motion
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ================================================================
+   Scrollbar Styling
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-smoke);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson);
+}
+
+/* ================================================================
+   Selection
+   ================================================================ */
+::selection {
+  background: var(--color-crimson);
+  color: #FFFFFF;
+}
