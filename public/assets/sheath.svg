@@ -1,0 +1,71 @@
+<svg viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="leatherGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#3d2b1f" />
+      <stop offset="40%" stopColor="#2d1f15" />
+      <stop offset="60%" stopColor="#241811" />
+      <stop offset="100%" stopColor="#1a100a" />
+    </linearGradient>
+    <linearGradient id="goldSheath" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#f4d03f" />
+      <stop offset="40%" stopColor="#daa520" />
+      <stop offset="100%" stopColor="#8b6914" />
+    </linearGradient>
+    <linearGradient id="sheathHighlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="rgba(255,255,255,0.1)" />
+      <stop offset="50%" stopColor="rgba(255,255,255,0)" />
+      <stop offset="100%" stopColor="rgba(0,0,0,0.2)" />
+    </linearGradient>
+    <filter id="sheathShadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#000" floodOpacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Sheath body — wider to match the broad sword -->
+  <rect
+    x="30"
+    y="32"
+    width="475"
+    height="56"
+    rx="10"
+    fill="url(#leatherGrad)"
+    filter="url(#sheathShadow)"
+  />
+  <!-- Sheath highlight overlay -->
+  <rect x="30" y="32" width="475" height="56" rx="10" fill="url(#sheathHighlight)" />
+
+  <!-- Chape (metal tip - left end) — broader -->
+  <path
+    d="M 35,38 L 14,56 Q 10,60 14,64 L 35,82 Z"
+    fill="url(#goldSheath)"
+  />
+  <path
+    d="M 35,42 L 20,56 Q 16,60 20,64 L 35,78 Z"
+    fill="#b8860b"
+    opacity="0.3"
+  />
+
+  <!-- Throat (metal opening - right end) — wider -->
+  <rect x="495" y="29" width="20" height="62" rx="5" fill="url(#goldSheath)" />
+  <rect x="498" y="32" width="14" height="56" rx="4" fill="#b8860b" opacity="0.3" />
+
+  <!-- Decorative metal bands -->
+  <rect x="140" y="30" width="8" height="60" rx="2" fill="url(#goldSheath)" opacity="0.75" />
+  <rect x="280" y="30" width="8" height="60" rx="2" fill="url(#goldSheath)" opacity="0.75" />
+  <rect x="400" y="30" width="8" height="60" rx="2" fill="url(#goldSheath)" opacity="0.75" />
+
+  <!-- Engraved line details -->
+  <line x1="55" y1="52" x2="135" y2="52" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="55" y1="68" x2="135" y2="68" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="153" y1="52" x2="275" y2="52" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="153" y1="68" x2="275" y2="68" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="293" y1="52" x2="395" y2="52" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="293" y1="68" x2="395" y2="68" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="413" y1="52" x2="490" y2="52" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+  <line x1="413" y1="68" x2="490" y2="68" stroke="#4a3320" strokeWidth="1" opacity="0.5" />
+
+  <!-- Crimson accent lines -->
+  <line x1="60" y1="60" x2="130" y2="60" stroke="#8b0000" strokeWidth="2" opacity="0.3" />
+  <line x1="160" y1="60" x2="270" y2="60" stroke="#8b0000" strokeWidth="2" opacity="0.3" />
+  <line x1="300" y1="60" x2="390" y2="60" stroke="#8b0000" strokeWidth="2" opacity="0.3" />
+</svg>
