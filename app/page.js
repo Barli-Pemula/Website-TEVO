@@ -26,7 +26,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Section 2: Identity Launch */}
-      <IdentitySection />
+      {/* <IdentitySection /> */}
 
       {/* Section 3: Introduction, Vision & Mission */}
       <ProfileSection />

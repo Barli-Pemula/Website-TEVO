@@ -3,14 +3,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { PLACEHOLDER } from "../../lib/placeholder-content";
+import Image from "next/image";
 
 interface UnitDetail {
   name: string;
   shortName?: string;
-  emoji?: string;
+  logo?: string;
   slug: string;
   type: "bph" | "biro" | "departemen";
 }
+
+const stagger = { duration: 0.4, ease: "easeOut" as const };
+const fadeUp = {
+  initial: { opacity: 0, y: 16 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+};
+
 
 function OrgModal({ unit, onClose }: { unit: UnitDetail | null; onClose: () => void }) {
   if (!unit) return null;
@@ -29,7 +38,7 @@ function OrgModal({ unit, onClose }: { unit: UnitDetail | null; onClose: () => v
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            {unit.emoji && <span className="text-3xl">{unit.emoji}</span>}
+            {unit.logo && <span className="text-3xl">{unit.logo}</span>}
             <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-forest-dark">
               {unit.name}
             </h3>
@@ -73,103 +82,154 @@ export default function StructureHub() {
   };
 
   return (
-    <section id="struktur" className="relative bg-gradient-to-b from-forest-dark to-[#1a2a06] py-20 md:py-28 overflow-hidden">
-      {/* Ornamental accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gold-warm/60" />
+    <section id="struktur" className="relative bg-[#DCB06F] overflow-hidden">
+      <div className="bg-[#870F0C] my-5 p-10">
+        <div className="bg-[#DCB06F]">
+          <div className="bg-[#FBF5EA] border-3 border-[#DCB06F] rounded-[25px]">
+            {/* Ornamental accent */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gold-warm/60" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <motion.h2
-          {...fadeUp}
-          transition={{ duration: 0.4 }}
-          className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-extrabold text-cream-soft"
-        >
-          {PLACEHOLDER.struktur.sectionTitle}
-        </motion.h2>
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.4, delay: 0.06 }}
-          className="mt-2 text-cream-soft/60 text-sm mb-12"
-        >
-          {PLACEHOLDER.struktur.sectionSub}
-        </motion.p>
+            <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 my-15">
+              <motion.h2
+                {...fadeUp}
+                transition={{ duration: 0.4 }}
+                className="font-asimovian text-[80px] text-[#870F0C] uppercase leading-none mb-10"
+              >
+                {PLACEHOLDER.struktur.sectionTitle}
+              </motion.h2>
+              {/* <motion.p
+              {...fadeUp}
+              transition={{ duration: 0.4, delay: 0.06 }}
+              className="mt-2 text-cream-soft/60 text-sm mb-12"
+            >
+              {PLACEHOLDER.struktur.sectionSub}
+            </motion.p> */}
 
-        {/* Tree Diagram */}
-        <div className="flex flex-col items-center gap-0">
-          {/* Level 1: BPH (Root) */}
-          <motion.button
-            {...fadeUp}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            onClick={() => setSelectedUnit(units[0])}
-            className="px-6 py-3 rounded-xl bg-bark/60 border border-gold-warm/30 text-cream-soft font-bold
-                       hover:border-crimson hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-lg"
-          >
-            <span className="text-xl mr-2">👑</span>
-            {PLACEHOLDER.struktur.bph.shortName}
-          </motion.button>
+              {/* Tree Diagram */}
+              <div className="flex flex-col items-center gap-0">
+                {/* Level 1: BPH (Root) */}
+                <motion.button
+                  {...fadeUp}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  onClick={() => setSelectedUnit(units[0])}
+                  className="flex flex-col items-center justify-center hover:border-crimson hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+                >
+                  <Image src={PLACEHOLDER.struktur.bph.logo} alt={PLACEHOLDER.struktur.bph.name} width={104} height={115} className="object-contain" />
+                  <div className="border-1 border-[#DCB06F] rounded-[10px] p-1">
+                    <div className="border-2 border-[#DCB06F] rounded-[6px] p-3 text-[#701011] font-montserrat font-semibold text-[20px] uppercase">
+                      {PLACEHOLDER.struktur.bph.name}
+                    </div>
+                  </div>
+                </motion.button>
 
-          {/* Connector Line */}
-          <div className="w-[1px] h-8 bg-gold-warm/40" />
+                {/* Connector Line */}
+                <div className="w-[2px] h-8 bg-[#DCB06F]/40" />
 
-          {/* Horizontal connector */}
-          <div className="w-3/4 max-w-md h-[1px] bg-gold-warm/30 relative">
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-gold-warm/60" />
-          </div>
+                {/* Horizontal connector */}
+                <div className="w-3/4 max-w-md h-[2px] bg-[#DCB06F]/40 relative">
+                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]/60" />
+                </div>
 
-          {/* Branch labels + nodes */}
-          <div className="grid grid-cols-2 gap-6 md:gap-12 w-full mt-4">
-            {/* Biro Branch */}
-            <div className="flex flex-col items-center">
-              <div className="w-[1px] h-6 bg-gold-warm/30" />
-              <span className="text-gold-warm text-xs font-bold uppercase tracking-[0.3em] mb-3">
-                Biro
-              </span>
-              <div className="flex flex-wrap justify-center gap-3">
-                {PLACEHOLDER.struktur.biro.map((unit, i) => (
-                  <motion.button
-                    key={unit.slug}
-                    {...fadeUp}
-                    transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
-                    onClick={() => setSelectedUnit({ ...unit, type: "biro" })}
-                    className="px-4 py-3 rounded-xl bg-bark/40 border border-gold-warm/20 text-cream-soft/90 text-sm
+                {/* Biro Branch + nodes */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                  {PLACEHOLDER.struktur.biro.map((biro, i) => (
+                    <div key={i} className="flex flex-col w-full">
+                      <motion.div
+                        {...fadeUp}
+                        transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
+                        onClick={() => setSelectedUnit({ ...biro, type: "biro" })}
+                        className="flex flex-col items-center cursor-pointer w-70"
+                      >
+                        <div className="w-[2px] h-6 bg-[#DCB06F]/40" />
+                        <div className=" bg-[#870F0C] p-1 text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px]">
+                          <div className="flex justify-center gap-3 items-center bg-[#870F0C] pr-2 py-1 border-2 border-[#DCB06F] rounded-[10px]">
+                            <Image src={biro.logo} alt={biro.name} width={95} height={95} />
+                            <span className="text-[#F9D253] text-[20px] text-left font-montserrat ">{biro.name}</span>
+                          </div>
+                        </div>
+
+                        {/* <span className="text-gold-warm text-xs font-bold uppercase tracking-[0.3em] mb-3">
+                          Biro
+                        </span> */}
+                        {/* <div className="flex flex-wrap justify-center gap-3">
+                          {PLACEHOLDER.struktur.biro.map((unit, i) => (
+                            <motion.button
+                              key={unit.slug}
+                              {...fadeUp}
+                              transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
+                              onClick={() => setSelectedUnit({ ...unit, type: "biro" })}
+                              className="px-4 py-3 rounded-xl bg-bark/40 border border-gold-warm/20 text-cream-soft/90 text-sm
                                hover:border-crimson hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 min-w-[120px]"
-                  >
-                    <span className="block text-lg mb-1">{unit.emoji}</span>
-                    <span className="text-xs leading-tight">{unit.name}</span>
-                  </motion.button>
-                ))}
+                            >
+                              <span className="block text-lg mb-1">{unit.logo}</span>
+                              <span className="text-xs leading-tight">{unit.name}</span>
+                            </motion.button>
+                          ))}
+                        </div> */}
+                      </motion.div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Horizontal connector */}
+                <div className="w-3/4 max-w-md h-[2px] bg-[#DCB06F]/40 relative">
+                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]/60" />
+                </div>
+
+                {/* Dept Branch + nodes */}
+                <div className="grid grid-cols-4 md:grid-cols-8 gap-1 w-full">
+                  {PLACEHOLDER.struktur.departemen.map((dept, i) => (
+                    <div key={i} className="flex flex-col items-center w-full">
+                      <motion.div
+                        {...fadeUp}
+                        transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
+                        onClick={() => setSelectedUnit({ ...dept, type: "biro" })}
+                        className="flex flex-col items-center w-20 cursor-pointer"
+                      >
+                        <div className="w-[2px] h-6 bg-[#DCB06F]/40" />
+                        <div className=" bg-[#2C430B] p-1 text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px]">
+                          <div className="flex flex-wrap justify-center items-center bg-[#2C430B] p-1 border-2 border-[#DCB06F] rounded-[10px]">
+                            <Image src={dept.logo} alt={dept.name} width={69} height={70} />
+                            <span className="w-30 text-[#F9D253] text-[12px] font-montserrat ">{dept.name}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </div>
-
             {/* Departemen Branch */}
-            <div className="flex flex-col items-center">
-              <div className="w-[1px] h-6 bg-gold-warm/30" />
-              <span className="text-gold-warm text-xs font-bold uppercase tracking-[0.3em] mb-3">
-                Departemen
-              </span>
-              <div className="flex flex-wrap justify-center gap-3">
-                {PLACEHOLDER.struktur.departemen.map((unit, i) => (
-                  <motion.button
-                    key={unit.slug}
-                    {...fadeUp}
-                    transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
-                    onClick={() => setSelectedUnit({ ...unit, type: "departemen" })}
-                    className="px-4 py-3 rounded-xl bg-bark/40 border border-gold-warm/20 text-cream-soft/90 text-sm
+            {/* <div className="flex flex-col items-center">
+                    <div className="w-[1px] h-6 bg-gold-warm/30" />
+                    <span className="text-gold-warm text-xs font-bold uppercase tracking-[0.3em] mb-3">
+                      Departemen
+                    </span>
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {PLACEHOLDER.struktur.departemen.map((unit, i) => (
+                        <motion.button
+                          key={unit.slug}
+                          {...fadeUp}
+                          transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
+                          onClick={() => setSelectedUnit({ ...unit, type: "departemen" })}
+                          className="px-4 py-3 rounded-xl bg-bark/40 border border-gold-warm/20 text-cream-soft/90 text-sm
                                hover:border-crimson hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 min-w-[120px]"
-                  >
-                    <span className="block text-lg mb-1">{unit.emoji}</span>
-                    <span className="text-xs leading-tight">{unit.name}</span>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
+                        >
+                          <span className="block text-lg mb-1">{unit.logo}</span>
+                          <span className="text-xs leading-tight">{unit.name}</span>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div> */}
+
+            {/* Modal */}
+            {selectedUnit && (
+              <OrgModal unit={selectedUnit} onClose={() => setSelectedUnit(null)} />
+            )}
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      {selectedUnit && (
-        <OrgModal unit={selectedUnit} onClose={() => setSelectedUnit(null)} />
-      )}
     </section>
   );
 }

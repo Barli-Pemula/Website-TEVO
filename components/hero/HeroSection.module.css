@@ -124,11 +124,13 @@
 }
 
 .heroTitle h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 6vw, 5.5rem);
-  font-weight: 900;
-  letter-spacing: 0.25em;
-  color: var(--gold-light);
+  font-family: var(--font-lacheyard);
+  font-size: clamp(2rem, 9vw, 9rem);
+  /* font-size: 100px; */
+  font-weight: 500;
+  /* letter-spacing: 0.25em; */
+  color: #A90900;
+  /* border-color: white; */
   white-space: nowrap;
   text-shadow:
     0 0 60px var(--crimson-glow),

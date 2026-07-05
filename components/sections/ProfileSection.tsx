@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { PLACEHOLDER } from "../../lib/placeholder-content";
+import style from "./ProfileSection.module.css";
+import IdentitySection from "./IdentitySection";
 
 const stagger = { duration: 0.4, ease: "easeOut" as const };
 const fadeUp = {
@@ -12,92 +14,184 @@ const fadeUp = {
 
 export default function ProfileSection() {
   return (
-    <section id="profile" className="relative">
-      {/* Subsection 1: Info Cards — smoke bg */}
-      <div className="bg-smoke py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            {...fadeUp}
-            transition={stagger}
-            className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-extrabold text-forest-dark text-center mb-2"
-          >
-            Mengenal Astana Angkasa
-          </motion.h2>
-          <motion.p
-            {...fadeUp}
-            transition={{ ...stagger, delay: 0.06 }}
-            className="text-bark text-center mb-12 text-sm uppercase tracking-[0.15em] font-medium"
-          >
-            Profil Kabinet
-          </motion.p>
+    <section id="profile" className="relative bg-[#FBF5EA]">
+      <div className={`${style.setImageForBackground} `}>
+        {/* subsection 1: logo dan jargon */}
+        <IdentitySection />
 
-          {/* 3 Info Cards — asimetris layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              PLACEHOLDER.intro.selayangPandang,
-              PLACEHOLDER.intro.peranOrmawa,
-              PLACEHOLDER.intro.pengertianKabinet,
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp}
-                transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
-                className="bg-white border border-gold-warm/20 rounded-[10px] p-6 md:p-8 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-forest-dark mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-ink/70 text-sm leading-relaxed">
-                  {card.body}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Divider */}
-      <div className="h-[1px] bg-gold-warm/40" />
-
-      {/* Subsection 2: Visi & Misi — white bg + cream card */}
-      <div className="bg-white py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
-            {/* Visi Card — cream-soft bg, takes 2 cols */}
+        {/* subsection 2: selayang pandang dan pengertian kabinet */}
+        <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+            {/* selayang pandang */}
             <motion.div
               {...fadeUp}
               transition={stagger}
-              className="md:col-span-2 bg-cream-soft rounded-[10px] p-8 md:p-10 border border-gold-warm/30 shadow-card"
+              className="bg-[#870F0C] shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
             >
-              <span className="inline-block px-3 py-1 rounded-full bg-gold-warm/20 text-forest-dark text-xs font-bold uppercase tracking-wider mb-6">
-                Visi
-              </span>
-              <p className="font-[family-name:var(--font-editorial)] text-forest-dark text-lg leading-relaxed italic">
-                &ldquo;{PLACEHOLDER.intro.visi}&rdquo;
-              </p>
-              {/* Ornamen */}
-              <div className="mt-6 w-12 h-[2px] bg-gold-warm" />
+              <div className="h-full rounded-[25px] bg-[#FBF5EA] border-2 border-[#870F0C] relative">
+                <div className="mx-10 my-7">
+                  <motion.p
+                    {...fadeUp}
+                    transition={stagger}
+                    className="font-asimovian uppercase text-[#870F0C] text-[50px] text-center"
+                  >
+                    Selayang Pandang
+                  </motion.p>
+                  <motion.p
+                    {...fadeUp}
+                    transition={stagger}
+                    className="font-montserrat text-[#870F0C] text-[20px] text-center mb-6"
+                  >
+                    Ormawa Eksekutif PKU IPB
+                  </motion.p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                    {[
+                      PLACEHOLDER.intro.ormawaEkse,
+                      PLACEHOLDER.intro.peranOrmawa,
+                    ].map((card, i) => (
+                      <motion.div
+                        key={i}
+                        {...fadeUp}
+                        transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
+                        className="bg-white border border-gold-warm/20 rounded-[25px] p-3 md:p-4 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
+                      >
+                        <h3 className="font-montserrat text-center text-[#A90900] text-[18px] text-lg font-bold mb-3">
+                          {card.title}
+                        </h3>
+                        <hr className="mb-3 text-[#A90900] border-t-2" />
+                        <p className="text-ink/70 leading-relaxed text-center text-[12px]">
+                          {card.body}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Misi Card — smoke bg, takes 3 cols */}
+            {/* Pengertian Kabinet */}
             <motion.div
               {...fadeUp}
-              transition={{ ...stagger, delay: 0.1 }}
-              className="md:col-span-3 bg-smoke rounded-[10px] p-8 md:p-10 border border-gold-warm/20 shadow-card"
+              transition={stagger}
+              className="bg-[#870F0C] shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
             >
-              <span className="inline-block px-3 py-1 rounded-full bg-crimson/10 text-crimson text-xs font-bold uppercase tracking-wider mb-6">
-                Misi
-              </span>
-              <ul className="space-y-4">
-                {PLACEHOLDER.intro.misi.map((item, i) => (
-                  <li key={i} className="flex gap-3 text-ink/80 text-sm leading-relaxed">
-                    <span className="flex-shrink-0 w-2 h-2 rounded-full bg-crimson mt-1.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="h-full rounded-[25px] bg-[#FBF5EA] border-2 border-[#870F0C] relative">
+                <div className="mx-10 my-7">
+                  <motion.p
+                    {...fadeUp}
+                    transition={stagger}
+                    className="font-asimovian uppercase text-[#870F0C] text-[50px] text-center"
+                  >
+                    Pengertian Kabinet
+                  </motion.p>
+                  <motion.p
+                    {...fadeUp}
+                    transition={stagger}
+                    className="font-montserrat text-[#870F0C] text-[20px] text-center mb-6"
+                  >
+                    Astana Angkasa
+                  </motion.p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                    {[
+                      PLACEHOLDER.intro.astana,
+                      PLACEHOLDER.intro.angkasa,
+                    ].map((card, i) => (
+                      <motion.div
+                        key={i}
+                        {...fadeUp}
+                        transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
+                        className="bg-[#F6E7CC] border border-[#DCB06F] border-3 rounded-[25px] p-3 md:p-4 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
+                      >
+                        <h3 className="font-montserrat text-center text-[#A90900] text-[18px] text-lg font-bold mb-3">
+                          {card.title}
+                        </h3>
+                        <hr className="mb-3 text-[#A90900] border-t-2" />
+                        <p className="text-ink/70 leading-relaxed text-center text-[12px]">
+                          {card.body}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
+        </div>
+
+        {/* Subsection 3: Astana Angkasa */}
+        <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 mb-10">
+          <motion.h2
+            {...fadeUp}
+            transition={stagger}
+            className="font-kapakana text-center text-[#701011] text-[100px] tracking-tight drop-shadow"
+          // className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.8rem)] font-extrabold text-forest-dark text-center mb-2"
+          >
+            Astana Angkasa
+          </motion.h2>
+
+          <motion.p
+            {...fadeUp}
+            transition={stagger}
+            className="mx-40 text-center font-montserrat font-[500] text-[18px]"
+          >
+            {PLACEHOLDER.intro.astanaAngkasa.barisSatu}
+          </motion.p>
+          <br />
+          <motion.p
+            {...fadeUp}
+            transition={stagger}
+            className="mx-40 text-center font-montserrat font-[500] text-[18px]"
+          >
+            {PLACEHOLDER.intro.astanaAngkasa.barisDua}
+          </motion.p>
+        </div>
+
+        {/* Subsection 4: Visi */}
+        <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 mb-10">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[50px]">
+            <div />
+
+            <motion.h2
+              {...fadeUp}
+              transition={stagger}
+              className="font-asimovian uppercase text-[64px] text-[#2C430B] leading-none mb-10"
+            >
+              Visi
+            </motion.h2>
+
+            <div className="h-[5px] bg-[#2C430B]" />
+          </div>
+          <motion.p
+            {...fadeUp}
+            transition={stagger}
+            className="bg-[#2C430B] border-3 border-[#DCB06F] text-center rounded-[25px] p-5 drop-shadow text-[white]"
+          >
+            {PLACEHOLDER.intro.visi}
+          </motion.p>
+        </div>
+
+        {/* Subsection 5: Misi */}
+        <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 pb-30">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[50px]">
+            <div className="h-[5px] bg-[#701011]" />
+            <motion.h2
+              {...fadeUp}
+              transition={stagger}
+              className="font-asimovian uppercase text-[64px] text-[#701011] leading-none text-center mb-10"
+            >
+              Misi
+            </motion.h2>
+            <div />
+          </div>
+          <motion.ul
+            {...fadeUp}
+            transition={stagger}
+            className="list-none bg-[#701011] border-3 border-[#DCB06F] rounded-[25px] p-5 drop-shadow text-[white]"
+          >
+            {PLACEHOLDER.intro.misi.map((baris, i) => (
+              <li key={i} className="relative pl-7 before:content-['✨'] before:absolute before:left-0 before:top-0">{baris}</li>
+            ))}
+          </motion.ul>
         </div>
       </div>
     </section>
