@@ -3,6 +3,9 @@
  * Semua teks di file ini WAJIB diganti sebelum go-live.
  */
 
+import { body } from "framer-motion/client";
+import { title } from "node:process";
+
 export const PLACEHOLDER = {
   /** Hero headline & sub */
   hero: {
@@ -19,17 +22,29 @@ export const PLACEHOLDER = {
 
   /** Introduction — Section 3 */
   intro: {
-    selayangPandang: {
-      title: "Selayang Pandang",
-      body: "Kabinet Astana Angkasa merupakan kabinet Ormawa Eksekutif Program Khusus Undip (PKU) IPB University periode 2025/2026. Nama \"Astana Angkasa\" merepresentasikan istana di angkasa — simbol cita-cita luhur yang dijunjung tinggi oleh setiap insan di dalamnya.",
+    ormawaEkse: {
+      title: "Ormawa Eksekutif PKU IPB",
+      body: "Ormawa Eksekutif PKU IPB merupakan organisasi kemahasiswaan di lingkup Pendidikan Kompetensi Umum yang dikhususkan untuk mahasiswa tingkat PKU IPB. Fungsinya melibatkan pemberian kesejahteraan penanganan segala problematika yang dialami mahasiswa PKU IPB."
     },
     peranOrmawa: {
-      title: "Peran Ormawa",
-      body: "Sebagai organisasi mahasiswa eksekutif di tingkat program, Ormawa Eksekutif PKU IPB berperan sebagai motor penggerak kegiatan kemahasiswaan, jembatan aspirasi mahasiswa kepada pihak program, serta wadah pengembangan kapasitas kepemimpinan dan keorganisasian.",
+      title: "Peran Ormawa Eksekutif PKU IPB",
+      body: "Perannya sangat signifikan dalam kehidupan kampus mahasiswa PKU, dengan pergerakan, pengembangan, pelayanan, dan pengabdian. Dengan demikian, organisasi ini bukan hanya berfungsi sebagai penanganan masalah, tetapi juga sebagai penggerak pengembangan dan kesejahteraan mahasiswa PKU IPB melalui berbagai kegiatan dan prgrgam yang dijalankan.",
     },
     pengertianKabinet: {
       title: "Pengertian Kabinet",
       body: "Kabinet Astana Angkasa terdiri dari Badan Pengurus Harian (BPH), Biro, dan Departemen yang bekerja secara kolektif-kolegial menjalankan program kerja selama satu periode kepengurusan.",
+    },
+    astana: {
+      title: "Astana",
+      body: "Astana dimaknai sebagai sebuah istana, rumah besar yang kokoh secara fondasi, terstruktur dalam tata kelola, dan berdiri atas sistem yang saling menopang. la merepresentasikan tatanan, keteraturan, dan kekuatan kolektif yang menjadi pijakan setiap langkah.",
+    },
+    angkasa: {
+      title: "Angkasa",
+      body: "Angkasa melambangkan ruang luas untuk bertumbuh, melampaui batas, dan menatap masa depan dengan visi yang lebih jauh. Sebuah simbol keberanian untuk bermimpi tinggi dan menjadikan cita-cita sebagai arah perjuangan.",
+    },
+    astanaAngkasa:{
+      barisSatu: "Kabinet Astana Angkasa hadir sebagai ruang bersama bagi seluruh elemen Senapati, Ksatria, dan Laksana untuk membangun organisasi yang solid, adaptif, dan terus berkembang, tanpa melupakan pijakan yang telah dibentuk sebelumnya.",
+      barisDua: "Astana Angkasa merepresentasikan sebuah organisasi yang memiliki sistem internal solid, tertata, dan kuat (Astana), namun tetap bergerak dengan keberanian, adaptabilitas, serta visi yang luas dan tinggi untuk berkembang tanpa batas (Angkasa).",
     },
     visi: "Mewujudkan Ormawa Eksekutif PKU IPB sebagai organisasi yang unggul, profesional, dan berintegritas dalam membangun sinergi mahasiswa yang progresif serta berdampak nyata bagi masyarakat.",
     misi: [
@@ -46,19 +61,26 @@ export const PLACEHOLDER = {
     sectionTitle: "Struktur Organisasi",
     sectionSub: "Bagan hierarki kabinet — klik setiap unit untuk informasi detail",
     bph: {
+      slug: "bph",
       name: "Badan Pengurus Harian",
       shortName: "BPH",
-      emoji: "👑",
+      logo: "/assets/logoBirdept/bph.png",
     },
     biro: [
-      { slug: "biro-administrasi", name: "Biro Administrasi", shortName: "Biro Admin", emoji: "📋" },
-      { slug: "biro-komunikasi", name: "Biro Komunikasi & Informasi", shortName: "Biro Kominfo", emoji: "📡" },
+      { slug: "biro-internal", name: "Biro Internal", shortName: "Biro Internal", logo: "/assets/logoBirdept/internal.png" },
+      { slug: "biro-ristek", name: "Biro Riset & Teknologi", shortName: "Biro Ristek", logo: "/assets/logoBirdept/ristek.png" },
+      { slug: "biro-komit", name: "Biro Kolaborasi & Kemitraan", shortName: "Biro Komit", logo: "/assets/logoBirdept/komit.png" },
+      { slug: "biro-medbrand", name: "Biro Media & Branding", shortName: "Biro Medbrand", logo: "/assets/logoBirdept/medbrand.png" },
     ],
     departemen: [
-      { slug: "dept-akademik", name: "Dept. Akademik & Profesi", shortName: "Dept. Akademik", emoji: "📚" },
-      { slug: "dept-pemberdayaan", name: "Dept. Pemberdayaan Mahasiswa", shortName: "Dept. PM", emoji: "🤝" },
-      { slug: "dept-sosial", name: "Dept. Sosial Masyarakat", shortName: "Dept. Sosial", emoji: "🌾" },
-      { slug: "dept-ekraf", name: "Dept. Ekonomi Kreatif", shortName: "Dept. Ekraf", emoji: "💡" },
+      { slug: "dept-adkesmah", name: "Departemen Advokasi & Kesejahteraan Mahasiswa", shortName: "Dept. Adkesmah", logo: "/assets/logoBirdept/adkesmah.png" },
+      { slug: "dept-psdm", name: "Departemen Pengembangan Sumber Daya Mahasiswa", shortName: "Dept. PSDM", logo: "/assets/logoBirdept/psdm.png" },
+      { slug: "dept-akpres", name: "Departemen Akademik & Prestasi", shortName: "Dept. Akpres", logo: "/assets/logoBirdept/akpres.png" },
+      { slug: "dept-slh", name: "Departemen Sosial & Lingkungan Hidup", shortName: "Dept. SLH", logo: "/assets/logoBirdept/slh.png" },
+      { slug: "dept-senbud", name: "Departemen Seni & Budaya", shortName: "Dept. Senbud", logo: "/assets/logoBirdept/senbud.png" },
+      { slug: "dept-peraga", name: "Departemen Pemuda & Olahraga", shortName: "Dept. Peraga", logo: "/assets/logoBirdept/peraga.png" },
+      { slug: "dept-kastrat", name: "Departemen Kajian & Aksi Strategis", shortName: "Dept. Kastrat", logo: "/assets/logoBirdept/kastrat.png" },
+      { slug: "dept-ekraf", name: "Departemen Ekonomi Kreatif", shortName: "Dept. Ekraf", logo: "/assets/logoBirdept/ekraf.png" },
     ],
   },
 

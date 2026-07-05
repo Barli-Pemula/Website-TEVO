@@ -1,7 +1,8 @@
-import { Plus_Jakarta_Sans, Inter, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, Playfair_Display, Kapakana, Asimovian, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Lacheyard from "next/font/local"
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-display",
@@ -25,6 +26,34 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const kapakana = Kapakana({
+  variable: "--font-kapakana",
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  display: "swap",
+})
+
+const asimovian = Asimovian({
+  variable: "--font-asimovian",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+})
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900",],
+  style: ["normal", "italic"],
+  display: "swap",
+})
+
+const lacheyard = Lacheyard({
+  src: "../assets/fonts/LacheyardScript.otf",
+  variable: "--font-lacheyard",
+  display: "swap",
+})
+
 export const metadata = {
   title: "Astana Angkasa — Kabinet Ormawa Eksekutif PKU IPB",
   description:
@@ -44,7 +73,7 @@ export default function RootLayout({ children }) {
       lang="id"
       className={`${plusJakarta.variable} ${inter.variable} ${playfair.variable}`}
     >
-      <body className="font-[family-name:var(--font-body)]">
+      <body className={`${kapakana.variable} ${asimovian.variable} ${montserrat.variable} ${lacheyard.variable} font-[family-name:var(--font-body)]`}>
         <Navbar />
         <main>{children}</main>
         <Footer />

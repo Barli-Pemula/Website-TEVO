@@ -434,7 +434,7 @@ export default function HeroSection() {
         {/* Background */}
         <div className={styles.bgImage}>
           <Image
-            src="/assets/hero-castle.webp"
+            src="/assets/hero-bg.png"
             alt="Crimson Royale Background"
             fill
             priority
@@ -445,8 +445,8 @@ export default function HeroSection() {
         <div className={styles.bgOverlay} />
 
         {/* Title — positioned at sword center, emerges from within */}
-        <div ref={titleRef} className={styles.heroTitle}>
-          <h1>ASTANA ANGKASA</h1>
+        <div ref={titleRef} className={`${styles.heroTitle}`}>
+          <h1 className="[-webkit-text-stroke:1px_#fff]">Astana Angkasa</h1>
           <p>Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
         </div>
 

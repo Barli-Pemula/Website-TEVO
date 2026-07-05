@@ -29,6 +29,10 @@
   --font-display:   'Plus Jakarta Sans', 'Poppins', sans-serif;
   --font-body:      'Inter', 'Plus Jakarta Sans', sans-serif;
   --font-editorial: 'Playfair Display', 'Merriweather', serif;
+  --font-kapakana: var(--font-kapakana);
+  --font-asimovian: var(--font-asimovian);
+  --font-montserrat: var(--font-montserrat);
+  --font-lacheyard: var(--font-lacheyard);
 
   /* ─── Shape ───────────────────────────────────────────── */
   --radius-card:    10px;

@@ -1,0 +1,7 @@
+/* identity logo dan jargon */
+.setImageForBackground {
+    background-image: url(/assets/identity-bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top;
+}
