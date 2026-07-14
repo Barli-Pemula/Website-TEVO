@@ -3,8 +3,9 @@ import IdentitySection from "../components/sections/IdentitySection";
 import ProfileSection from "../components/sections/ProfileSection";
 import StructureHub from "../components/sections/StructureHub";
 import AngkasaCareHub from "../components/sections/AngkasaCareHub";
-import StorePreview from "../components/sections/StorePreview";
+import StorePreview from "../components/sections/AngkasaStorePreview";
 import NewsCarousel from "../components/sections/NewsCarousel";
+import Proker from "../components/sections/Proker";
 
 /**
  * TEVO — One-Scroll Homepage
@@ -34,12 +35,8 @@ export default function Home() {
       {/* Section 4: Organization Structure Hub */}
       <StructureHub />
 
-      {/* Section 5: Angkasa Care Hub */}
-      <AngkasaCareHub />
-
-      {/* Section 6: Angkasa Store Preview */}
-      <StorePreview />
-
+      {/* section 5: preview proker adkes, ekraf, dan ristek */}
+      <Proker />
       {/* Section 7: Informasi & Update */}
       <NewsCarousel />
     </>

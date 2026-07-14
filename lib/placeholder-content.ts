@@ -42,17 +42,17 @@ export const PLACEHOLDER = {
       title: "Angkasa",
       body: "Angkasa melambangkan ruang luas untuk bertumbuh, melampaui batas, dan menatap masa depan dengan visi yang lebih jauh. Sebuah simbol keberanian untuk bermimpi tinggi dan menjadikan cita-cita sebagai arah perjuangan.",
     },
-    astanaAngkasa:{
+    astanaAngkasa: {
       barisSatu: "Kabinet Astana Angkasa hadir sebagai ruang bersama bagi seluruh elemen Senapati, Ksatria, dan Laksana untuk membangun organisasi yang solid, adaptif, dan terus berkembang, tanpa melupakan pijakan yang telah dibentuk sebelumnya.",
       barisDua: "Astana Angkasa merepresentasikan sebuah organisasi yang memiliki sistem internal solid, tertata, dan kuat (Astana), namun tetap bergerak dengan keberanian, adaptabilitas, serta visi yang luas dan tinggi untuk berkembang tanpa batas (Angkasa).",
     },
-    visi: "Mewujudkan Ormawa Eksekutif PKU IPB sebagai organisasi yang unggul, profesional, dan berintegritas dalam membangun sinergi mahasiswa yang progresif serta berdampak nyata bagi masyarakat.",
+    visi: "Mewujudkan Organisasi Mahasiswa Eksekutif PKU yang berintegritas dalam dedikasi untuk aktualisasi potensi Keluarga Mahasiswa PKU menuju ekosistem yang aktif, kreatif, inovatif, adaptif, dan kolaboratif.",
     misi: [
-      "Memperkuat sinergi dan solidaritas antar elemen mahasiswa PKU IPB",
-      "Menyelenggarakan program kerja inovatif yang responsif terhadap kebutuhan mahasiswa",
-      "Membangun budaya organisasi yang profesional, transparan, dan akuntabel",
-      "Mengembangkan potensi kepemimpinan dan kreativitas seluruh anggota kabinet",
-      "Menjalin kolaborasi strategis dengan pihak internal dan eksternal kampus",
+      "Menciptakan lingkungan PKU IPB yang <strong>suportif, harmonis, dan inklusif</strong> berlandaskan nilai-nilai spiritual yang luhur.",
+      "Optimalisasi Peran ormawa sebagai wadah aspirasi yang <strong>responsif, pelopor perbaikan, dan ruang diskusi</strong> dengan mengedepankan prinsip <strong>kolaborasi</strong> antar KM PKU IPB.",
+      "Meningkatkan partisipasi KM PKU dalam menyuarakan hak dan kewajiban untuk mencapai <strong>prestasi dan pengembangan kreativitas</strong> di lingkungan internal maupun eksternal IPB.",
+      "Penguatan harmoni yang <strong>ASIK (afirmatif, solidaritas, inklusifitas, dan kolaboratif)</strong> dalam membangun sinergi antara Ormawa Eksekutif, UKM IPB, dan OMDA PKU.",
+      "Mengedepankan peran teknologi untuk memaksimalkan <strong>budaya inovasi</strong> menuju <strong>transformasi</strong> organisasi yang efektif berbasis digitalisasi dengan prinsip dari, oleh, dan untuk KM PKU IPB.",
     ],
   },
 
@@ -67,22 +67,163 @@ export const PLACEHOLDER = {
       logo: "/assets/logoBirdept/bph.png",
     },
     biro: [
-      { slug: "biro-internal", name: "Biro Internal", shortName: "Biro Internal", logo: "/assets/logoBirdept/internal.png" },
-      { slug: "biro-ristek", name: "Biro Riset & Teknologi", shortName: "Biro Ristek", logo: "/assets/logoBirdept/ristek.png" },
-      { slug: "biro-komit", name: "Biro Kolaborasi & Kemitraan", shortName: "Biro Komit", logo: "/assets/logoBirdept/komit.png" },
-      { slug: "biro-medbrand", name: "Biro Media & Branding", shortName: "Biro Medbrand", logo: "/assets/logoBirdept/medbrand.png" },
+      {
+        slug: "biro-internal", name: "Internal", shortName: "Internal", logo: "/assets/logoBirdept/internal.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          },
+        ],
+        members: [
+          {
+            name: "Nurul Auliya Rahman", jabatan: "Laksana", instagram: "halo", prokerAktif: [
+              "acadoscope", "tevo", "ristek 100"
+            ]
+          },
+          {
+            name: "Item", jabatan: "Laksana", instagram: "halo", prokerAktif: [
+              "leadscope", "nexus", "ristek 100"
+            ]
+          }
+        ]
+      },
+      {
+        slug: "biro-ristek", name: "Riset & Teknologi", shortName: "Ristek", logo: "/assets/logoBirdept/ristek.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "biro-komit", name: "Kolaborasi & Kemitraan", shortName: "Komit", logo: "/assets/logoBirdept/komit.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "biro-medbrand", name: "Media & Branding", shortName: "Medbrand", logo: "/assets/logoBirdept/medbrand.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
     ],
     departemen: [
-      { slug: "dept-adkesmah", name: "Departemen Advokasi & Kesejahteraan Mahasiswa", shortName: "Dept. Adkesmah", logo: "/assets/logoBirdept/adkesmah.png" },
-      { slug: "dept-psdm", name: "Departemen Pengembangan Sumber Daya Mahasiswa", shortName: "Dept. PSDM", logo: "/assets/logoBirdept/psdm.png" },
-      { slug: "dept-akpres", name: "Departemen Akademik & Prestasi", shortName: "Dept. Akpres", logo: "/assets/logoBirdept/akpres.png" },
-      { slug: "dept-slh", name: "Departemen Sosial & Lingkungan Hidup", shortName: "Dept. SLH", logo: "/assets/logoBirdept/slh.png" },
-      { slug: "dept-senbud", name: "Departemen Seni & Budaya", shortName: "Dept. Senbud", logo: "/assets/logoBirdept/senbud.png" },
-      { slug: "dept-peraga", name: "Departemen Pemuda & Olahraga", shortName: "Dept. Peraga", logo: "/assets/logoBirdept/peraga.png" },
-      { slug: "dept-kastrat", name: "Departemen Kajian & Aksi Strategis", shortName: "Dept. Kastrat", logo: "/assets/logoBirdept/kastrat.png" },
-      { slug: "dept-ekraf", name: "Departemen Ekonomi Kreatif", shortName: "Dept. Ekraf", logo: "/assets/logoBirdept/ekraf.png" },
+      {
+        slug: "dept-adkesmah", name: "Advokasi & Kesejahteraan Mahasiswa", shortName: "Adkesmah", logo: "/assets/logoBirdept/adkesmah.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-psdm", name: "Pengembangan Sumber Daya Mahasiswa", shortName: "PSDM", logo: "/assets/logoBirdept/psdm.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-akpres", name: "Akademik & Prestasi", shortName: "Akpres", logo: "/assets/logoBirdept/akpres.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-slh", name: "Sosial & Lingkungan Hidup", shortName: "SLH", logo: "/assets/logoBirdept/slh.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-senbud", name: "Seni & Budaya", shortName: "Senbud", logo: "/assets/logoBirdept/senbud.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-peraga", name: "Pemuda & Olahraga", shortName: "Peraga", logo: "/assets/logoBirdept/peraga.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-kastrat", name: "Kajian & Aksi Strategis", shortName: "Kastrat", logo: "/assets/logoBirdept/kastrat.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
+      {
+        slug: "dept-ekraf", name: "Ekonomi Kreatif", shortName: "Ekraf", logo: "/assets/logoBirdept/ekraf.png", deskripsi: "Biro Internal merupakan wadah bagi Ormawa Eksekutif PKU, bertugas menjaga dinamika organisasi, serta memegang peran krusial untuk memaksimalkan kinerja dan ikatan yang dibangun. Fokus utama kami adalah menjadi wadah pendukung yang aman dan suportif guna mengoptimalkan kinerja, mengevaluasi, serta menjaga kenyamanan kerja seluruh pengurus Ormawa Eksekutif PKU.",
+        proker: [
+          {
+            name: "Acadoscope",
+            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quas ducimus provident! Voluptatibus voluptas recusandae",
+            date: "1 Februari 2026",
+            icon: "Handshake"
+          }
+        ]
+      },
     ],
   },
+
+  angkasaCare: [
+    // angkasa help
+    { buttonName: "Mulai Chatbot", link: "" },
+    // mincare adkes
+    { buttonName: "Hubungi Mincare", link: "https://halomincare.carrd.co/" }
+  ],
+
+
 
   /** Angkasa Care — Section 5 */
   care: {
@@ -106,13 +247,18 @@ export const PLACEHOLDER = {
     subtitle: "Merchandise resmi Kabinet Astana Angkasa",
     cta: "Kunjungi Angkasa Store",
     products: [
-      { name: "Hoodie Astana", price: "Rp 185.000", image: null },
-      { name: "T-Shirt Logo", price: "Rp 95.000", image: null },
-      { name: "Tote Bag", price: "Rp 65.000", image: null },
-      { name: "Sticker Pack", price: "Rp 25.000", image: null },
-      { name: "Lanyard", price: "Rp 35.000", image: null },
-      { name: "Notebook", price: "Rp 45.000", image: null },
+      { name: "Hoodie Astana", price: "Rp 185.000", image: "/assets/contohKatalog.jpg" },
+      { name: "T-Shirt Logo", price: "Rp 95.000", image: "/assets/contohKatalog.jpg" },
+      { name: "Tote Bag", price: "Rp 65.000", image: "/assets/contohKatalog.jpg" },
+      { name: "Sticker Pack", price: "Rp 25.000", image: "/assets/contohKatalog.jpg" },
+      { name: "Lanyard", price: "Rp 35.000", image: "/assets/contohKatalog.jpg" },
+      { name: "Notebook", price: "Rp 45.000", image: "/assets/contohKatalog.jpg" },
     ],
+  },
+
+  angkasaKost: {
+    title: "Angkasa Kost",
+    cta: "Kunjungi Angkasa Kost",
   },
 
   /** News — Section 7 */

@@ -1,121 +1,277 @@
+"use client"
+
 import { PLACEHOLDER } from "../../../lib/placeholder-content";
-import Link from "next/link";
+import style from "./page.module.css"
+import Image from "next/image";
+import { motion } from "framer-motion"
+import type { LucideIcon } from "lucide-react";
+import { UsersRound, ClipboardList, CalendarDays } from "lucide-react"
+import FrameCustom from "../../../styles/frameCustom.module.css"
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-/**
- * TEVO — Sub-page Biro / Departemen Detail
- * Route: /birdep/[slug]
- */
-export default async function BirdepPage({ params }: PageProps) {
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import "swiper/css/navigation";
+import { EffectCards, Navigation } from 'swiper/modules';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
+
+import axios from "axios"
+
+
+
+type UnitDetail = {
+  slug: string;
+  name: string;
+  shortName: string;
+  logo: string;
+  type: "bph" | "biro" | "departemen";
+};
+
+type PageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export default async function page({
+  params,
+}: PageProps) {
   const { slug } = await params;
 
-  // Find unit data from all sources
-  const allUnits = [
-    { slug: "bph", ...PLACEHOLDER.struktur.bph, type: "bph" },
-    ...PLACEHOLDER.struktur.biro.map((b) => ({ ...b, type: "biro" })),
-    ...PLACEHOLDER.struktur.departemen.map((d) => ({ ...d, type: "departemen" })),
+  const units: UnitDetail[] = [
+    {
+      ...PLACEHOLDER.struktur.bph,
+      type: "bph",
+      slug: "bph",
+    },
+    ...PLACEHOLDER.struktur.biro.map((item) => ({
+      ...item,
+      type: "biro" as const,
+    })),
+    ...PLACEHOLDER.struktur.departemen.map((item) => ({
+      ...item,
+      type: "departemen" as const,
+    })),
   ];
 
-  const unit = allUnits.find((u) => u.slug === slug);
+  function Proker({ name, description, date, icon: Icon }: ProkerProps) {
+    return (
+      <section id="proker" className="relative mx-auto w-full max-w-3xl pt-16">
+        <div className="relative overflow-visible rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-8 pb-7 pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] sm:px-14">
+          {/* cekungan visual */}
+          <div
+            className="absolute left-1/2 top-0 h-[105px] w-[240px] -translate-x-1/2 -translate-y-[2px] bg-[#28470B]"
+            // className="absolute left-1/2 top-0 h-24 w-40 -translate-x-1/2 -translate-y-[13%] bg-[#28470B]"
+            aria-hidden="true"
+            // style={{ clipPath: "path('M0 0 H160 V24 C160 69 124 96 80 96 C36 96 0 69 0 24 Z')", }}
+            style={{
+              clipPath:
+                "path('M0 0 H280 V20 C220 20 205 38 190 58 C170 85 145 103 120 103 C95 103 70 85 50 58 C35 38 20 20 0 20 Z')",
+            }}
+          />
+          {/* LINGKARAN ICON  */}
+          <div className="absolute left-1/2 top-0 z-20 flex size-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
+            <Icon className="size-16 text-[#DCB06F]" strokeWidth={2.2} />
+          </div>
+
+          {/* Konten */}
+          <div className="relative z-10 mt-8 font-montserrat">
+            <h3 className="inline-block border-b-2 border-[#A90900] pb-1 text-3xl font-bold text-[#A90900] sm:text-4xl">{name}</h3>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[black] sm:tex-lg">{description}</p>
+
+            <div className="mx-auto mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-7 py-2 text-[#870F0C] shadow-[0_4x_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
+              <CalendarDays className="size-5" />
+              <span className="font-semibold">{date}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  const unit = units.find((item) => item.slug === slug);
 
   if (!unit) {
-    return (
-      <div className="min-h-screen bg-smoke flex items-center justify-center">
-        <div className="text-center p-8">
-          <h1 className="font-[family-name:var(--font-display)] text-3xl font-extrabold text-forest-dark mb-4">
-            Unit Tidak Ditemukan
-          </h1>
-          <p className="text-bark mb-6">
-            Biro atau Departemen dengan slug &ldquo;{slug}&rdquo; tidak tersedia.
-          </p>
-          <Link
-            href="/#struktur"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-crimson text-white font-bold rounded-full shadow-crimson hover:-translate-y-0.5 transition-all"
-          >
-            ← Kembali ke Struktur
-          </Link>
-        </div>
-      </div>
-    );
+    return <div>Unit tidak ditemukan</div>;
+  }
+
+  const stagger = { duration: 0.4, ease: "easeOut" as const };
+  const fadeUp = {
+    initial: { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-80px" },
+  };
+
+  type ProkerProps = {
+    name: string,
+    description: string,
+    date: string,
+    icon: LucideIcon,
   }
 
   return (
-    <div className="min-h-screen bg-smoke">
-      {/* Hero Unit */}
-      <section className="relative bg-forest-dark pt-24 pb-16 md:pt-32 md:pb-20">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gold-warm/60" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Link
-            href="/#struktur"
-            className="inline-flex items-center gap-1 text-cream-soft/60 hover:text-gold-warm text-sm mb-6 transition-colors"
+    <section className="relative bg-[#FBF5EA]">
+      <div className={`${style.setImageForBackground} flex items-center py-25`}>
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            {...fadeUp}
+            transition={stagger}
+            className="flex justify-start items-center gap-15 pt-15">
+            <Image width={357} height={357} src={unit.logo} alt="unit.name" />
+            <div className="pr-10">
+              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5">{unit.type == "biro" ? `Biro ${unit.name}` : unit.type == "departemen" ? `Departemen ${unit.name}` : unit.name}</h2>
+              <p className="font-montserrat text-[18px]">{unit.deskripsi}</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className={`relative bg-[#870F0C] px-12 py-6 text-white mt-15 mb-25 max-w-5xl mx-auto border-3 border-[#DCB06F] ${FrameCustom.royalFrame}`}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-            Kembali ke Struktur Organisasi
-          </Link>
-          {unit.emoji && (
-            <span className="block text-5xl md:text-6xl mb-4">{unit.emoji}</span>
-          )}
-          <h1 className="font-[family-name:var(--font-display)] text-[clamp(1.5rem,4vw,2.8rem)] font-extrabold text-cream-soft">
-            {unit.name}
-          </h1>
-          <span className="inline-block mt-3 px-4 py-1 rounded-full bg-gold-warm/20 text-gold-warm text-xs font-bold uppercase tracking-wider">
-            {unit.type === "bph" ? "Badan Pengurus Harian" : unit.type === "biro" ? "Biro" : "Departemen"}
-          </span>
-        </div>
-      </section>
+            <div className="grid grid-cols-2 divide-x divide-[#E7B763]">
+              <div className="flex items-center justify-center gap-5 px-8">
+                {/* isi kiri */}
+                <div className="flex justify-center items-center gap-5">
+                  <div className="border-3 border-[#DCB06F] bg-[#F6E7CC] rounded-[25px] p-3">
+                    <UsersRound className="size-20 text-[#870F0C]" />
+                  </div>
+                  <div className="font-montserrat leading-none">
+                    <p className="text-[40px] font-bold text-[#F9D253] mb-1">18</p>
+                    <p className="uppercase font-semibold">Anggota Aktif</p>
+                  </div>
+                </div>
+              </div>
 
-      {/* Content */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Description */}
-          <div className="bg-white rounded-2xl p-8 md:p-10 shadow-card border border-gold-warm/10 mb-8">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-forest-dark mb-4">
-              Tentang {unit.shortName || unit.name}
-            </h2>
-            <div className="prose prose-sm text-ink/70 leading-relaxed max-w-none">
-              <p>
-                {unit.type === "bph"
-                  ? `${unit.name} merupakan pimpinan tertinggi dalam struktur kepengurusan Kabinet Astana Angkasa. BPH bertanggung jawab atas seluruh kebijakan strategis, koordinasi antar unit kerja, dan representasi organisasi.`
-                  : unit.type === "biro"
-                  ? `${unit.name} adalah unit kerja kabinet yang menangani urusan administratif dan koordinasi. Biro berfungsi sebagai penunjang operasional seluruh kegiatan organisasi.`
-                  : `${unit.name} adalah unit pelaksana program kerja yang berfokus pada bidang spesifik sesuai tupoksinya. Departemen menjadi motor utama kegiatan kemahasiswaan di bawah koordinasi BPH.`}
-              </p>
+              <div className="flex items-center justify-center gap-5 px-8">
+                {/* isi kanan */}
+                <div className="flex justify-center items-center gap-5">
+                  <div className="border-3 border-[#DCB06F] bg-[#F6E7CC] rounded-[25px] p-3">
+                    <ClipboardList className="size-20 text-[#870F0C]" />
+                  </div>
+                  <div className="font-montserrat leading-none">
+                    <p className="text-[40px] font-bold text-[#F9D253] mb-1">5</p>
+                    <p className="uppercase font-semibold">Program Kerja</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.section
+            id="program-kerja"
+            className="relative p-1 md:p-2 bg-[#DCB06F]"
+          >
+            <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#2C430B] rounded-[25px]">
+              <div className="text-center">
+                <motion.h2
+                  {...fadeUp}
+                  transition={{ duration: 0.4 }}
+                  className="font-asimovian uppercase text-[65px] text-[#FBF5EA]"
+                >
+                  Program Kerja
+                </motion.h2>
+              </div>
+
+              {unit.proker.map((proker, i) => (
+                <Proker
+                  key={i}
+                  name={proker.name}
+                  description={proker.description}
+                  date={proker.date}
+                  icon={proker.icon}
+                />
+              ))}
+            </div>
+          </motion.section>
+        </div>
+      </div>
+
+      <div className="bg-[#DCB06F] overflow-hidden">
+        <div className="my-5 p-10 bg-[#870F0C]">
+          <div className="bg-[#DCB06F]">
+            <div className="border-3 border-[#DCB06F] bg-[#FBF5EA] rounded-[25px] mx-auto">
+              <div className="max-w-8xl px-4 sm:px-6 lg:px-8 relative z-10 my-15">
+                <motion.h2
+                  {...fadeUp}
+                  transition={{ duration: 0.4 }}
+                  className="font-asimovian text-center text-[80px] text-[#870F0C] uppercase leading-none mb-10"
+                >
+                  Struktur Pengurus
+                </motion.h2>
+              </div>
+
+              <div className="flex justify-center items-center mb-20">
+                {/* CARAOUSEL UDH LUMAYAN AMAN */}
+                <div className={`${style.carouselWrapper} w-1/3`}>
+                  <Swiper
+                    effect="cards"
+                    grabCursor={true}
+                    navigation={true}
+                    modules={[EffectCards, Navigation]}
+                    cardsEffect={{
+                      perSlideOffset: 5,
+                      perSlideRotate: 10,
+                      rotate: true,
+                      slideShadows: false,
+                    }}
+                    className={style.storeSwiper}
+                  >
+                    {PLACEHOLDER.store.products.map((product, i) => (
+                      <SwiperSlide key={i} className={style.storeSlide}>
+                        <Image src={product.image} width={100} height={100} alt={product.name} />
+                        <h3>{product.name}</h3>
+                        <p>{product.price}</p>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+                {/* end carousel */}
+
+                <div className="w-2/3 px-20 font-montserrat">
+                  <motion.h3
+                    className="inline-block mb-5 border-b-2 border-[#A90900] text-[#A90900] text-[50px] font-bold pb-1"
+                  >
+                    kais
+                  </motion.h3>
+
+                  <motion.div
+                    className="flex items-center gap-5 items-stretch mb-8"
+                  >
+                    <div className={`${FrameCustom.royalFrame} bg-[#870F0C] px-8 py-2 text-[#F9D253] border-3 border-[#DCB06F]`}>
+                      <div className="px-8 py-2 border-b-2 border-t-2 border-[#DCB06F] uppercase font-bold text-[15px]">
+                        Ketua
+                      </div>
+                    </div>
+                    <div className="rounded-full bg-[#F6E7CC] p-2 text-[#F9D253] border-3 border-[#DCB06F] flex justify-center items-center">
+                      <FontAwesomeIcon icon={faSquareInstagram} className="text-[40px] text-[#870F0C]" />
+                    </div>
+                  </motion.div>
+
+                  <motion.h3
+                    className="text-[#701011] text-[20px] font-semibold uppercase mb-2"
+                  >
+                    Jabatan di Program Kerja
+                  </motion.h3>
+
+                  <div className=" flex items-center justify-start items-stretch">
+                    <motion.div
+                      className="rounded-[10px] border-2 border-[#DCB06F] p-1 flex items-center justify-start"
+                    >
+                      <div className="rounded-[6px] border-1 border-[#DCB06F] p-1">
+                        <FontAwesomeIcon icon={faSquareInstagram} className="text-[40px] text-[#870F0C]" />
+                      </div>
+                      <p className="font-bold text-[#DCB06F] px-3">SC & BOD Wellcoming Party</p>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Tupoksi */}
-          <div className="bg-white rounded-2xl p-8 md:p-10 shadow-card border border-gold-warm/10 mb-8">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-forest-dark mb-4">
-              Tupoksi
-            </h2>
-            <ul className="space-y-3">
-              <li className="flex gap-3 text-ink/70 text-sm">
-                <span className="flex-shrink-0 w-2 h-2 rounded-full bg-crimson mt-1.5" />
-                <span>Data tupoksi akan diisi setelah struktur organisasi resmi dikunci.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Members Placeholder */}
-          <div className="bg-white rounded-2xl p-8 md:p-10 shadow-card border border-gold-warm/10">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-forest-dark mb-4">
-              Anggota
-            </h2>
-            <div className="bg-smoke rounded-xl p-6 text-center">
-              <p className="text-bark text-sm">
-                ⏳ Data anggota {unit.name} sedang dalam proses pengumpulan.
-                <br />
-                Informasi akan ditampilkan setelah data resmi tersedia.
-              </p>
-            </div>
-          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </ section>
   );
 }
