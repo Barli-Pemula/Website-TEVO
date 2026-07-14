@@ -20,15 +20,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
 
 import axios from "axios"
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-
-
-type UnitDetail = {
+type birdepDetail = {
   slug: string;
   name: string;
-  shortName: string;
+  code: string;
+  birdepType: string;
   logo: string;
-  type: "bph" | "biro" | "departemen";
 };
 
 type PageProps = {
@@ -37,26 +38,47 @@ type PageProps = {
   }>;
 };
 
-export default async function page({
-  params,
-}: PageProps) {
-  const { slug } = await params;
+export default function page() {
+  const params = useParams()
+  const router = useRouter()
+  const slug = params.slug
 
-  const units: UnitDetail[] = [
-    {
-      ...PLACEHOLDER.struktur.bph,
-      type: "bph",
-      slug: "bph",
-    },
-    ...PLACEHOLDER.struktur.biro.map((item) => ({
-      ...item,
-      type: "biro" as const,
-    })),
-    ...PLACEHOLDER.struktur.departemen.map((item) => ({
-      ...item,
-      type: "departemen" as const,
-    })),
-  ];
+  const [birdep, setBirdep] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getBirdep = {
+          method: "GET",
+          url: "https://nexus.ormawaeksekutifpku.com/api/public/tevo/birdeps"
+        }
+
+        const response = await axios.request(getBirdep)
+        const allBirdeps = response.data.data.birdeps
+        const getThisBirdep = allBirdeps.find((thisBirdep) => thisBirdep.slug === slug)
+        if (getThisBirdep) setBirdep(getThisBirdep)
+        console.log(getThisBirdep)
+      setLoading(false)
+      } catch (error) {
+        console.error(error)
+        setLoading(false)
+      }
+    }
+
+    if (slug) fetchData()
+
+  }, [slug])
+
+  if (loading) return <div className="p-10 font-montserrat text-center mt-50">Memuat halaman...</div>
+  if (!birdep) return <div className="p-10 font-montserrat text-center mt-50">Data tidak ditemukan.</div>
+
+  type ProkerProps = {
+    name: string,
+    description: string,
+    date: string,
+    icon: LucideIcon,
+  }
 
   function Proker({ name, description, date, icon: Icon }: ProkerProps) {
     return (
@@ -93,25 +115,12 @@ export default async function page({
     )
   }
 
-  const unit = units.find((item) => item.slug === slug);
-
-  if (!unit) {
-    return <div>Unit tidak ditemukan</div>;
-  }
-
   const stagger = { duration: 0.4, ease: "easeOut" as const };
   const fadeUp = {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-80px" },
   };
-
-  type ProkerProps = {
-    name: string,
-    description: string,
-    date: string,
-    icon: LucideIcon,
-  }
 
   return (
     <section className="relative bg-[#FBF5EA]">
@@ -121,10 +130,10 @@ export default async function page({
             {...fadeUp}
             transition={stagger}
             className="flex justify-start items-center gap-15 pt-15">
-            <Image width={357} height={357} src={unit.logo} alt="unit.name" />
+            <Image width={357} height={357} src={birdep.logo} alt="birdep.name" />
             <div className="pr-10">
-              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5">{unit.type == "biro" ? `Biro ${unit.name}` : unit.type == "departemen" ? `Departemen ${unit.name}` : unit.name}</h2>
-              <p className="font-montserrat text-[18px]">{unit.deskripsi}</p>
+              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5">{birdep.unitType == "BIRO" ? `Biro ${birdep.name}` : birdep.unitType == "DEPARTEMEN" ? `Departemen ${birdep.name}` : birdep.name}</h2>
+              <p className="font-montserrat text-[18px]">{birdep.description}</p>
             </div>
           </motion.div>
 
@@ -175,7 +184,7 @@ export default async function page({
                 </motion.h2>
               </div>
 
-              {unit.proker.map((proker, i) => (
+              {/* {birdep.proker.map((proker, i) => (
                 <Proker
                   key={i}
                   name={proker.name}
@@ -183,7 +192,7 @@ export default async function page({
                   date={proker.date}
                   icon={proker.icon}
                 />
-              ))}
+              ))} */}
             </div>
           </motion.section>
         </div>

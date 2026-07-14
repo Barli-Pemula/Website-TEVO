@@ -1,33 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PLACEHOLDER } from "../../lib/placeholder-content";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { Birdhouse, X } from "lucide-react";
 import Link from "next/link";
 import axios from "axios"
-import { METHODS } from "node:http";
-import { url } from "node:inspector";
 
-const getBirdep = {
-  method: "GET",
-  url: "https://nexus.ormawaeksekutifpku.com/api/public/tevo/birdeps"
-}
-
-try {
-  const dataBirdeps = await axios.request(getBirdep)
-  // console.log('berhasil get birdep')
-} catch (error) {
-  console.error(error)
-}
 
 interface unitDetail {
   name: string,
-  shortName: string,
+  code: string,
   logo: string,
   slug: string,
-  type: "bph" | "biro" | "departemen"
+  unitType: string
 };
 
 const stagger = { duration: 0.4, ease: "easeOut" as const };
@@ -100,7 +87,6 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
             </motion.div>
 
             {/* kertas terbuka */}
-            {/* Kertas yang membuka */}
             <motion.div
               className="relative z-20 mx-5 overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               initial={{
@@ -176,15 +162,14 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                   </p>
 
                   <h2 className="text-3xl font-bold font-asimovian uppercase leading-tight text-[#701011] sm:text-5xl">
-                    {unit.type === "biro" ? `Biro ${unit.name}` : unit.type === "departemen" ? `Departemen ${unit.name}` : unit.name}
+                    {unit.unitType === "biro" ? `Biro ${unit.name.replace(/biro/gi, "").trim()}` : unit.unitType === "departemen" ? `Departemen ${unit.name.replace(/departemen/gi, "").trim()}` : unit.name}
                   </h2>
                 </div>
 
                 <div className="my-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
 
                 <p className="text-justify text-base leading-tight sm:text-md font-montserrat">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem optio magnam deserunt corrupti recusandae quo et, neque veniam ullam quos, commodi repudiandae quod necessitatibus? Dolor modi voluptatibus eligendi quas repellat.
-                  {/* {unit.type == "biro" ? `Biro ${unit.name}` : unit.type == "departemen" ? `Departemen ${unit.name}` : unit.name} */}
+                  {unit.description}
                 </p>
 
                 {/* Cap lilin */}
@@ -199,7 +184,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                         repeat: Infinity,
                         duration: 0.8,
                       }}
-                      className="absolute right-24 top-1/2 -translate-y-1/2 whitespace-nowrap font-monstserrat uppercase text-1xl text-[#A90900]"
+                      className="absolute right-24 top-1/2 -translate-y-1/2 whitespace-nowrap font-montserrat uppercase text-xl text-[#A90900]"
                     >
                       Tekan Logo Ini →
                     </motion.div>
@@ -210,12 +195,12 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                       className="flex size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)]"
                       onClick={() => handleBreakSeal(unit)}
                     >
-                      <Image
+                      {/* <Image
                         src={unit.logo}
                         alt={unit.name}
                         width={100}
                         height={100}
-                      />
+                      /> */}
                     </motion.button>
 
                   </div>
@@ -254,15 +239,47 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
 
 
 export default function StructureHub() {
-  const [unit, setUnit] = useState<unitDetail | null>(null)
+  const [unit, setUnit] = useState([])
+  const [modal, setModal] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const units: unitDetail[] = [
-    {
-      ...PLACEHOLDER.struktur.bph, type: "bph", slug: "bph",
-      ...PLACEHOLDER.struktur.biro.map((b) => ({ ...b, type: "biro" as const })),
-      ...PLACEHOLDER.struktur.departemen.map((d) => ({ ...d, type: "deprtemen" as const }))
+  useEffect(() => {
+    const fetchData = async () => {
+
+      try {
+        const getBirdep = {
+          method: "GET",
+          url: "https://nexus.ormawaeksekutifpku.com/api/public/tevo/birdeps"
+        }
+
+        const response = await axios.request(getBirdep)
+        setUnit(response.data.data.birdeps)
+        setLoading(false)
+        console.log(response.data.birdeps)
+      } catch (error) {
+        console.error(error)
+        setLoading(false)
+      }
     }
-  ];
+
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <p className="font-montserrat text-lg animate-pulse">Loading data...</p>
+      </div>
+    );
+  }
+
+  // const units: unitDetail[] = [
+  //   {
+  //     ...PLACEHOLDER.struktur.bph, type: "bph", slug: "bph",
+  //     ...PLACEHOLDER.struktur.biro.map((b) => ({ ...b, type: "biro" as const })),
+  //     ...PLACEHOLDER.struktur.departemen.map((d) => ({ ...d, type: "deprtemen" as const }))
+  //   }
+  // ];
 
   return (
     <section id="struktur" className="relative bg-[#DCB06F] overflow-hidden">
@@ -291,19 +308,22 @@ export default function StructureHub() {
               {/* Tree Diagram */}
               <div className="flex flex-col items-center gap-0">
                 {/* Level 1: BPH (Root) */}
-                <motion.button
-                  {...fadeUp}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                  onClick={() => setUnit(units[0])}
-                  className="flex flex-col items-center justify-center hover:border-crimson hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
-                >
-                  <Image src={PLACEHOLDER.struktur.bph.logo} alt={PLACEHOLDER.struktur.bph.name} width={104} height={115} className="object-contain" />
-                  <div className="border-1 border-[#DCB06F] rounded-[10px] p-1">
-                    <div className="border-2 border-[#DCB06F] rounded-[6px] p-3 text-[#701011] font-montserrat font-semibold text-[20px] uppercase">
-                      {dataBirdep}
+                {unit.filter((bph) => bph.unitType == "BPH").map((bph) => (
+                  <motion.button
+                    key={bph.id}
+                    {...fadeUp}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                    onClick={() => setModal(bph)}
+                    className="flex flex-col items-center justify-center hover:border-crimson hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+                  >
+                    {/* <Image src={PLACEHOLDER.struktur.bph.logo} alt={PLACEHOLDER.struktur.bph.name} width={104} height={115} className="object-contain" /> */}
+                    <div className="border-1 border-[#DCB06F] rounded-[10px] p-1">
+                      <div className="border-2 border-[#DCB06F] rounded-[6px] p-3 text-[#701011] font-montserrat font-semibold text-[20px] uppercase">
+                        {bph.name}
+                      </div>
                     </div>
-                  </div>
-                </motion.button>
+                  </motion.button>
+                ))}
 
                 {/* Connector Line */}
                 <div className="w-[2px] h-8 bg-[#DCB06F]/40" />
@@ -318,24 +338,24 @@ export default function StructureHub() {
 
                   {/* Biro Branch + nodes */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full h-full items-strecth">
-                    {PLACEHOLDER.struktur.biro.map((biro, i) => (
-                      <div key={i} className="flex flex-col w-full h-full items-center">
+                    {unit.filter((biro) => biro.unitType == "BIRO").map((biro) => (
+                      <div key={biro.id} className="flex flex-col w-full h-full items-center">
                         <motion.div
                           {...fadeUp}
-                          transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
-                          onClick={() => setUnit({ ...biro, type: "biro" })}
+                          transition={{ ...stagger, delay: 0.1 }}
+                          onClick={() => setModal(biro)}
                           className="flex flex-col items-center cursor-pointer w-70 h-full flex-1"
                         >
                           <div className="w-[2px] h-6 bg-[#DCB06F]/40 shrink-0" />
                           <div className="bg-[#870F0C] p-1 text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1">
                             <div className="flex flex-1 justify-center gap-3 items-center bg-[#870F0C] pr-2 py-1 border-2 border-[#DCB06F] rounded-[10px]">
                               <div className="shrink-0">
-                                <Image src={biro.logo} alt={biro.name} width={95} height={95} />
+                                {/* <Image src={biro.logo} alt={biro.name} width={95} height={95} /> */}
                               </div>
                               <div className=" text-[20px] text-left font-montserrat uppercase leading-tight">
                                 <span className="text-[#F9D253] font-semibold">Biro</span>
                                 <br />
-                                <span className="text-[white]">{biro.name}</span>
+                                <span className="text-[white]">{biro.name.replace(/biro/gi, "").trim()}</span>
                               </div>
                             </div>
                           </div>
@@ -352,24 +372,24 @@ export default function StructureHub() {
 
                 {/* Dept Branch + nodes */}
                 <div className="grid grid-cols-4 md:grid-cols-8 gap-1 w-full">
-                  {PLACEHOLDER.struktur.departemen.map((dept, i) => (
-                    <div key={i} className="flex flex-col items-center w-full h-full">
+                  {unit.filter((dept) => dept.unitType == "DEPARTEMEN").map((dept) => (
+                    <div key={dept.id} className="flex flex-col items-center w-full h-full">
                       <motion.div
                         {...fadeUp}
-                        transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
-                        onClick={() => setUnit({ ...dept, type: "departemen" })}
+                        transition={{ ...stagger, delay: 0.1 }}
+                        onClick={() => setModal(dept)}
                         className="flex flex-col flex-1 h-full w-full items-center w-20 cursor-pointer"
                       >
                         <div className="w-[2px] h-6 bg-[#DCB06F]/40 shrink-0" />
                         <div className=" bg-[#2C430B] p-1 text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1">
-                          <div className="flex flex-wrap justify-center items-center bg-[#2C430B] p-1 border-2 border-[#DCB06F] rounded-[10px]">
+                          <div className="flex flex-wrap justify-center items-center w-full bg-[#2C430B] p-1 border-2 border-[#DCB06F] rounded-[10px]">
                             <div className="h-1/3">
-                              <Image src={dept.logo} alt={dept.name} width={69} height={70} className="object-contain" />
+                              {/* <Image src={dept.logo} alt={dept.name} width={69} height={70} className="object-contain" /> */}
                             </div>
                             <div className="h-1/3 text-[14px] font-montserrat uppercase leading-tight mt-4 mb-2">
                               <span className="text-[#F9D253] font-semibold">Departemen</span>
                               <br />
-                              <span className="text-[white] ">{dept.name}</span>
+                              <span className="text-[white] ">{dept.name.replace(/departemen/gi, "").trim()}</span>
                             </div>
                           </div>
                         </div>
@@ -377,14 +397,11 @@ export default function StructureHub() {
                     </div>
                   ))}
                 </div>
-
               </div>
             </div>
 
             {/* Modal */}
-            {unit && (
-              <ModalCardBirDep unit={unit} setUnit={() => setUnit(null)} />
-            )}
+              <ModalCardBirDep unit={modal} setUnit={setModal} />
           </div>
         </div>
       </div>
