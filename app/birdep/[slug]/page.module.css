@@ -1,0 +1,81 @@
+.setImageForBackground {
+    background-image: url(/assets/identity-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+/* body {
+  background: #fff;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.storeSwiper {
+  width: 240px;
+  height: 320px;
+  --swiper-navigation-size: 20px;
+  --swiper-navigation-color:#2C430B;
+}
+
+.storeSlide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  border: 2px solid #ddb36d;
+  background: #f9edcf;
+  color: #701011;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 18%);
+}
+
+.storeSlide:nth-child(2n) {
+  background: #f6e4bd;
+}
+
+.storeSlide:nth-child(3n) {
+  background: #fff5df;
+}
+
+.swiper {
+  width: 100px;
+  height: 320px;
+}
+
+:global(.swiper-button-prev) {
+  left: -80px;
+}
+
+:global(.swiper-button-next) {
+  right: -80px;
+}

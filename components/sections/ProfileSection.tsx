@@ -164,7 +164,7 @@ export default function ProfileSection() {
           <motion.p
             {...fadeUp}
             transition={stagger}
-            className="bg-[#2C430B] border-3 border-[#DCB06F] text-center rounded-[25px] p-5 drop-shadow text-[white]"
+            className="bg-[#2C430B] border-3 border-[#DCB06F] text-center rounded-[25px] p-5 drop-shadow font-semibold text-[white] text-[18px] font-montserrat"
           >
             {PLACEHOLDER.intro.visi}
           </motion.p>
@@ -186,10 +186,10 @@ export default function ProfileSection() {
           <motion.ul
             {...fadeUp}
             transition={stagger}
-            className="list-none bg-[#701011] border-3 border-[#DCB06F] rounded-[25px] p-5 drop-shadow text-[white]"
+            className="list-none bg-[#701011] border-3 border-[#DCB06F] rounded-[25px] p-7 drop-shadow text-[white] [&_strong]:font-bold"
           >
             {PLACEHOLDER.intro.misi.map((baris, i) => (
-              <li key={i} className="relative pl-7 before:content-['✨'] before:absolute before:left-0 before:top-0">{baris}</li>
+              <li key={i} dangerouslySetInnerHTML={{ __html: baris }} className="relative pl-7 before:content-['✨'] before:absolute before:left-0 before:top-0 text-[18px] font-montserrat" />
             ))}
           </motion.ul>
         </div>

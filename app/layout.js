@@ -73,6 +73,10 @@ export default function RootLayout({ children }) {
       lang="id"
       className={`${plusJakarta.variable} ${inter.variable} ${playfair.variable}`}
     >
+      <head>
+        {/* cdn icon google */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_outward" />
+      </head>
       <body className={`${kapakana.variable} ${asimovian.variable} ${montserrat.variable} ${lacheyard.variable} font-[family-name:var(--font-body)]`}>
         <Navbar />
         <main>{children}</main>

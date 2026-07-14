@@ -12,6 +12,9 @@ export const CONFIG = {
   /** Angkasa Store subdomain */
   storeUrl: "https://angkasastore.ormawaeksekutifpku.com",
 
+  // Angkasa Kost subdomain
+  angkasaKostUrl: "https://angkasakost.ormawaeksekutifpku.com/",
+
   /** Narahubung */
   contact: {
     name: "Narahubung Kabinet",
