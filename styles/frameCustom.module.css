@@ -1,0 +1,19 @@
+.royalFrame {
+  -webkit-mask:
+    radial-gradient(20px at 0 0, transparent 98%, black) top left,
+    radial-gradient(20px at 100% 0, transparent 98%, black) top right,
+    radial-gradient(20px at 0 100%, transparent 98%, black) bottom left,
+    radial-gradient(20px at 100% 100%, transparent 98%, black) bottom right;
+
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 51% 51%;
+
+  mask:
+    radial-gradient(20px at 0 0, transparent 98%, black) top left,
+    radial-gradient(20px at 100% 0, transparent 98%, black) top right,
+    radial-gradient(20px at 0 100%, transparent 98%, black) bottom left,
+    radial-gradient(20px at 100% 100%, transparent 98%, black) bottom right;
+
+  mask-repeat: no-repeat;
+  mask-size: 51% 51%;
+}

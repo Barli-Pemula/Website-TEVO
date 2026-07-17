@@ -1,0 +1,21 @@
+/* identity logo dan jargon — MOBILE OPTIMIZED */
+.setImageForBackground {
+    /* CSS gradient ganti PNG rasio ekstrem (PRD §7.4 + SKILL §5.4) */
+    background: linear-gradient(180deg, #FFFFFF 0%, #FEF8BC 40%, #FBF5EA 100%);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top;
+    /* Batasi tinggi section ke konten aktual, bukan 2292px */
+    min-height: auto;
+}
+
+/* Fallback: jika efek dot pattern diperlukan, gunakan SVG pattern tile */
+@media (min-width: 768px) {
+    .setImageForBackground {
+        background:
+            radial-gradient(circle, rgba(220, 176, 111, 0.08) 1px, transparent 1px),
+            linear-gradient(180deg, #FFFFFF 0%, #FEF8BC 40%, #FBF5EA 100%);
+        background-size: 24px 24px, 100% auto;
+        background-position: 0 0, top;
+    }
+}

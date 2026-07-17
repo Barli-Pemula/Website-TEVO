@@ -1,0 +1,183 @@
+@import "tailwindcss";
+/* Preline UI */
+@source "../node_modules/preline/dist/*.js";
+@import "../node_modules/preline/variants.css";
+
+/* Plugins */
+/* @plugin "@tailwindcss/forms"; */
+/* Preline Themes */
+/* @import "./themes/theme.css"; */
+/* ================================================================
+   TEVO Design System — Astana Angkasa Company Profile
+   Sinkron dengan PRD v2.0 & SKILL v2.0 (UI/UX Spec v4)
+   ================================================================ */
+
+@theme {
+  /* ─── Brand Core ─────────────────────────────────────── */
+  --color-crimson:        #A83931;  /* CTA utama, active state, aksen berani */
+  --color-forest-dark:    #2C440C;  /* Hero background, footer, heading berat */
+  --color-gold-warm:      #D4A678;  /* Divider, ornamen, badge, focus ring */
+  --color-sky-vivid:      #03ABF6;  /* Aksen interaktif, link hover, highlight */
+  --color-sage-mid:       #9AAC69;  /* Badge Care, tag kategori */
+  --color-sky-pale:       #93D4E8;  /* Card bg sekunder, panel info ringan */
+  --color-cream-soft:     #FEF8BC;  /* Card Visi/Misi, teks di atas bg gelap */
+  --color-bark:           #614C3B;  /* Caption, label, teks sekunder */
+  --color-amber:          #F9D253;  /* Badge highlight, ornamen aktif, glow pedang */
+  --color-smoke:          #F5F4F0;  /* Background section netral */
+  --color-ink:            #1A1A1A;  /* Teks utama */
+
+  /* ─── Sword Animation Tokens ─────────────────────────── */
+  --gold-light:           #F9D253;
+  --crimson-glow:         rgba(168, 57, 49, 0.4);
+  --text-secondary:       #B0A090;
+  --font-heading:         var(--font-display);
+
+  /* ─── Tipografi ───────────────────────────────────────── */
+  --font-display:   'Plus Jakarta Sans', 'Poppins', sans-serif;
+  --font-body:      'Inter', 'Plus Jakarta Sans', sans-serif;
+  --font-editorial: 'Playfair Display', 'Merriweather', serif;
+  --font-kapakana: 'Kapakana', cursive;
+  --font-asimovian: 'Asimovian', sans-serif;
+  --font-montserrat: var(--font-montserrat);
+  --font-lacheyard: var(--font-lacheyard);
+
+  /* ─── Shape ───────────────────────────────────────────── */
+  --radius-card:    10px;
+  --radius-pill:    9999px;
+  --radius-sm:      6px;
+
+  /* ─── Shadow ──────────────────────────────────────────── */
+  --shadow-card:    0 2px 16px 0 rgba(0,0,0,0.07);
+  --shadow-lift:    0 6px 28px 0 rgba(0,0,0,0.12);
+  --shadow-crimson: 0 4px 20px 0 rgba(168,57,49,0.22);
+  --shadow-amber:   0 4px 20px 0 rgba(249,210,83,0.18);
+}
+
+/* ================================================================
+   Base Styles
+   ================================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ================================================================
+   Mobile Anti-Overlap & Spacing Tokens (PRD §8 + SKILL §4)
+   ================================================================ */
+:root {
+  --gap-safe-decoration: 12px;   /* jarak minimum ornamen ↔ teks */
+  --gap-heading-stack: 8px;      /* heading → subheading */
+  --pad-card-mobile: 12px;
+  --tap-target-min: 44px;
+
+  /* Mobile font scale (clamp-based) */
+  --text-hero-mobile: clamp(2rem, 8vw, 2.5rem);   /* H1 hero: 32–40px */
+  --text-h2-mobile: clamp(1.5rem, 6vw, 1.75rem);   /* H2 section: 24–28px */
+  --text-h3-mobile: clamp(1.125rem, 4.5vw, 1.25rem); /* H3 sub: 18–20px */
+  --text-body-mobile: 0.9375rem;                     /* 15px */
+  --text-caption-mobile: 0.75rem;                    /* 12px, minimum absolut */
+}
+
+/* ================================================================
+   Focus Ring — WAJIB, tidak boleh dihapus
+   ================================================================ */
+*:focus-visible {
+  outline: 2px solid var(--color-gold-warm);
+  outline-offset: 2px;
+}
+
+/* ================================================================
+   Reduced Motion
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ================================================================
+   Scrollbar Styling
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-smoke);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson);
+}
+
+/* ================================================================
+   Selection
+   ================================================================ */
+::selection {
+  background: var(--color-crimson);
+  color: #FFFFFF;
+}
+
+/* ================================================================
+   Mobile Section Helpers (PRD §7.4 / SKILL §5.4)
+   ================================================================ */
+.section-decorative-bg {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FEF8BC 40%, #FEF8BC 100%);
+  max-height: 480px;
+}
+
+/* Mobile tap target minimum */
+@media (max-width: 767px) {
+  .tap-target {
+    min-width: var(--tap-target-min);
+    min-height: var(--tap-target-min);
+  }
+}
+
+/* ================================================================
+   Navbar — concave / inverted rounded corners
+   ================================================================ */
+.navbar-concave {
+  --corner: 18px;
+  -webkit-mask-image:
+    radial-gradient(circle var(--corner) at 0 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--corner) at 100% 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--corner) at 0 100%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--corner) at 100% 100%, transparent 98%, #000 100%);
+  mask-image:
+    radial-gradient(circle var(--corner) at 0 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--corner) at 100% 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--corner) at 0 100%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--corner) at 100% 100%, transparent 98%, #000 100%);
+  -webkit-mask-size: 51% 51%;
+  mask-size: 51% 51%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
