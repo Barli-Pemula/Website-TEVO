@@ -233,7 +233,7 @@ export default function Navbar() {
   // ===== SUB-PAGE =====
   if (!isHome) {
     return (
-      <nav className={scrolled ? "navbar-concave" : ""} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, ...navbarOuter }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, ...navbarOuter }}>
         <div style={innerStyle}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-[72px]">
             <Link href="/" className="flex items-center min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
@@ -254,7 +254,7 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar */}
-      <nav className={scrolled ? "navbar-concave" : ""} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", ...navbarOuter }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", ...navbarOuter }}>
         <div style={innerStyle}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}

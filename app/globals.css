@@ -180,4 +180,6 @@ body {
   mask-size: 51% 51%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
+  -webkit-mask-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
+  mask-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
 }
