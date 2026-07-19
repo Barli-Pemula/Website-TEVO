@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 const SECTION_IDS = [
   "beranda",
-  "identity",
-  "profile",
   "struktur",
   "angkasa-care",
   "store",

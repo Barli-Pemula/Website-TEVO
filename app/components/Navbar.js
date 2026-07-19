@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 
 const MENU = [
@@ -186,6 +186,7 @@ export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const activeId = useScrollSpy(0.25);
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
   const hamburgerRef = useRef(null);
   const [hamHover, setHamHover] = useState(false);
@@ -217,10 +218,13 @@ export default function Navbar() {
 
   const handleNavClick = useCallback((id) => {
     setDrawerOpen(false);
-    if (!isHome) { window.location.href = `/#${id}`; return; }
+    if (!isHome) {
+      router.push(`/#${id}`);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
-  }, [isHome]);
+  }, [isHome, router]);
 
   const navbarOuter = scrolled
     ? { background: C.gold, backdropFilter: "blur(12px)" }
