@@ -3,7 +3,7 @@
 import { PLACEHOLDER } from "../../../lib/placeholder-content";
 import style from "./page.module.css"
 import Image from "next/image";
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import type { LucideIcon } from "lucide-react";
 import { UsersRound, ClipboardList, CalendarDays } from "lucide-react"
 import FrameCustom from "../../../styles/frameCustom.module.css"
@@ -18,11 +18,15 @@ import { EffectCards, Navigation } from 'swiper/modules';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+
+import type { Swiper as SwiperType } from "swiper"
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type birdepDetail = {
   slug: string;
@@ -38,6 +42,28 @@ type PageProps = {
   }>;
 };
 
+type ProkerProps = {
+  name: string,
+  description: string,
+  date: string,
+  icon: LucideIcon,
+}
+
+type Member = {
+  id: string,
+  fullName: string,
+  instagram?: string,
+  positionLabel: string,
+  photo: string,
+  birdep: {
+    slug: string,
+  }
+  programs?: {
+    id: string,
+    name: string,
+  }
+}
+
 export default function page() {
   const params = useParams()
   const router = useRouter()
@@ -45,6 +71,43 @@ export default function page() {
 
   const [birdep, setBirdep] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  const [members, setMembers] = useState<Member[]>([])
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [loadingMembers, setLoadingMembers] = useState(true)
+  const [memberError, setMemberError] = useState<string | null>(null)
+  const activeMember = members[activeIndex]
+
+  const swiperRef = useRef<SwiperType | null>(null)
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        setLoadingMembers(true)
+        setMemberError(null)
+
+        const response = await axios.get("https://nexus.ormawaeksekutifpku.com/api/public/tevo/members")
+        const getMembers = response.data.data.members
+        const filteredMembers = getMembers.filter((member: Member) => member.birdep?.slug === slug)
+        console.log(filteredMembers)
+
+        setMembers(filteredMembers)
+        setActiveIndex(0)
+
+      } catch (error) {
+        console.error("Gagal mengambil data anggota", error)
+        setMemberError("Data gagal dimuat.")
+
+      } finally {
+        setLoadingMembers(false)
+      }
+    };
+
+    if (slug) {
+      fetchMembers();
+    }
+
+  }, [slug]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +122,7 @@ export default function page() {
         const getThisBirdep = allBirdeps.find((thisBirdep) => thisBirdep.slug === slug)
         if (getThisBirdep) setBirdep(getThisBirdep)
         console.log(getThisBirdep)
-      setLoading(false)
+        setLoading(false)
       } catch (error) {
         console.error(error)
         setLoading(false)
@@ -73,12 +136,9 @@ export default function page() {
   if (loading) return <div className="p-10 font-montserrat text-center mt-50">Memuat halaman...</div>
   if (!birdep) return <div className="p-10 font-montserrat text-center mt-50">Data tidak ditemukan.</div>
 
-  type ProkerProps = {
-    name: string,
-    description: string,
-    date: string,
-    icon: LucideIcon,
-  }
+  if (loadingMembers) return (<div className="py-20 text-center font-montserrat">Memuat struktur pengurus...</div>)
+  if (memberError) return (<div className="py-20 text-center font-montserrat text-red-700">{memberError}</div>)
+  if (members.length == 0 || !activeMember) return (<div className="py-20 text-center font-montserrat">Data pengurus belum tersedia.</div>)
 
   function Proker({ name, description, date, icon: Icon }: ProkerProps) {
     return (
@@ -132,7 +192,7 @@ export default function page() {
             className="flex justify-start items-center gap-15 pt-15">
             <Image width={357} height={357} src={birdep.logo} alt="birdep.name" />
             <div className="pr-10">
-              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5">{birdep.unitType == "BIRO" ? `Biro ${birdep.name}` : birdep.unitType == "DEPARTEMEN" ? `Departemen ${birdep.name}` : birdep.name}</h2>
+              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5">{birdep.name}</h2>
               <p className="font-montserrat text-[18px]">{birdep.description}</p>
             </div>
           </motion.div>
@@ -148,7 +208,7 @@ export default function page() {
                     <UsersRound className="size-20 text-[#870F0C]" />
                   </div>
                   <div className="font-montserrat leading-none">
-                    <p className="text-[40px] font-bold text-[#F9D253] mb-1">18</p>
+                    <p className="text-[40px] font-bold text-[#F9D253] mb-1">{members.length}</p>
                     <p className="uppercase font-semibold">Anggota Aktif</p>
                   </div>
                 </div>
@@ -213,34 +273,105 @@ export default function page() {
               </div>
 
               <div className="flex justify-center items-center mb-20">
-                {/* CARAOUSEL UDH LUMAYAN AMAN */}
-                <div className={`${style.carouselWrapper} w-1/3`}>
-                  <Swiper
-                    effect="cards"
-                    grabCursor={true}
-                    navigation={true}
-                    modules={[EffectCards, Navigation]}
-                    cardsEffect={{
-                      perSlideOffset: 5,
-                      perSlideRotate: 10,
-                      rotate: true,
-                      slideShadows: false,
-                    }}
-                    className={style.storeSwiper}
-                  >
-                    {PLACEHOLDER.store.products.map((product, i) => (
-                      <SwiperSlide key={i} className={style.storeSlide}>
-                        <Image src={product.image} width={100} height={100} alt={product.name} />
-                        <h3>{product.name}</h3>
-                        <p>{product.price}</p>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                <div className="flex flex-col w-2/5">
+                  {/* CARAOUSEL UDH LUMAYAN AMAN */}
+                  <div className={`${style.carouselWrapper}`}>
+                    <Swiper
+                      effect="cards"
+                      grabCursor={true}
+                      // navigation={true}
+                      modules={[EffectCards, Navigation]}
+                      cardsEffect={{
+                        perSlideOffset: 5,
+                        perSlideRotate: 10,
+                        rotate: true,
+                        slideShadows: false,
+                      }}
+                      onSwiper={(swiper) => { swiperRef.current = swiper }}
+                      onSlideChange={(swiper) => { setActiveIndex(swiper.activeIndex) }}
+                      className={style.storeSwiper}
+                    >
+                      {members.map((member) => (
+                        <SwiperSlide key={member.id} className={style.storeSlide}>
+                          {/* <Image src={product.image} width={100} height={100} alt={product.name} /> */}
+                          <h3>{member.fullName}</h3>
+                          <p>{member.positionLabel}</p>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                  {/* end carousel */}
+
+                  {/* navigation */}
+                  <div className="mt-8 flex items-center justify-center gap-5">
+                    <button
+                      type="button"
+                      onClick={() => swiperRef.current.slidePrev()}
+                      disabled={activeIndex == 0}
+                      className="flex size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <FontAwesomeIcon icon={faAngleLeft} className="text-[#2C430B] text-[25px]" />
+                    </button>
+
+                    <span className="min-w-16 text-center font-montserrat font-bold text-[#2C430B]">
+                      {activeIndex + 1} / {members.length}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() => swiperRef.current.slideNext()}
+                      disabled={activeIndex == members.length - 1}
+                      className="flex size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity:40"
+                    >
+                      <FontAwesomeIcon icon={faAngleRight} className="text-[#2C430B] text-[25px]" />
+                    </button>
+                  </div>
+                  {/* end of custom */}
                 </div>
-                {/* end carousel */}
 
                 <div className="w-2/3 px-20 font-montserrat">
-                  <motion.h3
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeMember.id}
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -24 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.h3 className="inline-block mb-5 border-b-2 border-[#A90900] text-[#A90900] text-[50px] font-bold pb-1">
+                        {activeMember.fullName}
+                      </motion.h3>
+
+                      <motion.div className="flex items-center gap-3 items-stretch mb-8">
+                        <div className={`${FrameCustom.royalFrame} bg-[#2C430B] px-8 py-2 text-[#F9D253] border-3 border-[#DCB06F]`}>
+                          <div className="px-8 py-2 border-b-2 border-t-2 border-[#DCB06F] uppercase font-bold text-[15px]">
+                            {activeMember.positionLabel}
+                          </div>
+                        </div>
+                        {activeMember.instagram && (
+                          <a href={`https://www.instagram.com/${activeMember.instagram}/`} target="_blank" rel="noopener noreferrer" type="button" className="flex items-center">
+                            <FontAwesomeIcon icon={faSquareInstagram} className="text-[50px] text-[#2C430B]" />
+                          </a>
+                        )}
+                      </motion.div>
+
+                      <motion.h3 className="text-[#701011] text-[20px] font-semibold uppercase mb-2">
+                        Jabatan di Program Kerja
+                      </motion.h3>
+
+                      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+                        {activeMember.programs?.map((program) => (
+                          <div key={program.id} className="flex min-h-14 items-center rounded-[10px] border-2 border-[#DCB06F] p-1">
+                            <div className="rounded-[6px] border-1 border-[#DCB06F] p-1">
+                              <FontAwesomeIcon icon={faSquareInstagram} className="text-[40px] text-[#870F0C]" />
+                            </div>
+                            <p className="font-bold text-[#DCB06F] px-3">{program.name}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                  {/* <motion.h3
                     className="inline-block mb-5 border-b-2 border-[#A90900] text-[#A90900] text-[50px] font-bold pb-1"
                   >
                     kais
@@ -274,13 +405,16 @@ export default function page() {
                       </div>
                       <p className="font-bold text-[#DCB06F] px-3">SC & BOD Wellcoming Party</p>
                     </motion.div>
-                  </div>
+                  </div> */}
+
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
       </div>
     </ section>
-  );
+  )
 }

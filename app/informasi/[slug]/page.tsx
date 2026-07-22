@@ -1,6 +1,7 @@
 import { PLACEHOLDER } from "../../../lib/placeholder-content";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { useState } from "react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
