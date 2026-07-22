@@ -5,10 +5,9 @@ import AngkasaKostPreview from "./AngkasaKostPreview"
 
 export default function Proker() {
     return (
-        <>
+        <div className="bg-[#FBF5EA]">
             <AngkasaStorePreview />
-            <div className="mb-12"></div>
-            <AngkasaKostPreview/>
-        </>
+            <AngkasaKostPreview />
+        </div>
     )
 }

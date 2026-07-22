@@ -123,9 +123,9 @@ export default function page() {
   };
 
   return (
-    <section className="relative bg-[#FBF5EA]">
+    <section className="relative bg-transparent">
       <div className={`${style.setImageForBackground} flex items-center py-25`}>
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             {...fadeUp}
             transition={stagger}
@@ -171,9 +171,9 @@ export default function page() {
 
           <motion.section
             id="program-kerja"
-            className="relative p-1 md:p-2 bg-[#DCB06F]"
+            className="relative p-1 md:p-2 bg-transparent"
           >
-            <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#2C430B] rounded-[25px]">
+            <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#2C430B]/90 backdrop-blur-md rounded-[25px]">
               <div className="text-center">
                 <motion.h2
                   {...fadeUp}
@@ -198,10 +198,10 @@ export default function page() {
         </div>
       </div>
 
-      <div className="bg-[#DCB06F] overflow-hidden">
-        <div className="my-5 p-10 bg-[#870F0C]">
-          <div className="bg-[#DCB06F]">
-            <div className="border-3 border-[#DCB06F] bg-[#FBF5EA] rounded-[25px] mx-auto">
+      <div className="bg-transparent overflow-hidden">
+        <div className="my-5 p-10 bg-transparent">
+          <div className="bg-transparent">
+            <div className="border-3 border-[#DCB06F] bg-[#FBF5EA]/90 backdrop-blur-md rounded-[25px] mx-auto">
               <div className="max-w-8xl px-4 sm:px-6 lg:px-8 relative z-10 my-15">
                 <motion.h2
                   {...fadeUp}

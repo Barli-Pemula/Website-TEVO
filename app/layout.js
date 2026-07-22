@@ -2,6 +2,7 @@ import { Plus_Jakarta_Sans, Inter, Playfair_Display, Montserrat } from "next/fon
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import GlobalBackground from "./components/GlobalBackground";
 import Lacheyard from "next/font/local"
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -57,7 +58,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="id"
-      className={`${plusJakarta.variable} ${inter.variable} ${playfair.variable}`}
+      className={`${plusJakarta.variable} ${inter.variable} ${playfair.variable} ${montserrat.variable} ${lacheyard.variable}`}
     >
       <head>
         {/* cdn icon google */}
@@ -65,6 +66,8 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Asimovian&family=Kapakana:wght@300;400&display=swap" />
       </head>
       <body className={`${montserrat.variable} ${lacheyard.variable} font-[family-name:var(--font-body)]`}>
+        {/* Dynamic Global Background (Landing Page Dekstop/MOBILE vs Sub-Page blurred) */}
+        <GlobalBackground />
         <Navbar />
         <main>{children}</main>
         <Footer />

@@ -44,8 +44,10 @@ export default function AngkasaStorePreview() {
   }, []);
 
   return (
-    <section id="store" className="relative p-1 md:p-2 bg-[#DCB06F] m-4 md:m-10 lg:m-15">
-      <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#2C430B] rounded-[25px]">
+    <section id="store" className="relative py-8 md:py-16 bg-[#FBF5EA]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative p-2 md:p-2 bg-[#DCB06F] rounded-[30px]">
+          <div className="mx-auto p-3 sm:p-8 lg:p-12 bg-[#2C430B] rounded-[25px]">
         {/* Section Header */}
         <div className="text-center">
           <motion.h2
@@ -101,7 +103,7 @@ export default function AngkasaStorePreview() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="text-center mt-10"
+          className="text-center mt-6 md:mt-10"
         >
           <a
             href={CONFIG.storeUrl}
@@ -130,6 +132,8 @@ export default function AngkasaStorePreview() {
             </svg>
           </a>
         </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

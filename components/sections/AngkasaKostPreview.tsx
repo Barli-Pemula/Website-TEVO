@@ -28,8 +28,10 @@ export default function AngkasaKostPreview() {
     }, []);
 
     return (
-        <section id="angkasa-kost" className="relative p-1 md:p-2 bg-[#DCB06F] m-4 md:m-10 lg:m-15">
-            <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#701011] rounded-[25px]">
+        <section id="angkasa-kost" className="relative py-8 md:py-16 bg-[#FBF5EA]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="relative p-2 md:p-2 bg-[#DCB06F] rounded-[30px]">
+                    <div className="mx-auto p-3 sm:p-8 lg:p-12 bg-[#701011] rounded-[25px]">
                 {/* section header */}
                 <div className="text-center mb-12">
                     <motion.h2
@@ -51,7 +53,7 @@ export default function AngkasaKostPreview() {
                 "slidesQty":{"xs":1, "sm":3}
                 }'
                 >
-                    <div className="hs-carousel relative w-full h-120 overflow-hidden ">
+                    <div className="hs-carousel relative w-full h-80 sm:h-120 overflow-hidden ">
                         <div className="hs-carousel-body flex flex-nowrap absolute top-0 bottom-0 start-0 transition-transform duration-700 -mx-1 opacity-0">
                             {["First", "Second", "Third", "Fourth", "Fifth", "Sixth"].map(
                                 (item, i) => (
@@ -91,7 +93,7 @@ export default function AngkasaKostPreview() {
                 <motion.div
                     {...fadeUp}
                     transition={{ duration: 0.4, delay: 0.3 }}
-                    className="text-center mt-10"
+                    className="text-center mt-6 md:mt-10"
                 >
                     <a
                         href={CONFIG.angkasaKostUrl}
@@ -122,6 +124,8 @@ export default function AngkasaKostPreview() {
                 </motion.div>
 
 
+                    </div>
+                </div>
             </div>
         </section>
     )

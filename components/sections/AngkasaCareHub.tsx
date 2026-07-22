@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { PLACEHOLDER } from "../../lib/placeholder-content";
 import { CONFIG } from "../../lib/config";
+import Image from "next/image";
 
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -12,7 +13,32 @@ const fadeUp = {
 
 export default function AngkasaCareHub() {
   return (
-    <section id="angkasa-care" className="relative py-8 md:py-16 bg-[#FBF5EA]">
+    <section id="angkasa-care" className="relative py-8 md:py-16 bg-[#FBF5EA] overflow-hidden">
+      {/* Pohon Kiri (Geser 10px ke kiri) */}
+      <div className="hidden md:block absolute -left-[150px] lg:-left-[180px] top-0 bottom-0 w-[300px] lg:w-[360px] pointer-events-none z-0">
+        <Image
+          src="/assets/pohon.png"
+          alt="Pohon Kiri"
+          fill
+          priority
+          sizes="400px"
+          style={{ objectFit: "contain", objectPosition: "center" }}
+          className="rotate-90 origin-center scale-[1.6] lg:scale-[1.9] translate-y-6 opacity-95 drop-shadow-md"
+        />
+      </div>
+
+      {/* Pohon Kanan (Desktop Only: Tegak Berdiri, Setengah Badan di Ujung Kanan) */}
+      <div className="hidden md:block absolute -right-[140px] lg:-right-[170px] top-0 bottom-0 w-[300px] lg:w-[360px] pointer-events-none z-0">
+        <Image
+          src="/assets/pohon.png"
+          alt="Pohon Kanan"
+          fill
+          priority
+          sizes="400px"
+          style={{ objectFit: "contain", objectPosition: "center" }}
+          className="rotate-90 scale-y-[-1] origin-center scale-[1.6] lg:scale-[1.9] translate-y-6 opacity-95 drop-shadow-md"
+        />
+      </div>
       {/* ================================================================
          DESKTOP & TABLET: Venn Diagram — 2 lingkaran bersinggungan
          BG lingkaran dihilangkan (ikut background dasar)
@@ -116,7 +142,7 @@ export default function AngkasaCareHub() {
           rel="noopener noreferrer"
           {...fadeUp}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className="relative flex flex-col items-center justify-center w-[280px] h-[280px] rounded-full border-[3px] border-[#DCB06F] bg-transparent active:scale-[0.98] transition-all shadow-lg"
+          className="relative flex flex-col items-center justify-center w-[280px] max-[370px]:w-[240px] h-[280px] max-[370px]:h-[240px] rounded-full border-[3px] border-[#DCB06F] bg-transparent active:scale-[0.98] transition-all shadow-lg"
         >
           <div className="shrink-0 w-16 h-16 rounded-full bg-[#870F0C] flex items-center justify-center mb-4 shadow-md">
             <svg
@@ -147,7 +173,7 @@ export default function AngkasaCareHub() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="relative z-20 -my-4"
+          className="relative z-20 -my-3"
         >
           <span className="inline-block rounded-full bg-[#870F0C] text-[#FFE3BB] text-[16px] font-asimovian uppercase tracking-wider font-extrabold px-8 py-3 shadow-lg border-2 border-[#DCB06F]">
             Angkasa Care
@@ -161,7 +187,7 @@ export default function AngkasaCareHub() {
           rel="noopener noreferrer"
           {...fadeUp}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="relative flex flex-col items-center justify-center w-[280px] h-[280px] rounded-full border-[3px] border-[#DCB06F] bg-transparent active:scale-[0.98] transition-all shadow-lg"
+          className="relative flex flex-col items-center justify-center w-[280px] max-[370px]:w-[240px] h-[280px] max-[370px]:h-[240px] rounded-full border-[3px] border-[#DCB06F] bg-transparent active:scale-[0.98] transition-all shadow-lg"
         >
           <div className="shrink-0 w-16 h-16 rounded-full bg-[#DCB06F] flex items-center justify-center mb-4 shadow-md">
             <svg

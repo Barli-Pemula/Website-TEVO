@@ -161,6 +161,16 @@ body {
   }
 }
 
+/* Section anchor offset — prevents sticky header from covering content */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* iOS safe area padding */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 /* ================================================================
    Navbar — concave / inverted rounded corners
    ================================================================ */

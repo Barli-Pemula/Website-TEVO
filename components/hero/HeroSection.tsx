@@ -63,6 +63,17 @@ export default function HeroSection() {
     document.documentElement.style.overflow = "hidden";
     document.documentElement.style.overscrollBehavior = "none";
 
+    // Safety timeout: auto-unlock after 5s on mobile to prevent getting stuck
+    const safetyTimer = setTimeout(() => {
+      if (isLocked) {
+        unlockScroll();
+        // Also reveal sword and complete animation
+        if (!swordVisible) revealSword();
+        animProgress = 1;
+        renderFrame(1);
+      }
+    }, 5000);
+
     // Initially hide sword container
     if (containerRef.current) {
       containerRef.current.style.opacity = "0";
@@ -105,13 +116,13 @@ export default function HeroSection() {
       }
 
       /*
-       * ANIMATION TIMELINE (slower sword, faster text):
+       * ANIMATION TIMELINE:
        *
-       * Phase 1 — Sword separation       : 0.00 → 0.75  (slower, smoother)
-       * Phase 2 — Text reveals center-out : 0.02 → 0.12  (teks muncul saat pedang baru terbuka)
-       * Phase 3 — Subtitle appears       : 0.40 → 0.55  (subtitle fades in)
-       * Phase 4 — HOLD (text visible)    : 0.55 → 0.72  (sword gone, text shown)
-       * Phase 5 — Smooth transition out  : 0.72 → 1.00  (hero fades + slides up)
+       * Phase 1 — Sword separation       : 0.00 → 0.75
+       * Phase 2 — Text reveals center-out : 0.04 → 0.22
+       * Phase 3 — Subtitle appears       : 0.40 → 0.55
+       * Phase 4 — HOLD (text visible)    : 0.55 → 1.00
+       *         → scroll unlocked, user scrolls naturally
        */
 
       /* Phase 1: Sword & sheath separate — slower, bigger gap */
@@ -135,7 +146,7 @@ export default function HeroSection() {
       /* Phase 2: Title center-out clip reveal — starts as soon as swords part */
       let textReveal = 0;
       if (p >= 0.04) {
-        textReveal = Math.min(1, (p - 0.04) / 0.16);
+        textReveal = Math.min(1, (p - 0.04) / 0.18);
         textReveal = easeOutCubic(textReveal);
       }
       const clipInset = 50 - (textReveal * 50); // 50% → 0% (reveals from center outward)
@@ -148,22 +159,7 @@ export default function HeroSection() {
         subtitleOpacity = easeOutCubic(subtitleOpacity);
       }
 
-      /* Phase 4: Hold — nothing changes (0.55 → 0.72) */
-
-      /* Phase 5: Smooth transition — hero fades out + slides up */
-      let heroOpacity = 1;
-      let heroSlideY = 0;
-      if (p > 0.72) {
-        const fade = Math.min(1, (p - 0.72) / 0.28);
-        const easedFade = easeOutCubic(fade);
-        heroOpacity = 1 - easedFade;
-        heroSlideY = easedFade * -60; // slides up 60px
-        titleOpacity *= heroOpacity;
-        subtitleOpacity *= heroOpacity;
-      }
-
-      heroRef.current.style.opacity = String(heroOpacity);
-      heroRef.current.style.transform = `translateY(${heroSlideY}px)`;
+      /* Phase 4: Hold — nothing changes (0.55 → 1.00), hero stays visible */
 
       titleRef.current.style.opacity = String(titleOpacity);
       titleRef.current.style.clipPath = `inset(0 ${clipInset}% 0 ${clipInset}%)`;
@@ -179,18 +175,11 @@ export default function HeroSection() {
       hintRef.current.style.opacity = String(hintOpacity);
     }
 
-    /* --- Unlock scroll & transition smoothly --- */
-    function unlockAndTransition() {
+    /* --- Unlock scroll --- */
+    function unlockScroll() {
       isLocked = false;
       document.documentElement.style.overflow = "";
       document.documentElement.style.overscrollBehavior = "";
-      // Smooth scroll to content section
-      if (heroRef.current) {
-        window.scrollTo({
-          top: heroRef.current.offsetHeight,
-          behavior: "smooth",
-        });
-      }
     }
 
     /* --- Wheel handler (drives animation while locked) --- */
@@ -213,7 +202,7 @@ export default function HeroSection() {
 
       // Animation complete → unlock scroll
       if (animProgress >= 1) {
-        unlockAndTransition();
+        unlockScroll();
       }
     }
 
@@ -239,31 +228,19 @@ export default function HeroSection() {
       const delta = touchStartY - touchY;
       touchStartY = touchY;
 
-      animProgress += delta * SENSITIVITY * 2;
+      animProgress += delta * SENSITIVITY * 3;
       animProgress = Math.max(0, Math.min(1, animProgress));
 
       renderFrame(animProgress);
 
       if (animProgress >= 1) {
-        unlockAndTransition();
+        unlockScroll();
       }
     }
 
-    /* --- Regular scroll handler (for when unlocked) --- */
+    /* --- Regular scroll handler (no-op — animation plays once) --- */
     function handleScroll() {
-      // If user scrolls back to very top, re-lock and reset animation
-      if (!isLocked && window.scrollY <= 0) {
-        isLocked = true;
-        animProgress = 0.98;
-        document.documentElement.style.overflow = "hidden";
-        document.documentElement.style.overscrollBehavior = "none";
-        // Reset hero visibility
-        if (heroRef.current) {
-          heroRef.current.style.opacity = "1";
-          heroRef.current.style.transform = "translateY(0)";
-        }
-        renderFrame(animProgress);
-      }
+      // No re-lock — animation plays once, then user scrolls freely
     }
 
     /* --- Attach all listeners --- */
@@ -276,6 +253,7 @@ export default function HeroSection() {
     renderFrame(0);
 
     return () => {
+      clearTimeout(safetyTimer);
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
@@ -290,14 +268,26 @@ export default function HeroSection() {
       <div className={styles.heroSticky}>
         {/* Background */}
         <div className={styles.bgImage}>
-          <Image
-            src="/assets/hero-bg.png"
-            alt="Crimson Royale Background"
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-          />
+          <div className="hidden md:block absolute inset-0">
+            <Image
+              src="/assets/Dekstop.png"
+              alt="Astana Angkasa Desktop Background"
+              fill
+              priority
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <div className="block md:hidden absolute inset-0">
+            <Image
+              src="/assets/MOBILE.png"
+              alt="Astana Angkasa Mobile Background"
+              fill
+              priority
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
         <div className={styles.bgOverlay} />
 
