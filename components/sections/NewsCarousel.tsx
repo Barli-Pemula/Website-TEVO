@@ -83,7 +83,7 @@ export default function NewsCarousel() {
           onMouseLeave={resumeAutoPlay}
         >
           {/* Cards */}
-          <div className="flex items-stretch gap-4 md:gap-6 overflow-hidden">
+          <div className="flex items-stretch gap-4 md:gap-6 overflow-x-auto md:overflow-hidden snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
             {articles.map((article, i) => {
               const offset = i - activeIndex;
               const isActive = i === activeIndex;
@@ -97,7 +97,7 @@ export default function NewsCarousel() {
                     opacity: Math.abs(offset) <= 1 ? 1 : 0.3,
                   }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className={`flex-shrink-0 w-[85vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white rounded-2xl overflow-hidden shadow-card
+                  className={`flex-shrink-0 snap-center w-[85vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white rounded-2xl overflow-hidden shadow-card
                     ${isFeatured && isActive ? "ring-2 ring-gold-warm shadow-lift" : ""}
                     hover:shadow-lift transition-shadow duration-200`}
                 >
@@ -172,7 +172,7 @@ export default function NewsCarousel() {
             <button
               key={i}
               onClick={() => goTo(i)}
-              className={`rounded-full transition-all duration-300 ${
+              className={`p-1 rounded-full transition-all duration-300 ${
                 i === activeIndex
                   ? "w-6 h-2.5 bg-crimson"
                   : "w-2.5 h-2.5 bg-cream-soft/30 hover:bg-cream-soft/50"

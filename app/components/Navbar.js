@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 
 const MENU = [
@@ -186,6 +186,7 @@ export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const activeId = useScrollSpy(0.25);
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
   const hamburgerRef = useRef(null);
   const [hamHover, setHamHover] = useState(false);
@@ -217,14 +218,21 @@ export default function Navbar() {
 
   const handleNavClick = useCallback((id) => {
     setDrawerOpen(false);
-    if (!isHome) { window.location.href = `/#${id}`; return; }
+    if (!isHome) {
+      router.push(`/#${id}`);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
-  }, [isHome]);
+  }, [isHome, router]);
 
   const navbarOuter = scrolled
-    ? { background: C.gold, backdropFilter: "blur(12px)" }
+    ? {} // background handled by className for responsive support
     : { background: "transparent" };
+
+  const navbarScrolledClass = scrolled
+    ? "backdrop-blur-sm bg-[#FBF5EA]/80 md:bg-[#DCB06F] md:backdrop-blur-[12px]"
+    : "";
 
   const innerStyle = scrolled
     ? { background: C.light, margin: "3px", borderRadius: "2px" }
@@ -233,7 +241,7 @@ export default function Navbar() {
   // ===== SUB-PAGE =====
   if (!isHome) {
     return (
-      <nav className={scrolled ? "navbar-concave" : ""} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, ...navbarOuter }}>
+      <nav className={navbarScrolledClass} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, ...navbarOuter }}>
         <div style={innerStyle}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-[72px]">
             <Link href="/" className="flex items-center min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
@@ -254,7 +262,7 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar */}
-      <nav className={scrolled ? "navbar-concave" : ""} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", ...navbarOuter }}>
+      <nav className={navbarScrolledClass} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", ...navbarOuter }}>
         <div style={innerStyle}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}

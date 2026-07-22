@@ -174,7 +174,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
               />
 
               <motion.div
-                className="relative h-full overflow-y-auto px-7 py-10 text-[#4B2B18] sm:px-12"
+                className="relative h-full overflow-y-auto px-5 py-8 sm:px-12 sm:py-10 text-[#4B2B18]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{
@@ -229,7 +229,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                     <motion.div
                       animate={{ x: [0, 8, 0] }}
                       transition={{ repeat: Infinity, duration: 0.8 }}
-                      className="absolute right-24 top-1/2 -translate-y-1/2 whitespace-nowrap font-montserrat uppercase text-xl text-[#A90900]"
+                      className="hidden md:block absolute right-24 top-1/2 -translate-y-1/2 whitespace-nowrap font-montserrat uppercase text-xl text-[#A90900]"
                     >
                       Tekan Logo Ini →
                     </motion.div>
@@ -372,7 +372,7 @@ export default function StructureHub() {
                 <div className="relative w-full flex flex-col items-center pb-8">
                   <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/40 z-0" />
 
-                  <div className="flex flex-wrap justify-center gap-3 md:gap-4 w-full relative z-10">
+                  <div className="flex flex-wrap justify-center gap-2 min-[400px]:gap-3 md:gap-4 w-full relative z-10">
                     {biroUnits.map((biro) => {
                       const cleanName = biro.name.replace(/biro/gi, "").trim();
                       const nameLen = cleanName.length;
@@ -386,7 +386,7 @@ export default function StructureHub() {
                       return (
                       <div
                         key={biro.id}
-                        className="flex flex-col items-center w-[140px] sm:w-[170px] md:w-[200px] lg:w-[210px]"
+                        className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[170px] md:w-[200px] lg:w-[210px]"
                       >
                         <motion.div
                           {...fadeUp}
@@ -448,7 +448,7 @@ export default function StructureHub() {
                             ? "text-[10px] sm:text-[12px] md:text-[13px]"
                             : deptNameLen <= 24
                               ? "text-[9px] sm:text-[11px] md:text-[11px]"
-                              : "text-[8px] sm:text-[10px] md:text-[10px]";
+                              : "text-[9px] sm:text-[10px] md:text-[10px]";
                       return (
                       <div
                         key={dept.id}

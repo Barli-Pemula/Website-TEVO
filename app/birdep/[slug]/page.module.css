@@ -1,8 +1,19 @@
 .setImageForBackground {
-    background-image: url(/assets/identity-bg.png);
+    position: relative;
+    overflow: hidden;
+}
+
+.setImageForBackground::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url(/assets/Sub-Page.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background-position: center;
+    filter: blur(8px);
+    transform: scale(1.1);
 }
 
 /* body {

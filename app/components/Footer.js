@@ -14,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <footer id="footer" className="bg-forest-dark text-cream-soft">
+    <footer id="footer" className="bg-forest-dark text-cream-soft safe-area-bottom">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
@@ -34,11 +34,11 @@ export default function Footer() {
           </div>
 
           {/* Quick Links — separated by gold divider */}
-          <div className="md:col-span-3 border-l border-gold-warm/20 pl-0 md:pl-8">
+          <div className="md:col-span-3 border-l-0 border-t border-gold-warm/20 pt-6 md:border-l md:border-t-0 md:pt-0 pl-0 md:pl-8">
             <h4 className="font-[family-name:var(--font-display)] text-xs font-bold uppercase tracking-[0.15em] text-gold-warm mb-4">
               Navigasi
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3 md:space-y-2.5">
               {PLACEHOLDER.footer.quickLinks.map((link) => (
                 <li key={link.href}>
                   <a
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-4 border-l border-gold-warm/20 pl-0 md:pl-8">
+          <div className="md:col-span-4 border-l-0 border-t border-gold-warm/20 pt-6 md:border-l md:border-t-0 md:pt-0 pl-0 md:pl-8">
             <h4 className="font-[family-name:var(--font-display)] text-xs font-bold uppercase tracking-[0.15em] text-gold-warm mb-4">
               Kontak
             </h4>

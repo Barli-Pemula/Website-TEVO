@@ -48,3 +48,12 @@
 :global(.swiper-button-next) {
   right: -80px;
 }
+
+@media (max-width: 767px) {
+  :global(.swiper-button-prev) {
+    left: 4px !important;
+  }
+  :global(.swiper-button-next) {
+    right: 4px !important;
+  }
+}

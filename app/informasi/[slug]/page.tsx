@@ -21,7 +21,7 @@ export default async function InformasiPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-smoke">
+    <div className="min-h-screen bg-transparent">
       {/* Article Header */}
       <section className="relative bg-forest-dark pt-24 pb-12 md:pt-32 md:pb-16">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gold-warm/60" />
