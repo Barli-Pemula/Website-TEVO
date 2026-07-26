@@ -34,15 +34,16 @@ function NavItem({ id, label, isActive, scrolled, showArrow, onClick, isSpecial 
 
   const baseStyle = {
     position: "relative",
-    padding: "8px 16px",
+    padding: "6px clamp(8px, 1.1vw, 16px)",
     borderRadius: "9999px",
-    fontSize: "14px",
+    fontSize: "clamp(12px, 0.95vw, 14px)",
     fontWeight: isSpecial ? 600 : 500,
     transition: "all 0.2s",
     background: "transparent",
     color: textColor,
     cursor: "pointer",
     border: "none",
+    whiteSpace: "nowrap",
   };
 
   const activeStyle = {
@@ -99,13 +100,14 @@ function NavLink({ id, label, showArrow, isSpecial }) {
       key={id}
       href={`/#${id}`}
       style={{
-        padding: "8px 16px",
+        padding: "6px clamp(8px, 1.1vw, 16px)",
         borderRadius: "9999px",
-        fontSize: "14px",
+        fontSize: "clamp(12px, 0.95vw, 14px)",
         fontWeight: isSpecial ? 600 : 500,
         transition: "all 0.2s",
         color: textColor,
         background: hover ? C.peach : "transparent",
+        whiteSpace: "nowrap",
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -231,7 +233,7 @@ export default function Navbar() {
     : { background: "transparent" };
 
   const navbarScrolledClass = scrolled
-    ? "backdrop-blur-sm bg-[#FBF5EA]/80 md:bg-[#DCB06F] md:backdrop-blur-[12px]"
+    ? "backdrop-blur-sm bg-[#FBF5EA]/80 lg:bg-[#DCB06F] lg:backdrop-blur-[12px]"
     : "";
 
   const innerStyle = scrolled
@@ -243,11 +245,11 @@ export default function Navbar() {
     return (
       <nav className={navbarScrolledClass} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, ...navbarOuter }}>
         <div style={innerStyle}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-[72px]">
-            <Link href="/" className="flex items-center min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
-              <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] md:h-[42px] w-auto" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
+            <Link href="/" className="flex items-center shrink-0 min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
+              <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
             </Link>
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1">
               {MENU.map((item) => (
                 <NavLink key={item.id} id={item.id} label={item.label} showArrow={item.id === "store"} isSpecial={item.isSpecial} />
               ))}
@@ -261,17 +263,17 @@ export default function Navbar() {
   // ===== HOME PAGE =====
   return (
     <>
-      {/* Desktop Navbar */}
+      {/* Desktop / Mobile / Tablet Navbar */}
       <nav className={navbarScrolledClass} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", ...navbarOuter }}>
         <div style={innerStyle}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-[72px]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
           {/* Logo */}
-          <button onClick={() => handleNavClick("beranda")} className="flex items-center min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
-            <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] md:h-[42px] w-auto" />
+          <button onClick={() => handleNavClick("beranda")} className="flex items-center shrink-0 min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
+            <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
           </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop Menu (1024px and up) */}
+          <div className="hidden lg:flex items-center gap-1">
             {MENU.map((item) => (
               <NavItem
                 key={item.id}
@@ -286,10 +288,10 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Hamburger */}
+          {/* Hamburger (Mobile & Tablet < 1024px) */}
           <button
             ref={hamburgerRef}
-            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg transition-colors"
+            className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg transition-colors"
             style={{ color: scrolled ? C.dark : C.light, background: hamHover ? (scrolled ? "rgba(220,176,111,0.1)" : "rgba(246,231,204,0.1)") : "transparent" }}
             onClick={() => setDrawerOpen(true)}
             aria-label="Buka menu navigasi"
@@ -309,7 +311,7 @@ export default function Navbar() {
 
       {/* Overlay */}
       <div
-        className={`fixed inset-0 z-40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${drawerOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${drawerOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         style={{ background: "rgba(50,33,15,0.5)" }}
         onClick={() => setDrawerOpen(false)}
         aria-hidden="true"
@@ -317,7 +319,7 @@ export default function Navbar() {
 
       {/* Drawer Panel */}
       <div
-        className={`fixed top-0 right-0 z-50 w-[85vw] max-w-[320px] h-dvh shadow-2xl transition-transform duration-300 ease-out md:hidden ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 z-50 w-[85vw] max-w-[320px] h-dvh shadow-2xl transition-transform duration-300 ease-out lg:hidden ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}
         style={{ background: C.dark }}
         role="dialog"
         aria-modal="true"
