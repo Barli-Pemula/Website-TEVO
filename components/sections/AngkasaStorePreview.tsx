@@ -53,7 +53,7 @@ export default function AngkasaStorePreview() {
           <motion.h2
             {...fadeUp}
             transition={{ duration: 0.4 }}
-            className="font-asimovian uppercase text-[clamp(2rem,6vw,72px)] text-[#FBF5EA]"
+            className="font-asimovian uppercase text-[clamp(2.5rem,10vw,80px)] text-[#FBF5EA]"
           >
             {PLACEHOLDER.store.title}
           </motion.h2>

@@ -14,7 +14,7 @@ const fadeUp = {
 export default function AngkasaCareHub() {
   return (
     <section id="angkasa-care" className="relative py-8 md:py-16 bg-[#FBF5EA] overflow-hidden">
-      {/* Pohon Kiri (Tetap Setengah Badan di Ujung Kiri) */}
+      {/* Pohon Kiri (Geser 10px ke kiri) */}
       <div className="hidden md:block absolute -left-[150px] lg:-left-[180px] top-0 bottom-0 w-[300px] lg:w-[360px] pointer-events-none z-0">
         <Image
           src="/assets/pohon.png"
@@ -27,7 +27,7 @@ export default function AngkasaCareHub() {
         />
       </div>
 
-      {/* Pohon Kanan (Tetap Setengah Badan di Ujung Kanan) */}
+      {/* Pohon Kanan (Desktop Only: Tegak Berdiri, Setengah Badan di Ujung Kanan) */}
       <div className="hidden md:block absolute -right-[140px] lg:-right-[170px] top-0 bottom-0 w-[300px] lg:w-[360px] pointer-events-none z-0">
         <Image
           src="/assets/pohon.png"
@@ -40,27 +40,28 @@ export default function AngkasaCareHub() {
         />
       </div>
       {/* ================================================================
-         DESKTOP & TABLET: Venn Diagram — Lingkaran Tengah Dikecilkan
-         Disesuaikan per rasio agar pas di tengah antara dua pohon
+         DESKTOP & TABLET: Venn Diagram — 2 lingkaran bersinggungan
+         BG lingkaran dihilangkan (ikut background dasar)
+         Elemen kiri digeser ke kiri, elemen kanan digeser ke kanan
          ================================================================ */}
       <motion.div
         {...fadeUp}
         transition={{ duration: 0.4 }}
-        className="hidden md:flex justify-center items-center py-6 lg:py-10 my-2"
+        className="hidden md:flex justify-center items-center"
       >
-        <div className="relative w-[600px] h-[380px] scale-[0.75] min-[840px]:scale-[0.88] lg:scale-100 origin-center transition-transform duration-300">
+        <div className="relative w-[800px] h-[480px]">
           {/* ---- LEFT CIRCLE: Angkasa Help (Chatbot) ---- */}
           <a
             href={CONFIG.angkasaHelpUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute left-0 flex flex-col items-start justify-center pl-10 rounded-full w-[380px] h-[380px] border-[3px] border-[#DCB06F] bg-transparent z-10 cursor-pointer hover:border-[#870F0C] transition-colors group"
+            className="absolute left-0 flex flex-col items-start justify-center pl-16 rounded-full w-[520px] h-[520px] border-[3px] border-[#DCB06F] bg-transparent z-10 cursor-pointer hover:border-[#870F0C] transition-colors group"
           >
             {/* Icon */}
-            <div className="shrink-0 w-14 h-14 rounded-full bg-[#870F0C] flex items-center justify-center mb-3 shadow-lg group-hover:scale-105 transition-transform">
+            <div className="shrink-0 w-20 h-20 rounded-full bg-[#870F0C] flex items-center justify-center mb-5 shadow-lg group-hover:scale-105 transition-transform">
               <svg
-                width="26"
-                height="26"
+                width="36"
+                height="36"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#FFFFFF"
@@ -74,13 +75,13 @@ export default function AngkasaCareHub() {
               </svg>
             </div>
             {/* Name — bold */}
-            <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-lg mb-1.5">
+            <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-2xl mb-2">
               {PLACEHOLDER.care.angkasaHelp.name}
             </h3>
             {/* CTA inside circle */}
-            <span className="mt-1 inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#870F0C] text-white text-[12px] font-bold rounded-full group-hover:bg-[#6B0A08] transition-colors shadow-md">
+            <span className="mt-2 inline-flex items-center gap-2 px-6 py-2.5 bg-[#870F0C] text-white text-[14px] font-bold rounded-full group-hover:bg-[#6B0A08] transition-colors shadow-md">
               {PLACEHOLDER.care.angkasaHelp.cta}
-              <span className="material-symbols-outlined text-[15px]">arrow_outward</span>
+              <span className="material-symbols-outlined text-[18px]">arrow_outward</span>
             </span>
           </a>
 
@@ -89,13 +90,13 @@ export default function AngkasaCareHub() {
             href={CONFIG.minCareUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute right-0 flex flex-col items-end justify-center pr-10 rounded-full w-[380px] h-[380px] border-[3px] border-[#DCB06F] bg-transparent z-10 cursor-pointer hover:border-[#870F0C] transition-colors group"
+            className="absolute right-0 flex flex-col items-end justify-center pr-16 rounded-full w-[520px] h-[520px] border-[3px] border-[#DCB06F] bg-transparent z-10 cursor-pointer hover:border-[#870F0C] transition-colors group"
           >
             {/* Icon */}
-            <div className="shrink-0 w-14 h-14 rounded-full bg-[#DCB06F] flex items-center justify-center mb-3 shadow-lg group-hover:scale-105 transition-transform">
+            <div className="shrink-0 w-20 h-20 rounded-full bg-[#DCB06F] flex items-center justify-center mb-5 shadow-lg group-hover:scale-105 transition-transform">
               <svg
-                width="26"
-                height="26"
+                width="36"
+                height="36"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#FFFFFF"
@@ -107,20 +108,20 @@ export default function AngkasaCareHub() {
               </svg>
             </div>
             {/* Name — bold */}
-            <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-lg mb-1.5 text-right">
+            <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-2xl mb-2 text-right">
               {PLACEHOLDER.care.minCare.name}
             </h3>
             {/* CTA inside circle */}
-            <span className="mt-1 inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#DCB06F] text-[#32210F] text-[12px] font-bold rounded-full group-hover:bg-[#C49A5E] transition-colors shadow-md">
+            <span className="mt-2 inline-flex items-center gap-2 px-6 py-2.5 bg-[#DCB06F] text-[#32210F] text-[14px] font-bold rounded-full group-hover:bg-[#C49A5E] transition-colors shadow-md">
               {PLACEHOLDER.care.minCare.cta}
-              <span className="material-symbols-outlined text-[15px]">arrow_outward</span>
+              <span className="material-symbols-outlined text-[18px]">arrow_outward</span>
             </span>
           </a>
 
           {/* ---- INTERSECTION: Angkasa Care (bold, centered) ---- */}
-          <div className="absolute left-0 w-[380px] h-[380px] overflow-hidden rounded-full pointer-events-none">
-            <div className="absolute top-0 -right-[220px] w-[380px] h-[380px] overflow-hidden rounded-full">
-              <div className="absolute inset-y-0 right-[220px] w-[160px] flex flex-col items-center justify-center text-center uppercase font-asimovian text-[28px] lg:text-[32px] text-[#FFE3BB] leading-tight px-2 bg-[#870F0C] font-extrabold">
+          <div className="absolute left-0 w-[520px] h-[520px] overflow-hidden rounded-full pointer-events-none">
+            <div className="absolute top-0 -right-[280px] w-[520px] h-[520px] overflow-hidden rounded-full">
+              <div className="absolute inset-y-0 right-[280px] w-[240px] flex flex-col items-center justify-center text-center uppercase font-asimovian text-[42px] text-[#FFE3BB] leading-tight px-2 bg-[#870F0C] font-extrabold">
                 <span>Angkasa</span>
                 <span>Care</span>
               </div>

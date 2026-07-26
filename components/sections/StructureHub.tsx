@@ -326,7 +326,7 @@ export default function StructureHub() {
               <motion.h2
                 {...fadeUp}
                 transition={{ duration: 0.4 }}
-                className="font-asimovian text-[clamp(2rem,6vw,72px)] text-[#870F0C] uppercase leading-none mb-2"
+                className="font-asimovian text-[clamp(2.5rem,10vw,80px)] text-[#870F0C] uppercase leading-none mb-2"
               >
                 {PLACEHOLDER.struktur.sectionTitle}
               </motion.h2>
@@ -386,7 +386,7 @@ export default function StructureHub() {
                       return (
                       <div
                         key={biro.id}
-                        className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[150px] md:w-[155px] lg:w-[210px]"
+                        className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[170px] md:w-[200px] lg:w-[210px]"
                       >
                         <motion.div
                           {...fadeUp}

@@ -22,7 +22,7 @@ export default function ProfileSection() {
 
         {/* subsection 2: selayang pandang dan pengertian kabinet */}
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
             {/* selayang pandang */}
             <motion.div
               {...fadeUp}
@@ -30,22 +30,22 @@ export default function ProfileSection() {
               className="bg-[#870F0C] shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
             >
               <div className="h-full rounded-[25px] bg-[#FBF5EA] border-2 border-[#870F0C] relative">
-                <div className="mx-4 my-5 md:mx-6 lg:mx-10 md:my-7">
+                <div className="mx-4 my-5 md:mx-10 md:my-7">
                   <motion.p
                     {...fadeUp}
                     transition={stagger}
-                    className="font-asimovian uppercase text-[#870F0C] text-[clamp(1.8rem,5vw,50px)] text-center"
+                    className="font-asimovian uppercase text-[#870F0C] text-[clamp(1.8rem,6vw,50px)] text-center"
                   >
                     Selayang Pandang
                   </motion.p>
                   <motion.p
                     {...fadeUp}
                     transition={stagger}
-                    className="font-montserrat text-[#870F0C] text-[clamp(0.95rem,2.5vw,20px)] text-center mb-6"
+                    className="font-montserrat text-[#870F0C] text-[clamp(1rem,3vw,20px)] text-center mb-6"
                   >
                     Ormawa Eksekutif PKU IPB
                   </motion.p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                     {[
                       PLACEHOLDER.intro.ormawaEkse,
                       PLACEHOLDER.intro.peranOrmawa,
@@ -54,13 +54,13 @@ export default function ProfileSection() {
                         key={i}
                         {...fadeUp}
                         transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
-                        className="bg-white border border-gold-warm/20 rounded-[25px] p-3.5 md:p-4 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
+                        className="bg-white border border-gold-warm/20 rounded-[25px] p-3 md:p-4 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
                       >
-                        <h3 className="font-montserrat text-center text-[#A90900] text-[16px] md:text-[18px] font-bold mb-3">
+                        <h3 className="font-montserrat text-center text-[#A90900] text-[18px] text-lg font-bold mb-3">
                           {card.title}
                         </h3>
                         <hr className="mb-3 text-[#A90900] border-t-2" />
-                        <p className="text-ink/70 leading-relaxed text-center text-[clamp(0.8125rem,1.8vw,0.875rem)]">
+                        <p className="text-ink/70 leading-relaxed text-center text-[clamp(0.8125rem,2.5vw,0.875rem)]">
                           {card.body}
                         </p>
                       </motion.div>
@@ -77,22 +77,22 @@ export default function ProfileSection() {
               className="bg-[#870F0C] shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
             >
               <div className="h-full rounded-[25px] bg-[#FBF5EA] border-2 border-[#870F0C] relative">
-                <div className="mx-4 my-5 md:mx-6 lg:mx-10 md:my-7">
+                <div className="mx-4 my-5 md:mx-10 md:my-7">
                   <motion.p
                     {...fadeUp}
                     transition={stagger}
-                    className="font-asimovian uppercase text-[#870F0C] text-[clamp(1.8rem,5vw,50px)] text-center"
+                    className="font-asimovian uppercase text-[#870F0C] text-[clamp(1.8rem,6vw,50px)] text-center"
                   >
                     Pengertian Kabinet
                   </motion.p>
                   <motion.p
                     {...fadeUp}
                     transition={stagger}
-                    className="font-montserrat text-[#870F0C] text-[clamp(0.95rem,2.5vw,20px)] text-center mb-6"
+                    className="font-montserrat text-[#870F0C] text-[clamp(1rem,3vw,20px)] text-center mb-6"
                   >
                     Astana Angkasa
                   </motion.p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                     {[
                       PLACEHOLDER.intro.astana,
                       PLACEHOLDER.intro.angkasa,
@@ -101,13 +101,13 @@ export default function ProfileSection() {
                         key={i}
                         {...fadeUp}
                         transition={{ ...stagger, delay: 0.1 + i * 0.06 }}
-                        className="bg-[#F6E7CC] border border-[#DCB06F] border-3 rounded-[25px] p-3.5 md:p-4 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
+                        className="bg-[#F6E7CC] border border-[#DCB06F] border-3 rounded-[25px] p-3 md:p-4 shadow-card hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
                       >
-                        <h3 className="font-montserrat text-center text-[#A90900] text-[16px] md:text-[18px] font-bold mb-3">
+                        <h3 className="font-montserrat text-center text-[#A90900] text-[18px] text-lg font-bold mb-3">
                           {card.title}
                         </h3>
                         <hr className="mb-3 text-[#A90900] border-t-2" />
-                        <p className="text-ink/70 leading-relaxed text-center text-[clamp(0.8125rem,1.8vw,0.875rem)]">
+                        <p className="text-ink/70 leading-relaxed text-center text-[clamp(0.8125rem,2.5vw,0.875rem)]">
                           {card.body}
                         </p>
                       </motion.div>
@@ -121,34 +121,34 @@ export default function ProfileSection() {
 
         {/* Subsection 3: Astana Angkasa */}
         <div className="relative max-w-7xl mx-auto py-8 px-2 sm:px-6 lg:px-8 mb-10 overflow-hidden">
-          {/* Menara Kiri */}
-          <div className="absolute -left-20 sm:-left-24 md:-left-[90px] lg:-left-[110px] xl:-left-[170px] top-[50%] -translate-y-1/2 w-48 sm:w-60 md:w-[220px] lg:w-[280px] xl:w-[420px] pointer-events-none z-0">
+          {/* Menara Kiri (Simetris sempurna) */}
+          <div className="absolute -left-20 sm:-left-24 md:-left-[120px] lg:-left-[170px] top-[50%] -translate-y-1/2 w-48 sm:w-64 md:w-[350px] lg:w-[450px] pointer-events-none z-0">
             <Image
               src="/assets/menara-only.png"
               alt="Menara Astana Kiri"
               width={600}
               height={300}
-              className="w-full h-auto rotate-[110deg] object-contain opacity-75 md:opacity-85 xl:opacity-100 drop-shadow-md"
+              className="w-full h-auto rotate-[110deg] object-contain opacity-85 md:opacity-100 drop-shadow-md"
             />
           </div>
 
-          {/* Menara Kanan */}
-          <div className="absolute -right-20 sm:-right-24 md:-right-[105px] lg:-right-[125px] xl:-right-[195px] top-[50%] -translate-y-1/2 w-48 sm:w-60 md:w-[220px] lg:w-[280px] xl:w-[420px] pointer-events-none z-0">
+          {/* Menara Kanan (Geser kanan 15px lagi) */}
+          <div className="absolute -right-20 sm:-right-24 md:-right-[145px] lg:-right-[195px] top-[50%] -translate-y-1/2 w-48 sm:w-64 md:w-[350px] lg:w-[450px] pointer-events-none z-0">
             <Image
               src="/assets/menara-only.png"
               alt="Menara Astana Kanan"
               width={600}
               height={300}
-              className="w-full h-auto rotate-[70deg] object-contain opacity-75 md:opacity-85 xl:opacity-100 drop-shadow-md"
+              className="w-full h-auto rotate-[70deg] object-contain opacity-85 md:opacity-100 drop-shadow-md"
             />
           </div>
 
-          {/* Content Text */}
-          <div className="relative z-10 max-w-[82%] sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto text-center px-4 sm:px-6 py-2">
+          {/* Content Text (Mobile: kecil & ketengah. Desktop: kembali ke semula 100px & 18px) */}
+          <div className="relative z-10 max-w-[82%] sm:max-w-xl md:max-w-4xl lg:max-w-5xl mx-auto text-center px-4 sm:px-6 py-2">
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-kapakana text-center text-[#701011] text-[clamp(1.5rem,4.5vw,54px)] md:text-[clamp(2.5rem,7vw,100px)] tracking-tight drop-shadow mb-3 md:mb-6"
+              className="font-kapakana text-center text-[#701011] text-[clamp(1.5rem,4.5vw,54px)] md:text-[clamp(3rem,10vw,100px)] tracking-tight drop-shadow mb-3 md:mb-6"
             >
               Astana Angkasa
             </motion.h2>
@@ -156,7 +156,7 @@ export default function ProfileSection() {
             <motion.p
               {...fadeUp}
               transition={stagger}
-              className="text-center font-montserrat font-[500] text-[#32210F] text-[clamp(0.75rem,2.8vw,13.5px)] md:text-[clamp(0.875rem,2vw,18px)] leading-relaxed mb-3 md:mb-4"
+              className="text-center font-montserrat font-[500] text-[#32210F] text-[clamp(0.75rem,3.2vw,13.5px)] md:text-[clamp(0.875rem,2.5vw,18px)] leading-relaxed mb-3 md:mb-4"
             >
               {PLACEHOLDER.intro.astanaAngkasa.barisSatu}
             </motion.p>
@@ -164,7 +164,7 @@ export default function ProfileSection() {
             <motion.p
               {...fadeUp}
               transition={stagger}
-              className="text-center font-montserrat font-[500] text-[#32210F] text-[clamp(0.75rem,2.8vw,13.5px)] md:text-[clamp(0.875rem,2vw,18px)] leading-relaxed"
+              className="text-center font-montserrat font-[500] text-[#32210F] text-[clamp(0.75rem,3.2vw,13.5px)] md:text-[clamp(0.875rem,2.5vw,18px)] leading-relaxed"
             >
               {PLACEHOLDER.intro.astanaAngkasa.barisDua}
             </motion.p>
