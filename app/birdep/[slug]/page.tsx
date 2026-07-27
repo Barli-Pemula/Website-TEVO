@@ -61,7 +61,7 @@ type Member = {
   programs?: {
     id: string,
     name: string,
-  }
+  }[]
 }
 
 export default function page() {

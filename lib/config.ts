@@ -32,7 +32,9 @@ export const CONFIG = {
 
   /** Social Media */
   socials: {
-    instagram: "https://instagram.com/astanaangkasa",
+    instagram: "https://www.instagram.com/ormawaeksekutifpku?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    whatsapp: "https://wa.me/6281200000000",
+    email: "mailto:astanaangkasa@apps.ipb.ac.id",
     youtube: null,
     tiktok: null,
   },
