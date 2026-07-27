@@ -224,7 +224,7 @@ export default function Navbar() {
       router.push(`/#${id}`);
       return;
     }
-    const el = document.getElementById(id);
+    const el = document.getElementById(id) || (id === "narahubung" ? document.getElementById("footer") : null);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   }, [isHome, router]);
 

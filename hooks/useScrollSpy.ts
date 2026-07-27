@@ -9,6 +9,7 @@ const SECTION_IDS = [
   "store",
   "angkasa-kost",
   "informasi",
+  "narahubung",
 ];
 
 /**
