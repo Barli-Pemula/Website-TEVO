@@ -11,6 +11,19 @@ export default function NewsCarousel() {
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const articles = PLACEHOLDER.news.articles;
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024);
+    };
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   const goTo = useCallback(
     (index: number) => {
       const len = articles.length;
@@ -47,6 +60,21 @@ export default function NewsCarousel() {
     viewport: { once: true, margin: "-80px" },
   };
 
+  const getXOffset = () => {
+    if (isMobile) {
+      return `calc(-${activeIndex} * (100% + 16px))`;
+    }
+    if (isTablet) {
+      const maxIdx = Math.max(0, articles.length - 2);
+      const idx = Math.min(activeIndex, maxIdx);
+      return `calc(-${idx} * (50% + 12px))`;
+    }
+    // Desktop
+    const maxIdx = Math.max(0, articles.length - 3);
+    const idx = Math.min(activeIndex, maxIdx);
+    return `calc(-${idx} * (33.333% + 16px))`;
+  };
+
   return (
     <section id="informasi" className="relative bg-forest-dark py-20 md:py-28">
       {/* Top ornament */}
@@ -76,94 +104,97 @@ export default function NewsCarousel() {
           </motion.p>
         </div>
 
-        {/* Carousel */}
+        {/* Carousel Container */}
         <div
-          className="relative"
+          className="relative px-2 md:px-6"
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
         >
-          {/* Cards */}
-          <div className="flex items-stretch gap-4 md:gap-6 overflow-x-auto md:overflow-hidden snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
-            {articles.map((article, i) => {
-              const offset = i - activeIndex;
-              const isActive = i === activeIndex;
-              const isFeatured = article.featured;
-
-              return (
-                <motion.article
-                  key={article.slug}
-                  animate={{
-                    scale: isActive ? 1 : 0.92,
-                    opacity: Math.abs(offset) <= 1 ? 1 : 0.3,
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className={`flex-shrink-0 snap-center w-[85vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white rounded-2xl overflow-hidden shadow-card
-                    ${isFeatured && isActive ? "ring-2 ring-gold-warm shadow-lift" : ""}
-                    hover:shadow-lift transition-shadow duration-200`}
-                >
-                  {/* Cover image placeholder */}
-                  <div className="h-40 bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 flex items-center justify-center">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A678" strokeWidth="1" opacity="0.4">
-                      <rect x="2" y="2" width="20" height="20" rx="2" /><line x1="7" y1="7" x2="17" y2="7" />
-                      <line x1="7" y1="11" x2="13" y2="11" /><line x1="7" y1="15" x2="15" y2="15" />
-                    </svg>
-                  </div>
-
-                  <div className="p-5 md:p-6">
-                    {/* Meta */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs text-bark">{article.date}</span>
-                      <span className="w-1 h-1 rounded-full bg-bark/30" />
-                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-sky-pale/30 text-forest-dark text-[10px] font-bold uppercase tracking-wider">
-                        {article.category}
-                      </span>
-                    </div>
-
-                    <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-2
-                                   group-hover:text-crimson transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-ink/50 text-xs leading-relaxed line-clamp-2 mb-4">
-                      {article.excerpt}
-                    </p>
-
-                    {/* Read more */}
-                    <a
-                      href={`/informasi/${article.slug}`}
-                      className="inline-flex items-center gap-1 text-crimson text-xs font-semibold hover:gap-2 transition-all"
-                    >
-                      Selengkapnya
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                        <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </a>
-                  </div>
-                </motion.article>
-              );
-            })}
-          </div>
-
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Visible on Mobile and Desktop */}
           <button
             onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white shadow-card
-                       flex items-center justify-center hover:bg-smoke transition-colors hidden md:flex"
+            className="absolute -left-2 sm:-left-3 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-gold-warm/30 flex items-center justify-center hover:bg-smoke hover:scale-105 active:scale-95 transition-all text-forest-dark"
             aria-label="Artikel sebelumnya"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
           <button
             onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white shadow-card
-                       flex items-center justify-center hover:bg-smoke transition-colors hidden md:flex"
+            className="absolute -right-2 sm:-right-3 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-gold-warm/30 flex items-center justify-center hover:bg-smoke hover:scale-105 active:scale-95 transition-all text-forest-dark"
             aria-label="Artikel selanjutnya"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
+
+          {/* Cards Track */}
+          <div className="overflow-hidden py-2">
+            <motion.div
+              className="flex items-stretch gap-4 md:gap-6"
+              animate={{ x: getXOffset() }}
+              transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
+            >
+              {articles.map((article, i) => {
+                const isActive = i === activeIndex;
+                const isFeatured = article.featured;
+
+                return (
+                  <motion.article
+                    key={article.slug}
+                    animate={{
+                      scale: isActive ? 1 : 0.95,
+                      opacity: isActive || (!isMobile && Math.abs(i - activeIndex) <= 2) ? 1 : 0.5,
+                    }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className={`w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-card
+                      ${isFeatured && isActive ? "ring-2 ring-gold-warm shadow-lift" : ""}
+                      hover:shadow-lift transition-shadow duration-200`}
+                  >
+                    {/* Cover image placeholder */}
+                    <div className="h-40 bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 flex items-center justify-center">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A678" strokeWidth="1" opacity="0.4">
+                        <rect x="2" y="2" width="20" height="20" rx="2" /><line x1="7" y1="7" x2="17" y2="7" />
+                        <line x1="7" y1="11" x2="13" y2="11" /><line x1="7" y1="15" x2="15" y2="15" />
+                      </svg>
+                    </div>
+
+                    <div className="p-5 md:p-6">
+                      {/* Meta */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-xs text-bark">{article.date}</span>
+                        <span className="w-1 h-1 rounded-full bg-bark/30" />
+                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-sky-pale/30 text-forest-dark text-[10px] font-bold uppercase tracking-wider">
+                          {article.category}
+                        </span>
+                      </div>
+
+                      <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-2
+                                     group-hover:text-crimson transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-ink/50 text-xs leading-relaxed line-clamp-2 mb-4">
+                        {article.excerpt}
+                      </p>
+
+                      {/* Read more */}
+                      <a
+                        href={`/informasi/${article.slug}`}
+                        className="inline-flex items-center gap-1 text-crimson text-xs font-semibold hover:gap-2 transition-all"
+                      >
+                        Selengkapnya
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                          <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </a>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </motion.div>
+          </div>
         </div>
 
         {/* Pagination dots */}
