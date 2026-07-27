@@ -208,15 +208,23 @@ export default function ProfileSection() {
             </motion.h2>
             <div />
           </div>
-          <motion.ul
+          <motion.ol
             {...fadeUp}
             transition={stagger}
-            className="list-none bg-[#701011] border-3 border-[#DCB06F] rounded-[25px] p-7 drop-shadow text-[white] [&_strong]:font-bold"
+            className="list-none bg-[#701011] border-3 border-[#DCB06F] rounded-[25px] p-6 md:p-8 drop-shadow text-[white] [&_strong]:font-bold space-y-4"
           >
             {PLACEHOLDER.intro.misi.map((baris, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: baris }} className="relative pl-7 before:content-['✨'] before:absolute before:left-0 before:top-0 text-[clamp(0.875rem,2.2vw,18px)] font-montserrat" />
+              <li
+                key={i}
+                className="flex items-start gap-3 text-[clamp(0.875rem,2.2vw,18px)] font-montserrat leading-relaxed"
+              >
+                <span className="font-bold text-[#DCB06F] text-[clamp(1rem,2.3vw,20px)] shrink-0 min-w-[24px]">
+                  {i + 1}.
+                </span>
+                <span dangerouslySetInnerHTML={{ __html: baris }} />
+              </li>
             ))}
-          </motion.ul>
+          </motion.ol>
         </div>
       </div>
     </section>
