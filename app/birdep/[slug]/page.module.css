@@ -1,19 +1,21 @@
 .setImageForBackground {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .setImageForBackground::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image: url(/assets/Sub-Page.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    filter: blur(8px);
-    transform: scale(1.1);
+  content: "";
+  position: absolute;
+  inset: -12px;
+
+  background-image: url("/assets/Sub-Page.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+
+  filter: blur(8px);
+  z-index: -1;
 }
 
 /* body {

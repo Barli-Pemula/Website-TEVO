@@ -11,7 +11,7 @@ interface unitDetail {
   id: number;
   name: string;
   code: string;
-  logo: string;
+  logoUrl: string;
   slug: string;
   unitType: string;
   description: string;
@@ -282,6 +282,7 @@ export default function StructureHub() {
         };
         const response = await axios.request(getBirdep);
         setUnit(response.data.data.birdeps);
+        console.log(response.data.data.birdeps);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -346,7 +347,7 @@ export default function StructureHub() {
                       {/* BPH Logo */}
                       <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-[3px] border-[#DCB06F] bg-white flex items-center justify-center overflow-hidden shadow-md mx-auto mb-2 group-hover:border-[#870F0C] transition-colors">
                         <Image
-                          src={getUnitLogo(bph)}
+                          src={bph.logoUrl}
                           alt={bph.name}
                           width={80}
                           height={80}
@@ -364,7 +365,7 @@ export default function StructureHub() {
 
                 {/* Connector: BPH → Biro */}
                 <div className="w-[2px] h-8 bg-[#DCB06F]/60" />
-                <div className="w-3/4 h-[2px] bg-[#DCB06F]/60 relative">
+                <div className="w-1/2 md:w-5/9 h-[2px] bg-[#DCB06F]/60 relative">
                   <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]" />
                 </div>
 
@@ -400,7 +401,7 @@ export default function StructureHub() {
                               {/* Biro Logo */}
                               <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-2 border-[#F9D253]/30 bg-[#701011] flex items-center justify-center overflow-hidden">
                                 <Image
-                                  src={getUnitLogo(biro)}
+                                  src={biro.logoUrl}
                                   alt={biro.name}
                                   width={50}
                                   height={50}
@@ -426,14 +427,12 @@ export default function StructureHub() {
 
                 {/* Connector: Biro → Departemen */}
                 <div className="w-[2px] h-4 bg-[#DCB06F]/60" />
-                <div className="w-5/6 h-[2px] bg-[#DCB06F]/60 relative">
+                <div className="w-1/2 md:w-8/9 h-[2px] bg-[#DCB06F]/60 relative">
                   <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]" />
                 </div>
 
                 {/* ---- Level 3: Departemen (2/4/8 cols) ---- */}
                 <div className="relative w-full flex flex-col items-center pb-8">
-                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/40 z-0" />
-
                   <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1 md:gap-2 w-full relative z-10">
                     {deptUnits.map((dept) => {
                       const cleanDeptName = dept.name
@@ -466,7 +465,7 @@ export default function StructureHub() {
                               {/* Departemen Logo */}
                               <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#F9D253]/20 bg-[#1A2E06] flex items-center justify-center overflow-hidden mb-1">
                                 <Image
-                                  src={getUnitLogo(dept)}
+                                  src={dept.logoUrl}
                                   alt={dept.name}
                                   width={40}
                                   height={40}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
+import FrameCustom from "../../styles/frameCustom.module.css"
 
 const MENU = [
   { id: "beranda", label: "Beranda" },
@@ -18,12 +19,12 @@ const MENU = [
 
 // Color palette
 const C = {
-  dark:      "#32210F",
-  gold:      "#DCB06F",
-  red:       "#870F0C",
-  cream:     "#F6E7CC",
-  light:     "#FBF5EA",
-  peach:     "#FFE3BB",
+  dark: "#32210F",
+  gold: "#DCB06F",
+  red: "#870F0C",
+  cream: "#F6E7CC",
+  light: "#FBF5EA",
+  peach: "#FFE3BB",
 };
 
 /* ================================================================
@@ -233,30 +234,32 @@ export default function Navbar() {
     : { background: "transparent" };
 
   const navbarScrolledClass = scrolled
-    ? "backdrop-blur-sm bg-[#FBF5EA]/80 lg:bg-[#DCB06F] lg:backdrop-blur-[12px]"
-    : "";
+    ? "backdrop-blur-sm bg-[#FBF5EA]/80 lg:bg-[#DCB06F] lg:backdrop-blur-[12px] top-[15px] inset-x-[5px] md:inset-x-[35px]"
+    : "top-0 inset-x-0";
 
   const innerStyle = scrolled
-    ? { background: C.light, margin: "3px", borderRadius: "2px" }
+    ? { background: C.light, margin: "1.5px", borderRadius: "2px" }
     : {};
 
   // ===== SUB-PAGE =====
   if (!isHome) {
     return (
-      <nav className={navbarScrolledClass} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, ...navbarOuter }}>
-        <div style={innerStyle}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
-            <Link href="/" className="flex items-center shrink-0 min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
-              <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
-            </Link>
-            <div className="hidden lg:flex items-center gap-1">
-              {MENU.map((item) => (
-                <NavLink key={item.id} id={item.id} label={item.label} showArrow={item.id === "store"} isSpecial={item.isSpecial} />
-              ))}
+      <div className={`fixed inset-x-10 z-50 rounded-[28px] ${scrolled ? "drop-shadow-[0_12px_32px_rgba(68,42,20,0.28)]" : "shadow-none"}`}>
+        <nav className={`${FrameCustom.royalFrame} ${navbarScrolledClass} `} style={{ position: "fixed", zIndex: 50, transition: "all 1s", ...navbarOuter }}>
+          <div style={innerStyle}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
+              <Link href="/" className="flex items-center shrink-0 min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
+                <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
+              </Link>
+              <div className="hidden lg:flex items-center gap-1">
+                {MENU.map((item) => (
+                  <NavLink key={item.id} id={item.id} label={item.label} showArrow={item.id === "store"} isSpecial={item.isSpecial} />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     );
   }
 
@@ -264,50 +267,52 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop / Mobile / Tablet Navbar */}
-      <nav className={navbarScrolledClass} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", ...navbarOuter }}>
-        <div style={innerStyle}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
-          {/* Logo */}
-          <button onClick={() => handleNavClick("beranda")} className="flex items-center shrink-0 min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
-            <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
-          </button>
+      <div className={`fixed inset-x-10 z-50 rounded-[28px] ${scrolled ? "drop-shadow-[0_12px_32px_rgba(68,42,20,0.28)]" : "shadow-none"}`}>
+        <nav className={`${FrameCustom.royalFrame} ${navbarScrolledClass} `} style={{ position: "fixed", zIndex: 50, transition: "all 1s", ...navbarOuter }}>
+          <div style={innerStyle}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
+              {/* Logo */}
+              <button onClick={() => handleNavClick("beranda")} className="flex items-center shrink-0 min-w-[44px] min-h-[44px]" aria-label="Kembali ke Beranda">
+                <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
+              </button>
 
-          {/* Desktop Menu (1024px and up) */}
-          <div className="hidden lg:flex items-center gap-1">
-            {MENU.map((item) => (
-              <NavItem
-                key={item.id}
-                id={item.id}
-                label={item.label}
-                isActive={activeId === item.id}
-                scrolled={scrolled}
-                showArrow={item.id === "store"}
-                onClick={handleNavClick}
-                isSpecial={item.isSpecial}
-              />
-            ))}
+              {/* Desktop Menu (1024px and up) */}
+              <div className="hidden lg:flex items-center gap-1">
+                {MENU.map((item) => (
+                  <NavItem
+                    key={item.id}
+                    id={item.id}
+                    label={item.label}
+                    isActive={activeId === item.id}
+                    scrolled={scrolled}
+                    showArrow={item.id === "store"}
+                    onClick={handleNavClick}
+                    isSpecial={item.isSpecial}
+                  />
+                ))}
+              </div>
+
+              {/* Hamburger (Mobile & Tablet < 1024px) */}
+              <button
+                ref={hamburgerRef}
+                className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg transition-colors"
+                style={{ color: scrolled ? C.dark : C.light, background: hamHover ? (scrolled ? "rgba(220,176,111,0.1)" : "rgba(246,231,204,0.1)") : "transparent" }}
+                onClick={() => setDrawerOpen(true)}
+                aria-label="Buka menu navigasi"
+                aria-expanded={drawerOpen}
+                onMouseEnter={() => setHamHover(true)}
+                onMouseLeave={() => setHamHover(false)}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="4" y1="6" x2="20" y2="6" />
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+              </button>
+            </div>
           </div>
-
-          {/* Hamburger (Mobile & Tablet < 1024px) */}
-          <button
-            ref={hamburgerRef}
-            className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg transition-colors"
-            style={{ color: scrolled ? C.dark : C.light, background: hamHover ? (scrolled ? "rgba(220,176,111,0.1)" : "rgba(246,231,204,0.1)") : "transparent" }}
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Buka menu navigasi"
-            aria-expanded={drawerOpen}
-            onMouseEnter={() => setHamHover(true)}
-            onMouseLeave={() => setHamHover(false)}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="4" y1="6" x2="20" y2="6" />
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <line x1="4" y1="18" x2="20" y2="18" />
-            </svg>
-          </button>
-        </div>
+        </nav>
       </div>
-      </nav>
 
       {/* Overlay */}
       <div

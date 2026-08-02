@@ -270,7 +270,7 @@ export default function HeroSection() {
         <div className={styles.bgImage}>
           <div className="hidden md:block absolute inset-0">
             <Image
-              src="/assets/Dekstop.png"
+              src="/assets/backgrounds/hero-desktop.png"
               alt="Astana Angkasa Desktop Background"
               fill
               priority
@@ -293,8 +293,10 @@ export default function HeroSection() {
 
         {/* Title — positioned at sword center, emerges from within */}
         <div ref={titleRef} className={`${styles.heroTitle}`}>
-          <h1 className="[-webkit-text-stroke:1px_#fff]">Astana Angkasa</h1>
-          <p>Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
+          <h1 className="[-webkit-text-stroke:1px_#fff]" style={{
+            textShadow: "0 6px 20px rgba(0,0,0,0.4), 0 0 3px rgba(255,255,255,0.8)",
+          }}>Astana Angkasa</h1>
+          <p className="px-5 py-3 bg-[var(--text-secondary)]/20">Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
         </div>
 
         {/* Sword Assembly */}

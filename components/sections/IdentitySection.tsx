@@ -8,9 +8,9 @@ export default function IdentitySection() {
   return (
     <section id="identity" className="relative text-center overflow-hidden">
       {/* Background image */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="/assets/Sub-Page.png"
+          src="/assets/blended-bg.png"
           alt="Background Castle"
           fill
           priority
@@ -22,7 +22,7 @@ export default function IdentitySection() {
             transform: "scale(1.1)",
           }}
         />
-      </div>
+      </div> */}
 
       {/* Light transparent overlay — keeps background bright and natural */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-white/20 via-transparent to-transparent" />

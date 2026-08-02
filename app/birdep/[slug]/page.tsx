@@ -33,7 +33,7 @@ type birdepDetail = {
   name: string;
   code: string;
   birdepType: string;
-  logo: string;
+  logoUrl: string;
 };
 
 type PageProps = {
@@ -61,7 +61,7 @@ type Member = {
   programs?: {
     id: string,
     name: string,
-  }[]
+  }
 }
 
 export default function page() {
@@ -121,7 +121,7 @@ export default function page() {
         const allBirdeps = response.data.data.birdeps
         const getThisBirdep = allBirdeps.find((thisBirdep) => thisBirdep.slug === slug)
         if (getThisBirdep) setBirdep(getThisBirdep)
-        console.log(getThisBirdep)
+        console.log(getThisBirdep.logoUrl)
         setLoading(false)
       } catch (error) {
         console.error(error)
@@ -183,16 +183,16 @@ export default function page() {
   };
 
   return (
-    <section className="relative bg-transparent">
+    <section className="relative bg-[#FBF5EA]">
       <div className={`${style.setImageForBackground} flex items-center py-25`}>
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             {...fadeUp}
             transition={stagger}
             className="flex justify-start items-center gap-15 pt-15">
-            <Image width={357} height={357} src={birdep.logo} alt="birdep.name" />
+            <Image className="drop-shadow" width={357} height={357} src={birdep.logoUrl} alt="birdep.name" />
             <div className="pr-10">
-              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5">{birdep.name}</h2>
+              <h2 className="font-lacheyard text-[100px] text-[#A90900] leading-none mb-5 drop-shadow-sm">{birdep.name}</h2>
               <p className="font-montserrat text-[18px]">{birdep.description}</p>
             </div>
           </motion.div>
@@ -231,9 +231,9 @@ export default function page() {
 
           <motion.section
             id="program-kerja"
-            className="relative p-1 md:p-2 bg-transparent"
+            className="relative p-1 md:p-2 bg-[#DCB06F]"
           >
-            <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#2C430B]/90 backdrop-blur-md rounded-[25px]">
+            <div className="mx-auto p-1 sm:p-8 lg:p-12 bg-[#2C430B] rounded-[25px]">
               <div className="text-center">
                 <motion.h2
                   {...fadeUp}
@@ -258,10 +258,10 @@ export default function page() {
         </div>
       </div>
 
-      <div className="bg-transparent overflow-hidden">
-        <div className="my-5 p-10 bg-transparent">
-          <div className="bg-transparent">
-            <div className="border-3 border-[#DCB06F] bg-[#FBF5EA]/90 backdrop-blur-md rounded-[25px] mx-auto">
+      <div className="bg-[#DCB06F] overflow-hidden">
+        <div className="my-5 p-10 bg-[#870F0C]">
+          <div className="bg-[#DCB06F]">
+            <div className="border-3 border-[#DCB06F] bg-[#FBF5EA] rounded-[25px] mx-auto">
               <div className="max-w-8xl px-4 sm:px-6 lg:px-8 relative z-10 my-15">
                 <motion.h2
                   {...fadeUp}
@@ -294,7 +294,7 @@ export default function page() {
                       {members.map((member) => (
                         <SwiperSlide key={member.id} className={style.storeSlide}>
                           {/* <Image src={product.image} width={100} height={100} alt={product.name} /> */}
-                          <h3>{member.fullName}</h3>
+                          <h3 className="leading-none">{member.fullName}</h3>
                           <p>{member.positionLabel}</p>
                         </SwiperSlide>
                       ))}

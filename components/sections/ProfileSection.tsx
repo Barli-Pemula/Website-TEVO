@@ -16,7 +16,28 @@ const fadeUp = {
 export default function ProfileSection() {
   return (
     <section id="profile" className="relative bg-[#FBF5EA]">
-      <div className={`${style.setImageForBackground} `}>
+      <div className={style.setImageForBackground}>
+        {/* Menara Kiri */}
+          <div className="absolute -left-20 sm:-left-24 md:-left-[90px] lg:-left-[110px] xl:-left-[170px] top-[60%] -translate-y-1/2 w-48 sm:w-60 md:w-[220px] lg:w-[280px] xl:w-[420px] pointer-events-none z-0">
+            <Image
+              src="/assets/menara-only.png"
+              alt="Menara Astana Kiri"
+              width={600}
+              height={300}
+              className="w-full h-auto rotate-[110deg] object-contain opacity-75 md:opacity-85 xl:opacity-100 drop-shadow-md"
+            />
+          </div>
+
+          {/* Menara Kanan */}
+          <div className="absolute -right-20 sm:-right-24 md:-right-[105px] lg:-right-[125px] xl:-right-[195px] top-[60%] -translate-y-1/2 w-48 sm:w-60 md:w-[220px] lg:w-[280px] xl:w-[420px] pointer-events-none z-0">
+            <Image
+              src="/assets/menara-only.png"
+              alt="Menara Astana Kanan"
+              width={600}
+              height={300}
+              className="w-full h-auto rotate-[70deg] object-contain opacity-75 md:opacity-85 xl:opacity-100 drop-shadow-md"
+            />
+          </div>
         {/* subsection 1: logo dan jargon */}
         <IdentitySection />
 
@@ -121,28 +142,6 @@ export default function ProfileSection() {
 
         {/* Subsection 3: Astana Angkasa */}
         <div className="relative max-w-7xl mx-auto py-8 px-2 sm:px-6 lg:px-8 mb-10 overflow-hidden">
-          {/* Menara Kiri */}
-          <div className="absolute -left-20 sm:-left-24 md:-left-[90px] lg:-left-[110px] xl:-left-[170px] top-[50%] -translate-y-1/2 w-48 sm:w-60 md:w-[220px] lg:w-[280px] xl:w-[420px] pointer-events-none z-0">
-            <Image
-              src="/assets/menara-only.png"
-              alt="Menara Astana Kiri"
-              width={600}
-              height={300}
-              className="w-full h-auto rotate-[110deg] object-contain opacity-75 md:opacity-85 xl:opacity-100 drop-shadow-md"
-            />
-          </div>
-
-          {/* Menara Kanan */}
-          <div className="absolute -right-20 sm:-right-24 md:-right-[105px] lg:-right-[125px] xl:-right-[195px] top-[50%] -translate-y-1/2 w-48 sm:w-60 md:w-[220px] lg:w-[280px] xl:w-[420px] pointer-events-none z-0">
-            <Image
-              src="/assets/menara-only.png"
-              alt="Menara Astana Kanan"
-              width={600}
-              height={300}
-              className="w-full h-auto rotate-[70deg] object-contain opacity-75 md:opacity-85 xl:opacity-100 drop-shadow-md"
-            />
-          </div>
-
           {/* Content Text */}
           <div className="relative z-10 max-w-[82%] sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto text-center px-4 sm:px-6 py-2">
             <motion.h2

@@ -30,12 +30,14 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: radial-gradient(
+
+  /* ga perlu pake efek vinyet lagi */
+  /* background: radial-gradient(
     ellipse at center,
     rgba(255, 255, 255, 0.15) 0%,
     rgba(255, 255, 255, 0.05) 50%,
     rgba(0, 0, 0, 0.15) 100%
-  );
+  ); */
 }
 
 /* ===== SWORD CONTAINER — responsive height (horizontal, bigger) ===== */
@@ -139,7 +141,7 @@
   font-family: var(--font-heading);
   font-size: clamp(0.7rem, 1.5vw, 1.2rem);
   letter-spacing: 0.6em;
-  color: var(--text-secondary);
+  color: #2C430B;
   margin-top: 1rem;
   text-transform: uppercase;
 }
