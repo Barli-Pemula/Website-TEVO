@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
     >
       <head>
         {/* cdn icon google */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_outward" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_outward,calendar_today" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Asimovian&family=Kapakana:wght@300;400&display=swap" />
       </head>
       <body className={`${montserrat.variable} ${lacheyard.variable} font-[family-name:var(--font-body)]`}>

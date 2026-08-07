@@ -260,7 +260,7 @@ export const PLACEHOLDER = {
 
   /** News — Section 7 */
   news: {
-    title: "Informasi & Update",
+    title: "Angkasa News",
     subtitle: "Kabar terbaru dari Kabinet Astana Angkasa",
     articles: [
       {

@@ -15,6 +15,7 @@ interface unitDetail {
   slug: string;
   unitType: string;
   description: string;
+  focusArea: string;
 }
 
 const stagger = { duration: 0.4, ease: "easeOut" as const };
@@ -101,7 +102,7 @@ function getUnitLogo(unit: unitDetail): string {
 
 function handleBreakSeal(unit: unitDetail) {
   setTimeout(() => {
-    window.open(`/birdep/${unit.slug}`, "_blank", "noopener,noreferrer");
+    window.open(`/struktur-organisasi/${unit.slug}`, "_blank", "noopener,noreferrer");
   }, 700);
 }
 
@@ -209,7 +210,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                 <div className="my-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
 
                 <p className="text-justify text-base leading-relaxed sm:text-md font-montserrat">
-                  {unit.description}
+                  {unit.description} {unit.focusArea}
                 </p>
 
                 {/* Logo + Cap lilin */}
@@ -278,8 +279,9 @@ export default function StructureHub() {
       try {
         const getBirdep = {
           method: "GET",
-          url: "https://nexus.ormawaeksekutifpku.com/api/public/tevo/birdeps",
+          url: "/api/nexus/public/tevo/birdeps",
         };
+        
         const response = await axios.request(getBirdep);
         setUnit(response.data.data.birdeps);
         console.log(response.data.data.birdeps);
