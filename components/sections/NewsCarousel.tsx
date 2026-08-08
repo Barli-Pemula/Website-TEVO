@@ -150,26 +150,46 @@ export default function NewsCarousel() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-14">
-          <motion.h2
-            {...fadeUp}
-            transition={{ duration: 0.4 }}
-            className="font-asimovian text-[80px] uppercase text-[#F6E7CC]"
-          >
-            {PLACEHOLDER.news.title}
-          </motion.h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-14 gap-4">
+          <div className="text-center md:text-left">
+            <motion.h2
+              {...fadeUp}
+              transition={{ duration: 0.4 }}
+              className="font-asimovian text-[clamp(2.5rem,6vw,80px)] uppercase text-[#F6E7CC] leading-none"
+            >
+              {PLACEHOLDER.news.title}
+            </motion.h2>
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.4, delay: 0.06 }}
+              className="mt-3 mx-auto md:mx-0 w-16 h-[2px] bg-gold-warm"
+            />
+            <motion.p
+              {...fadeUp}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="mt-3 text-cream-soft/60 text-sm"
+            >
+              {PLACEHOLDER.news.subtitle}
+            </motion.p>
+          </div>
+
+          {/* Button "Lihat Selengkapnya" — Desktop Only */}
           <motion.div
             {...fadeUp}
-            transition={{ duration: 0.4, delay: 0.06 }}
-            className="mt-3 mx-auto w-16 h-[2px] bg-gold-warm"
-          />
-          <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="mt-4 text-cream-soft/60 text-sm"
+            transition={{ duration: 0.4, delay: 0.12 }}
+            className="hidden md:block shrink-0 mb-1"
           >
-            {PLACEHOLDER.news.subtitle}
-          </motion.p>
+            <a
+              href="/angkasa-news"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F6E7CC] text-[#870F0C] font-semibold text-sm border-2 border-[#DCB06F] shadow-md hover:bg-[#DCB06F] hover:text-[#32210F] hover:scale-105 active:scale-95 transition-all duration-200"
+            >
+              Lihat Selengkapnya
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+          </motion.div>
         </div>
 
         {/* Carousel Container */}
