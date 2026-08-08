@@ -121,20 +121,20 @@ body {
 }
 
 /* ================================================================
-   Scrollbar Styling
+   Hide Scrollbar Globally (Full Screen Experience across all devices)
    ================================================================ */
+html,
+body,
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+*::-webkit-scrollbar,
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-smoke);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-bark);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-crimson);
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* ================================================================
