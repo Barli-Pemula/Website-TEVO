@@ -150,8 +150,8 @@ export default function NewsCarousel() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-14 gap-4">
-          <div className="text-center md:text-left">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 md:mb-14 gap-4">
+          <div className="text-center sm:text-left">
             <motion.h2
               {...fadeUp}
               transition={{ duration: 0.4 }}
@@ -162,7 +162,7 @@ export default function NewsCarousel() {
             <motion.div
               {...fadeUp}
               transition={{ duration: 0.4, delay: 0.06 }}
-              className="mt-3 mx-auto md:mx-0 w-16 h-[2px] bg-gold-warm"
+              className="mt-3 mx-auto sm:mx-0 w-16 h-[2px] bg-gold-warm"
             />
             <motion.p
               {...fadeUp}
@@ -173,11 +173,11 @@ export default function NewsCarousel() {
             </motion.p>
           </div>
 
-          {/* Button "Lihat Selengkapnya" — Desktop Only */}
+          {/* Button "Lihat Selengkapnya" — Tablet & Desktop */}
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.4, delay: 0.12 }}
-            className="hidden md:block shrink-0 mb-1"
+            className="hidden sm:block shrink-0 mb-1"
           >
             <a
               href="/angkasa-news"
@@ -324,6 +324,16 @@ export default function NewsCarousel() {
               style={{ minWidth: i === activeIndex ? "24px" : "10px", minHeight: "10px" }}
             />
           ))}
+        </div>
+
+        {/* Button "Lihat Selengkapnya" — Mobile Only (Centered) */}
+        <div className="flex justify-center mt-6 sm:hidden px-2">
+          <a
+            href="/angkasa-news"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F6E7CC] text-[#870F0C] font-semibold text-xs border-2 border-[#DCB06F] shadow-[0_4px_12px_rgba(0,0,0,0.18)] hover:bg-[#DCB06F] hover:text-[#32210F] active:scale-95 transition-all duration-200"
+          >
+            Lihat Selengkapnya
+          </a>
         </div>
       </div>
     </section >
