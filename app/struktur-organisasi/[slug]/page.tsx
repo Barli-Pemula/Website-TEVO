@@ -44,9 +44,9 @@ interface Member {
     slug: string,
   }
   programs?: {
-    id: string,
-    name: string,
-  }
+    id: string;
+    name: string;
+  }[];
 }
 
 function Proker({ name, description, date, icon: Icon }: ProkerProps) {

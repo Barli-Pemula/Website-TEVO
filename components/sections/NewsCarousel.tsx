@@ -58,11 +58,22 @@ export default function NewsCarousel() {
         }
 
         const response = await axios.request(getArticles)
-        setArticles(response.data.data)
-        console.log(response.data.data)
+        const rawArticles: articleDetail[] = response.data?.data || []
+
+        // Urutkan berdasarkan tanggal terbaru (publishedAt descending)
+        const sortedArticles = [...rawArticles].sort((a, b) => {
+          const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0
+          const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0
+          return dateB - dateA
+        })
+
+        // Ambil maksimal 9 artikel terbaru untuk halaman utama
+        const latestNineArticles = sortedArticles.slice(0, 9)
+
+        setArticles(latestNineArticles)
         setLoading(false)
       } catch (error) {
-        console.error(error)
+        console.error("Gagal mengambil data artikel:", error)
         setLoading(false)
       }
     }
@@ -83,6 +94,7 @@ export default function NewsCarousel() {
   const goTo = useCallback(
     (index: number) => {
       const len = articles.length;
+      if (len === 0) return;
       setActiveIndex(((index % len) + len) % len);
     },
     [articles.length]
