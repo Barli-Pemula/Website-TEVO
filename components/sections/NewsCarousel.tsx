@@ -237,72 +237,72 @@ export default function NewsCarousel() {
                       opacity: isActive || (!isMobile && Math.abs(i - activeIndex) <= 2) ? 1 : 0.5,
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className={`${FrameCustom.royalFrame} w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 bg-[#F6E7CC] overflow-hidden shadow-card border-3 border-[#DCB06F]
+                    className={`${FrameCustom.royalFrame} w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 bg-[#DCB06F] p-[3px] shadow-card
                       hover:shadow-lift transition-shadow duration-200`}
                   >
-                    <div className="relative overflow-hidden">
-                      {/* ${isFeatured && isActive ? "ring-2 ring-gold-warm shadow-lift" : ""} */}
-                      {/* Cover image placeholder */}
-                      {article.coverUrl ? (
-                        <div className="relative h-40 overflow-hidden">
-                          <Image src={article.coverUrl} alt={article.title} fill className="object-cover" />
-                        </div>
-                      ) : (
-                        <div className="h-40 bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 flex items-center justify-center">
-                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A678" strokeWidth="1" opacity="0.4">
-                            <rect x="2" y="2" width="20" height="20" rx="2" /><line x1="7" y1="7" x2="17" y2="7" />
-                            <line x1="7" y1="11" x2="13" y2="11" /><line x1="7" y1="15" x2="15" y2="15" />
-                          </svg>
-                        </div>
-                      )}
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
-
-                      {/* Meta */}
-                      <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2 font-montserrat font-semibold">
-                        <span className="bg-[#A90900]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{formatDate(article.publishedAt)}</span>
-                        <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{article.category.name}</span>
-                      </div>
-                    </div>
-
-                    <div className="px-5 py-3 md:px-6 md:py-4">
-                      <div className="mb-3">
-                        <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-2
-                                     group-hover:text-crimson transition-colors">
-                          {article.title}
-                        </h3>
-                        <p className="text-ink/50 text-xs leading-relaxed line-clamp-2 mb-2">
-                          {article.excerpt}
-                        </p>
-
-                        {article.birdeps.length > 0 && (
-                          <div className="flex items-center justify-start gap-1">
-                            {article.birdeps.slice(0, 3).map((birdep) => (
-                              <div key={birdep.id} className="flex gap-1">
-                                <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{birdep.code}</span>
-                              </div>
-                            ))}
-                            {article.birdeps.length > 3 && (
-                              <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2C430B]/50 px-1 text-[10px] border-1 border-[#DCB06F] text-white">
-                                +{article.birdeps.length - 3}
-                              </span>
-                            )}
+                    <div className={`${FrameCustom.royalFrame} bg-[#F6E7CC] w-full h-full flex flex-col justify-between overflow-hidden`}>
+                      <div className="relative overflow-hidden">
+                        {/* Cover image placeholder */}
+                        {article.coverUrl ? (
+                          <div className="relative h-40 overflow-hidden">
+                            <Image src={article.coverUrl} alt={article.title} fill className="object-cover" />
+                          </div>
+                        ) : (
+                          <div className="h-40 bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 flex items-center justify-center">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A678" strokeWidth="1" opacity="0.4">
+                              <rect x="2" y="2" width="20" height="20" rx="2" /><line x1="7" y1="7" x2="17" y2="7" />
+                              <line x1="7" y1="11" x2="13" y2="11" /><line x1="7" y1="15" x2="15" y2="15" />
+                            </svg>
                           </div>
                         )}
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+
+                        {/* Meta */}
+                        <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2 font-montserrat font-semibold">
+                          <span className="bg-[#A90900]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{formatDate(article.publishedAt)}</span>
+                          <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{article.category.name}</span>
+                        </div>
                       </div>
 
-                      {/* Read more */}
-                      <a
-                        href={`/angkasa-news/${article.slug}`}
-                        target="_blank"
-                        className="inline-flex items-center gap-1 text-crimson text-xs font-semibold hover:gap-2 transition-all"
-                      >
-                        Selengkapnya
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                          <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                        </svg>
-                      </a>
+                      <div className="px-5 py-3 md:px-6 md:py-4 flex-1 flex flex-col justify-between">
+                        <div className="mb-3">
+                          <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-2
+                                       group-hover:text-crimson transition-colors">
+                            {article.title}
+                          </h3>
+                          <p className="text-ink/50 text-xs leading-relaxed line-clamp-2 mb-2">
+                            {article.excerpt}
+                          </p>
+
+                          {article.birdeps.length > 0 && (
+                            <div className="flex items-center justify-start gap-1">
+                              {article.birdeps.slice(0, 3).map((birdep) => (
+                                <div key={birdep.id} className="flex gap-1">
+                                  <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{birdep.code}</span>
+                                </div>
+                              ))}
+                              {article.birdeps.length > 3 && (
+                                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2C430B]/50 px-1 text-[10px] border-1 border-[#DCB06F] text-white">
+                                  +{article.birdeps.length - 3}
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Read more */}
+                        <a
+                          href={`/angkasa-news/${article.slug}`}
+                          target="_blank"
+                          className="inline-flex items-center gap-1 text-crimson text-xs font-semibold hover:gap-2 transition-all"
+                        >
+                          Selengkapnya
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
-                    {/* </div> */}
                   </motion.article>
                 );
               })}

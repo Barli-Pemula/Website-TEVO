@@ -176,15 +176,15 @@ export default function Navbar() {
   const isBarActive = scrolled || drawerOpen;
 
   const navbarOuter = isBarActive
-    ? {}
+    ? { background: "#DCB06F" }
     : { background: "transparent" };
 
   const navbarScrolledClass = isBarActive
-    ? "backdrop-blur-sm bg-[#FBF5EA] lg:bg-[#DCB06F] lg:backdrop-blur-[12px]"
+    ? "backdrop-blur-md shadow-lg p-[2.5px] sm:p-[3px]"
     : "";
 
   const innerStyle = isBarActive
-    ? { background: C.light, margin: "1.5px", borderRadius: "2px" }
+    ? { background: C.light }
     : {};
 
   return (
@@ -202,11 +202,24 @@ export default function Navbar() {
           className={`${FrameCustom.royalFrame} ${navbarScrolledClass} relative z-50`}
           style={{ transition: "all 0.3s", ...navbarOuter }}
         >
-          <div style={innerStyle}>
+          <div className={isBarActive ? FrameCustom.royalFrame : ""} style={innerStyle}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
               {/* Logo — Always on the Left */}
-              <button onClick={() => handleNavClick("beranda")} className="flex items-center shrink-0 min-w-[44px] min-h-[44px] cursor-pointer" aria-label="Kembali ke Beranda">
-                <Image src="/assets/logo-astana-angkasa.png" alt="Astana Angkasa" width={150} height={42} priority className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto" />
+              <button
+                onClick={() => handleNavClick("beranda")}
+                className="flex items-center shrink-0 min-w-[44px] min-h-[44px] cursor-pointer bg-transparent border-0 border-none outline-none focus:outline-none focus:ring-0 p-0 shadow-none"
+                style={{ border: "none", outline: "none", background: "transparent" }}
+                aria-label="Kembali ke Beranda"
+              >
+                <Image
+                  src="/assets/logo-astana-angkasa.png"
+                  alt="Astana Angkasa"
+                  width={150}
+                  height={42}
+                  priority
+                  className="h-[36px] sm:h-[40px] lg:h-[42px] w-auto border-0 outline-none"
+                  style={{ border: "none", outline: "none" }}
+                />
               </button>
 
               {/* Desktop Menu (1024px and up) */}
