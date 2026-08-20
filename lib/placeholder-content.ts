@@ -244,12 +244,11 @@ export const PLACEHOLDER = {
     subtitle: "Merchandise resmi Kabinet Astana Angkasa",
     cta: "Kunjungi Angkasa Store",
     products: [
-      { name: "Hoodie Astana", price: "Rp 185.000", image: "/assets/contohKatalog.jpg" },
-      { name: "T-Shirt Logo", price: "Rp 95.000", image: "/assets/contohKatalog.jpg" },
-      { name: "Tote Bag", price: "Rp 65.000", image: "/assets/contohKatalog.jpg" },
-      { name: "Sticker Pack", price: "Rp 25.000", image: "/assets/contohKatalog.jpg" },
-      { name: "Lanyard", price: "Rp 35.000", image: "/assets/contohKatalog.jpg" },
-      { name: "Notebook", price: "Rp 45.000", image: "/assets/contohKatalog.jpg" },
+      { name: "Lanyard", price: "Rp 11.000", image: "/assets/angkasaKost/Lanyard.jpg" },
+      { name: "Keychain", price: "Rp 5.000", image: "/assets/angkasaKost/Keychain.jpg" },
+      { name: "Sticker Pack", price: "Rp 3.000", image: "/assets/angkasaKost/Sticker.jpg" },
+      { name: "Pin", price: "Rp 2.000", image: "/assets/angkasaKost/Pin.jpg" },
+      { name: "Plakat", price: "Rp 65.000", image: "/assets/angkasaKost/Plakat.jpg" },
     ],
   },
 

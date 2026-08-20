@@ -20,21 +20,20 @@
   align-items: center;
   justify-content: center;
   border-radius: 18px;
-  border: 2px solid #ddb36d;
-  background: #f9edcf;
-  color: #701011;
+  border: 2px solid #DCB06F;
+  background: #870F0C;
   font-size: 22px;
   font-weight: 700;
   box-shadow: 0 10px 24px rgb(0 0 0 / 18%);
 }
 
-.storeSlide:nth-child(2n) {
-  background: #f6e4bd;
+/* .storeSlide:nth-child(2n) {
+  background: #A90900;
 }
 
 .storeSlide:nth-child(3n) {
-  background: #fff5df;
-}
+  background: #870F0C;
+} */
 
 .swiper {
   width: 240px;

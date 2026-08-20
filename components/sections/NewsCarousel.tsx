@@ -42,7 +42,6 @@ export default function NewsCarousel() {
   const reduced = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-  // const articles = PLACEHOLDER.news.articles;
   const [articles, setArticles] = useState<articleDetail[]>([])
   const [loading, setLoading] = useState(true)
 

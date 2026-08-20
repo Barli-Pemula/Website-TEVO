@@ -356,8 +356,8 @@ export default function StructureHub() {
                           className="object-contain p-2"
                         />
                       </div>
-                      <div className="border-1 border-[#DCB06F] rounded-[10px] p-1 bg-white">
-                        <div className="border-2 border-[#DCB06F] rounded-[6px] px-4 py-2 text-[#701011] font-montserrat font-semibold text-[16px] md:text-[20px] uppercase">
+                      <div className="border-1 border-[#DCB06F] rounded-[10px] p-1 bg-white group-hover:bg-[#DCB06F] group-hover:border-[#701011]">
+                        <div className="border-2 border-[#DCB06F] rounded-[6px] px-4 py-2 text-[#701011] font-montserrat font-semibold text-[16px] md:text-[20px] uppercase group-hover:border-[#701011] group-hover:text-white">
                           {bph.name}
                         </div>
                       </div>
@@ -395,13 +395,13 @@ export default function StructureHub() {
                           {...fadeUp}
                           transition={{ ...stagger, delay: 0.1 }}
                           onClick={() => setModal(biro)}
-                          className="flex flex-col items-center cursor-pointer w-full h-full flex-1 group"
+                          className="flex flex-col items-center cursor-pointer w-full h-full flex-1"
                         >
                           <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
-                          <div className="bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 group-hover:shadow-lg transition-shadow">
-                            <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full">
+                          <div className="group bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 transition-shadow shadow-lg hover:bg-[#DCB06F] hover:border-[#870F0C] hover:-translate-y-1 active:scale-105">
+                            <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full group-hover:bg-[#DCB06F] group-hover:border-[#870F0C]">
                               {/* Biro Logo */}
-                              <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-2 border-[#F9D253]/30 bg-[#701011] flex items-center justify-center overflow-hidden">
+                              <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-2 border-[#F9D253]/30 bg-[#701011] group-hover:bg-[#F6E7CC] group-hover:border-[#870F0C]/50 flex items-center justify-center overflow-hidden">
                                 <Image
                                   src={biro.logoUrl}
                                   alt={biro.name}
@@ -411,11 +411,11 @@ export default function StructureHub() {
                                 />
                               </div>
                               <div className="text-center font-montserrat uppercase leading-tight px-1">
-                                <span className="text-[#F9D253] font-semibold text-[11px] sm:text-[13px] md:text-[14px]">
+                                <span className="text-[#F9D253] font-semibold text-[11px] sm:text-[13px] md:text-[14px] group-hover:text-white">
                                   Biro
                                 </span>
                                 <br />
-                                <span className={`text-white font-semibold ${nameFontClass}`}>
+                                <span className={`text-white font-semibold ${nameFontClass} group-hover:text-[#870F0C]`}>
                                   {cleanName}
                                 </span>
                               </div>
@@ -459,13 +459,13 @@ export default function StructureHub() {
                           {...fadeUp}
                           transition={{ ...stagger, delay: 0.1 }}
                           onClick={() => setModal(dept)}
-                          className="flex flex-col flex-1 h-full w-full items-center cursor-pointer group"
+                          className="flex flex-col flex-1 h-full w-full items-center cursor-pointer"
                         >
                           <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
-                          <div className="bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 group-hover:shadow-lg transition-shadow">
-                            <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px]">
+                          <div className="group bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 shadow-lg transition-shadow hover:bg-[#DCB06F] hover:border-[#2C430B] hover:-translate-y-1 active:scale-105">
+                            <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px] group-hover:bg-[#DCB06F] group-hover:border-[#2C430B]">
                               {/* Departemen Logo */}
-                              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#F9D253]/20 bg-[#1A2E06] flex items-center justify-center overflow-hidden mb-1">
+                              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#F9D253]/20 bg-[#1A2E06] flex items-center justify-center overflow-hidden mb-1 group-hover:bg-[#F6E7CC] group-hover:border-[#2C430B]/50">
                                 <Image
                                   src={dept.logoUrl}
                                   alt={dept.name}
@@ -475,11 +475,11 @@ export default function StructureHub() {
                                 />
                               </div>
                               <div className="font-montserrat uppercase leading-tight mt-1 mb-1 text-center">
-                                <span className="text-[#F9D253] font-semibold text-[10px] md:text-[14px]">
+                                <span className="text-[#F9D253] font-semibold text-[10px] md:text-[14px] group-hover:text-white">
                                   Departemen
                                 </span>
                                 <br />
-                                <span className={`text-white font-semibold ${deptNameFontClass}`}>
+                                <span className={`text-white font-semibold ${deptNameFontClass} group-hover:text-[#2C430B]`}>
                                   {cleanDeptName}
                                 </span>
                               </div>
