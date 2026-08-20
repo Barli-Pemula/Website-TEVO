@@ -222,8 +222,10 @@ export default function page() {
 
   if (loadingMembers) return (<div className="py-20 text-center font-montserrat">Memuat struktur pengurus...</div>)
   if (memberError) return (<div className="py-20 text-center font-montserrat text-red-700">{memberError}</div>)
-  if (members.length == 0 || !activeMember) return (<div className="py-20 text-center font-montserrat">Data pengurus belum tersedia.</div>)
-
+    if (members.length == 0 || !activeMember) return (<div className="py-20 text-center font-montserrat">Data pengurus belum tersedia.</div>)
+      
+      if (loadingPrograms) return (<div className="py-20 text-center font-montserrat">Memuat struktur pengurus...</div>)
+      if (programError) return (<div className="py-20 text-center font-montserrat text-red-700">{memberError}</div>)
   const stagger = { duration: 0.4, ease: "easeOut" as const };
   const fadeUp = {
     initial: { opacity: 0, y: 16 },
