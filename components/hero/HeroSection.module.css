@@ -131,15 +131,14 @@
 .heroTitle h1 {
   font-family: var(--font-lacheyard);
   font-size: clamp(2.5rem, 9.5vw, 9.5rem);
-  font-weight: 800;
+  font-weight: 400;
   color: #B71C1C;
   white-space: nowrap;
   letter-spacing: 0.02em;
-  -webkit-text-stroke: 2px #FFFFFF;
   text-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.9),
-    0 0 35px rgba(255, 215, 0, 0.5),
-    0 0 15px rgba(183, 28, 28, 0.8);
+    0 4px 24px rgba(0, 0, 0, 0.85),
+    0 0 30px rgba(255, 215, 0, 0.4),
+    0 0 12px rgba(183, 28, 28, 0.6);
 }
 
 .heroTitle p {
@@ -169,11 +168,11 @@
   }
 
   .heroTitle h1 {
-    font-size: clamp(1.4rem, 7.2vw, 2.3rem);
-    letter-spacing: 0.04em;
-    line-height: 1.1;
+    font-size: clamp(1.85rem, 8.8vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.15;
     white-space: nowrap;
-    -webkit-text-stroke: 1.2px #FFFFFF;
   }
 
   .heroTitle p {
@@ -190,7 +189,7 @@
 /* Small mobile (e.g. <= 360px) */
 @media (max-width: 360px) {
   .heroTitle h1 {
-    font-size: 1.3rem;
+    font-size: clamp(1.6rem, 8.2vw, 1.85rem);
   }
 
   .heroTitle p {
@@ -202,9 +201,9 @@
 /* iPad / tablet */
 @media (min-width: 481px) and (max-width: 1024px) {
   .heroTitle h1 {
-    font-size: clamp(2.2rem, 6vw, 4.5rem);
-    letter-spacing: 0.08em;
-    -webkit-text-stroke: 1.5px #FFFFFF;
+    font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
   }
 
   .heroTitle p {
