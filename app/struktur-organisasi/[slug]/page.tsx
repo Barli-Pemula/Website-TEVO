@@ -139,7 +139,7 @@ export default function page() {
     import("preline").then(() => {
       window.HSStaticMethods?.autoInit();
     });
-  }, []);
+  }, [programs]);
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -311,7 +311,7 @@ export default function page() {
                 >
                   <div className="hs-carousel relative min-h-120 w-full overflow-hidden md:min-h-96 md:overflow-visible">
                     {/* Carousel Body */}
-                    <div className="hs-carousel-body gap-5 absolute inset-s-0 top-0 bottom-0 flex flex-nowrap transition-transform duration-700">
+                    <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap transition-transform duration-700">
                       {programs.map((program, i) => (
                         <Proker
                           key={program.id}
