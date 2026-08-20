@@ -307,11 +307,11 @@ export default function page() {
                 <div
                   id="hs-carousel"
                   className="relative my-10"
-                  data-hs-carousel='{"loadingClasses": "opacity-0", "isInfiniteLoop": true}'
+                  data-hs-carousel='{"isInfiniteLoop": true}'
                 >
                   <div className="hs-carousel relative min-h-120 w-full overflow-hidden md:min-h-96 md:overflow-visible">
                     {/* Carousel Body */}
-                    <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap transition-transform duration-700">
+                    <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap opacity-0 transition-transform duration-700">
                       {programs.map((program, i) => (
                         <Proker
                           key={program.id}
