@@ -126,7 +126,8 @@
   opacity: 0;
   clip-path: inset(0 50% 0 50%);
   pointer-events: none;
-  max-width: 90vw;
+  width: max-content;
+  max-width: 98vw;
 }
 
 .heroTitle h1 {
@@ -144,26 +145,41 @@
   color: #2C430B;
   margin-top: 1rem;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-/* Mobile: tighter spacing so text fits — H1 32-40px per PRD §6 */
+/* Mobile: single-line horizontal layout (tidak bertumpuk), font diperkecil */
 @media (max-width: 480px) {
   .heroTitle {
-    max-width: 92vw;
+    max-width: 98vw;
+    width: max-content;
   }
 
   .heroTitle h1 {
-    font-size: clamp(2rem, 8vw, 2.5rem);
-    letter-spacing: 0.08em;
-    line-height: 1.15;
-    white-space: normal;
+    font-size: clamp(1.35rem, 6.8vw, 2.2rem);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    white-space: nowrap;
   }
 
   .heroTitle p {
-    font-size: clamp(0.7rem, 2.5vw, 0.8rem);
-    letter-spacing: 0.2em;
-    margin-top: 0.5rem;
-    white-space: normal;
+    font-size: clamp(0.42rem, 1.85vw, 0.62rem);
+    letter-spacing: 0.05em;
+    margin-top: 0.4rem;
+    white-space: nowrap;
+    padding: 3px 8px !important;
+  }
+}
+
+/* Small mobile (e.g. <= 360px) */
+@media (max-width: 360px) {
+  .heroTitle h1 {
+    font-size: 1.25rem;
+  }
+
+  .heroTitle p {
+    font-size: 0.39rem;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -172,11 +188,13 @@
   .heroTitle h1 {
     font-size: clamp(2rem, 5vw, 4rem);
     letter-spacing: 0.18em;
+    white-space: nowrap;
   }
 
   .heroTitle p {
-    font-size: clamp(0.65rem, 1.3vw, 1rem);
-    letter-spacing: 0.4em;
+    font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+    letter-spacing: 0.3em;
+    white-space: nowrap;
   }
 }
 
