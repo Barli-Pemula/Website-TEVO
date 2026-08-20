@@ -124,6 +124,8 @@ export default function page() {
   const [loading, setLoading] = useState(true)
 
   const [programs, setPrograms] = useState<Program[]>([])
+  const [loadingPrograms, setLoadingPrograms] = useState(true)
+  const [programError, setProgramError] = useState<string | null>(null)
 
   const [members, setMembers] = useState<Member[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
@@ -142,6 +144,9 @@ export default function page() {
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
+        setLoadingPrograms(true)
+        setProgramError(null)
+
         const response = await axios.get("/api/nexus/public/tevo/programs")
         const getPrograms = response.data.data
         const filteredPrograms = getPrograms.filter((program: Program) => program.birdep?.slug === slug)
@@ -150,6 +155,9 @@ export default function page() {
         console.log(filteredPrograms.length)
       } catch (error) {
         console.error(error)
+        setProgramError("Data gagal dimuat.")
+      } finally {
+        setLoadingPrograms(false)
       }
 
     }
@@ -289,42 +297,60 @@ export default function page() {
                   Program Kerja
                 </motion.h2>
               </div>
+              {loadingPrograms ? (
+                <div>Loading...</div>
+              ) : programError ? (
+                <div>{programError}</div>
+              ) : programs.length === 0 ? (
+                <div>Tidak ada program.</div>
+              ) : (
+                <div
+                  id="hs-carousel"
+                  className="relative my-10"
+                  data-hs-carousel='{"loadingClasses": "opacity-0", "isInfiniteLoop": true}'
+                >
+                  <div className="hs-carousel relative min-h-120 w-full overflow-hidden md:min-h-96 md:overflow-visible">
+                    {/* Carousel Body */}
+                    <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap opacity-0 transition-transform duration-700">
+                      {programs.map((program, i) => (
+                        <Proker
+                          key={program.id}
+                          {...program}
+                          current={i + 1}
+                          total={programs.length}
+                        />
+                      ))}
+                    </div>
+                    {/* End Carousel Body */}
 
-              {/* <!-- Carousel --> */}
-              <div id="hs-carousel" className="relative my-10" data-hs-carousel='{"loadingClasses": "opacity-0",  "isInfiniteLoop":"true"}' >
-                <div className="hs-carousel relative w-full min-h-120 md:min-h-96 overflow-hidden md:overflow-visible">
-                  {/* <!-- Carousel Body --> */}
-                  <div className="hs-carousel-body flex flex-nowrap absolute top-0 bottom-0 inset-s-0 transition-transform duration-700 opacity-0">
-                    {/* loopinf mulai dari baris ini */}
-                    {programs.map((program, i) => (
-                      <Proker
-                        key={program.id}
-                        {...program}
-                        current={i + 1}
-                        total={programs.length}
-                      />
-                    ))}
+                    {!loadingPrograms && !programError && programs.length > 0 && (
+                      <>
+                        {/* VERSI DESKTOP */}
+                        <button
+                          type="button"
+                          disabled={programs.length === 1}
+                          className="hidden md:inline-flex hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                            keyboard_arrow_left
+                          </span>
+                        </button>
+
+                        <button
+                          type="button"
+                          disabled={programs.length === 1}
+                          className="hidden md:inline-flex hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                            keyboard_arrow_right
+                          </span>
+                        </button>
+                      </>
+                    )}
                   </div>
-                  {/* <!-- End Carousel Body --> */}
                 </div>
+              )}
 
-                {/* <!-- Arrows --> */}
-                {/* VERSI DESKTOP */}
-                <button type="button" disabled={programs.length == 1} className="hidden md:inline-flex hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
-                  <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                    keyboard_arrow_left
-                  </span>
-                </button>
-                <button type="button" disabled={programs.length == 1} className="hidden md:inline-flex hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
-                  <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                    keyboard_arrow_right
-                  </span>
-                </button>
-
-
-                {/* <!-- End Arrows --> */}
-              </div>
-              {/* <!-- End Carousel --> */}
               {/* VERSI MOBILE */}
               <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
                 <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
