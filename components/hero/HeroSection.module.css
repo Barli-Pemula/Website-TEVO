@@ -126,8 +126,7 @@
   opacity: 0;
   clip-path: inset(0 50% 0 50%);
   pointer-events: none;
-  width: max-content;
-  max-width: 98vw;
+  max-width: 90vw;
 }
 
 .heroTitle h1 {
@@ -145,7 +144,6 @@
   color: #2C430B;
   margin-top: 1rem;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 /* Mobile: single-line horizontal layout (tidak bertumpuk), font diperkecil */

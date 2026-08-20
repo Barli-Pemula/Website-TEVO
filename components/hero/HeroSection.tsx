@@ -298,10 +298,10 @@ export default function HeroSection() {
 
         {/* Title — positioned at sword center, emerges from within */}
         <div ref={titleRef} className={`${styles.heroTitle}`}>
-          <h1 className="[-webkit-text-stroke:1px_#fff] whitespace-nowrap" style={{
+          <h1 className="[-webkit-text-stroke:1px_#fff]" style={{
             textShadow: "0 6px 20px rgba(0,0,0,0.4), 0 0 3px rgba(255,255,255,0.8)",
           }}>Astana Angkasa</h1>
-          <p className="px-2.5 py-1 md:px-5 md:py-3 bg-[var(--text-secondary)]/20 whitespace-nowrap rounded-md">Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
+          <p className="px-5 py-3 bg-[var(--text-secondary)]/20">Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
         </div>
 
         {/* Sword Assembly */}
