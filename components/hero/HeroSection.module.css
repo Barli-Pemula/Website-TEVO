@@ -4,7 +4,6 @@
   height: 100vh;
   height: 100dvh; /* dynamic viewport for mobile Safari */
   width: 100%;
-  touch-action: none;   /* prevent browser gestures during animation */
 }
 
 .heroSticky {

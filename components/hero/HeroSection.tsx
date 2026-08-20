@@ -55,29 +55,33 @@ export default function HeroSection() {
 
   useEffect(() => {
     let animProgress = 0;       // 0 = start, 1 = animation complete
-    let isLocked = true;         // scroll is locked during animation
-    let swordVisible = false;    // sword hidden until first scroll
+    const isMobile = window.innerWidth <= 768;
+    let isLocked = !isMobile;    // Only lock scroll on desktop interactive wheel animation
+    let swordVisible = isMobile; // On mobile, sword is immediately visible
     const SENSITIVITY = 0.0008;  // how much each wheel pixel advances progress
 
-    // Lock scroll on mount
-    document.documentElement.style.overflow = "hidden";
-    document.documentElement.style.overscrollBehavior = "none";
+    // Only lock scroll on desktop mount
+    if (!isMobile) {
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.overscrollBehavior = "none";
+    }
 
-    // Safety timeout: auto-unlock after 5s on mobile to prevent getting stuck
+    // Safety timeout: auto-unlock on desktop to prevent getting stuck
     const safetyTimer = setTimeout(() => {
       if (isLocked) {
         unlockScroll();
-        // Also reveal sword and complete animation
         if (!swordVisible) revealSword();
         animProgress = 1;
         renderFrame(1);
       }
-    }, 5000);
+    }, 3000);
 
-    // Initially hide sword container
+    // Sword container initial opacity
     if (containerRef.current) {
-      containerRef.current.style.opacity = "0";
-      containerRef.current.style.transition = "opacity 0.6s ease-out";
+      containerRef.current.style.opacity = isMobile ? "1" : "0";
+      if (!isMobile) {
+        containerRef.current.style.transition = "opacity 0.6s ease-out";
+      }
     }
 
     /* --- Fade in sword on first scroll --- */
@@ -85,7 +89,6 @@ export default function HeroSection() {
       swordVisible = true;
       if (containerRef.current) {
         containerRef.current.style.opacity = "1";
-        // Remove CSS transition after fade-in so manual animation can take over
         setTimeout(() => {
           if (containerRef.current) {
             containerRef.current.style.transition = "";
@@ -109,7 +112,7 @@ export default function HeroSection() {
         !heroRef.current
       ) return;
 
-      // If sword not yet revealed, only show scroll hint
+      // If sword not yet revealed on desktop, only show scroll hint
       if (!swordVisible) {
         hintRef.current.style.opacity = "0.9";
         return;
@@ -187,7 +190,7 @@ export default function HeroSection() {
       document.documentElement.style.overscrollBehavior = "";
     }
 
-    /* --- Wheel handler (drives animation while locked) --- */
+    /* --- Wheel handler (drives animation on desktop while locked) --- */
     function handleWheel(e: WheelEvent) {
       if (!isLocked) return;
 
@@ -211,47 +214,19 @@ export default function HeroSection() {
       }
     }
 
-    /* --- Touch support for mobile --- */
-    let touchStartY = 0;
-
-    function handleTouchStart(e: TouchEvent) {
-      touchStartY = e.touches[0].clientY;
-    }
-
-    function handleTouchMove(e: TouchEvent) {
-      if (!isLocked) return;
-
-      e.preventDefault();
-
-      // First touch swipe → reveal sword, don't advance animation
-      if (!swordVisible) {
-        revealSword();
-        return;
-      }
-
-      const touchY = e.touches[0].clientY;
-      const delta = touchStartY - touchY;
-      touchStartY = touchY;
-
-      animProgress += delta * SENSITIVITY * 3;
-      animProgress = Math.max(0, Math.min(1, animProgress));
-
-      renderFrame(animProgress);
-
-      if (animProgress >= 1) {
-        unlockScroll();
-      }
-    }
-
-    /* --- Regular scroll handler (no-op — animation plays once) --- */
+    /* --- Mobile natural scroll handler --- */
     function handleScroll() {
-      // No re-lock — animation plays once, then user scrolls freely
+      if (isMobile) {
+        const currentY = window.scrollY;
+        const progress = Math.min(1, Math.max(0, currentY / 220));
+        renderFrame(progress);
+      }
     }
 
-    /* --- Attach all listeners --- */
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    /* --- Attach listeners --- */
+    if (!isMobile) {
+      window.addEventListener("wheel", handleWheel, { passive: false });
+    }
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Render initial state
@@ -260,8 +235,6 @@ export default function HeroSection() {
     return () => {
       clearTimeout(safetyTimer);
       window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("scroll", handleScroll);
       document.documentElement.style.overflow = "";
       document.documentElement.style.overscrollBehavior = "";
