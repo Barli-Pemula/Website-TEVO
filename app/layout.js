@@ -52,6 +52,11 @@ export const metadata = {
     "Kabinet",
     "IPB University",
   ],
+  icons: {
+    icon: "/assets/logo-elang.png",
+    shortcut: "/assets/logo-elang.png",
+    apple: "/assets/logo-elang.png",
+  },
 };
 
 export default function RootLayout({ children }) {
