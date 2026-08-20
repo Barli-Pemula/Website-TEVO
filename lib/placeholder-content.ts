@@ -254,7 +254,28 @@ export const PLACEHOLDER = {
 
   angkasaKost: {
     title: "Angkasa Kost",
+    subtitle: "Rekomendasi hunian dan kost terbaik untuk mahasiswa PKU IPB",
     cta: "Kunjungi Angkasa Kost",
+    kosts: [
+      {
+        name: "Khalyna",
+        price: "Rp 1.100.000",
+        period: "/1 Bulan",
+        image: "/assets/angkasaKost/khalyna.jpg",
+      },
+      {
+        name: "Ancala",
+        price: "Rp 1.500.000",
+        period: "/1 Bulan",
+        image: "/assets/angkasaKost/ancala.jpg",
+      },
+      {
+        name: "RAN",
+        price: "Rp 1.800.000",
+        period: "/1 Bulan",
+        image: "/assets/angkasaKost/ran.jpg",
+      },
+    ],
   },
 
   /** News — Section 7 */
