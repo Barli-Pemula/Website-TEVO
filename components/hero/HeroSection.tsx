@@ -111,7 +111,7 @@ export default function HeroSection() {
 
       // If sword not yet revealed, only show scroll hint
       if (!swordVisible) {
-        hintRef.current.style.opacity = "0.7";
+        hintRef.current.style.opacity = "0.9";
         return;
       }
 
@@ -170,8 +170,13 @@ export default function HeroSection() {
         subtitleEl.style.opacity = String(subtitleOpacity);
       }
 
-      /* Scroll hint */
-      const hintOpacity = p < 0.06 ? 0.7 * (1 - p / 0.06) : 0;
+      /* Scroll hint: visible at start, hides during separation, reappears when title is visible */
+      let hintOpacity = 0.9;
+      if (p > 0.05 && p < 0.60) {
+        hintOpacity = Math.max(0, 0.9 * (1 - (p - 0.05) / 0.25));
+      } else if (p >= 0.60) {
+        hintOpacity = Math.min(0.9, (p - 0.60) / 0.25);
+      }
       hintRef.current.style.opacity = String(hintOpacity);
     }
 
@@ -311,13 +316,25 @@ export default function HeroSection() {
         </div>
 
         {/* Scroll Hint */}
-        <div ref={hintRef} className={styles.scrollHint}>
+        <div
+          ref={hintRef}
+          className={styles.scrollHint}
+          onClick={() => {
+            const nextSection = document.getElementById("profile") || document.getElementById("identity");
+            if (nextSection) {
+              nextSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          title="Scroll ke bawah"
+          role="button"
+          tabIndex={0}
+        >
           <span>Scroll</span>
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           >

@@ -183,48 +183,67 @@
 /* ===== SCROLL HINT ===== */
 .scrollHint {
   position: absolute;
-  z-index: 5;
-  bottom: clamp(20px, 4vh, 40px);
+  z-index: 20;
+  bottom: clamp(20px, 4vh, 36px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  opacity: 0.7;
+  gap: 5px;
+  opacity: 0.9;
   animation: hintBounce 2s ease-in-out infinite;
-  will-change: opacity;
+  will-change: opacity, transform;
+  pointer-events: auto;
+  cursor: pointer;
+  background: rgba(18, 12, 8, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(220, 176, 111, 0.6);
+  border-radius: 9999px;
+  padding: 8px 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 10px rgba(220, 176, 111, 0.2);
+  transition: opacity 0.3s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.scrollHint:hover {
+  border-color: #DCB06F;
+  background: rgba(18, 12, 8, 0.8);
 }
 
 .scrollHint span {
-  font-family: var(--font-heading);
-  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
-  letter-spacing: 0.4em;
+  font-family: var(--font-montserrat), var(--font-display), sans-serif;
+  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: #F6E7CC;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  line-height: 1;
 }
 
 .scrollHint svg {
-  width: clamp(16px, 2.5vw, 20px);
-  height: clamp(16px, 2.5vw, 20px);
-  color: var(--text-secondary);
+  width: clamp(14px, 2vw, 16px);
+  height: clamp(14px, 2vw, 16px);
+  color: #DCB06F;
 }
 
-/* Mobile: smaller hint to not cover sword */
+/* Mobile: smaller hint */
 @media (max-width: 480px) {
   .scrollHint {
-    bottom: clamp(12px, 3vh, 24px);
-    gap: 4px;
+    bottom: clamp(16px, 3vh, 24px);
+    padding: 6px 14px;
+    gap: 3px;
   }
 
   .scrollHint span {
     font-size: 0.6rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.22em;
   }
 
   .scrollHint svg {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
   }
 }
 
@@ -233,6 +252,6 @@
     transform: translateX(-50%) translateY(0);
   }
   50% {
-    transform: translateX(-50%) translateY(8px);
+    transform: translateX(-50%) translateY(6px);
   }
 }
