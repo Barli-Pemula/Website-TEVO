@@ -131,15 +131,14 @@
 .heroTitle h1 {
   font-family: var(--font-lacheyard);
   font-size: clamp(2.5rem, 9.5vw, 9.5rem);
-  font-weight: 800;
+  font-weight: 400;
   color: #B71C1C;
   white-space: nowrap;
   letter-spacing: 0.02em;
-  -webkit-text-stroke: 2px #FFFFFF;
   text-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.9),
-    0 0 35px rgba(255, 215, 0, 0.5),
-    0 0 15px rgba(183, 28, 28, 0.8);
+    0 0 18px rgba(255, 255, 255, 0.95),
+    0 0 32px rgba(255, 255, 255, 0.75),
+    0 0 50px rgba(255, 245, 220, 0.5);
 }
 
 .heroTitle p {
@@ -169,11 +168,11 @@
   }
 
   .heroTitle h1 {
-    font-size: clamp(1.4rem, 7.2vw, 2.3rem);
-    letter-spacing: 0.04em;
-    line-height: 1.1;
+    font-size: clamp(1.85rem, 8.8vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.15;
     white-space: nowrap;
-    -webkit-text-stroke: 1.2px #FFFFFF;
   }
 
   .heroTitle p {
@@ -190,7 +189,7 @@
 /* Small mobile (e.g. <= 360px) */
 @media (max-width: 360px) {
   .heroTitle h1 {
-    font-size: 1.3rem;
+    font-size: clamp(1.6rem, 8.2vw, 1.85rem);
   }
 
   .heroTitle p {
@@ -202,9 +201,9 @@
 /* iPad / tablet */
 @media (min-width: 481px) and (max-width: 1024px) {
   .heroTitle h1 {
-    font-size: clamp(2.2rem, 6vw, 4.5rem);
-    letter-spacing: 0.08em;
-    -webkit-text-stroke: 1.5px #FFFFFF;
+    font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
   }
 
   .heroTitle p {
@@ -230,19 +229,19 @@
   will-change: opacity, transform;
   pointer-events: auto;
   cursor: pointer;
-  background: rgba(18, 12, 8, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(220, 176, 111, 0.6);
-  border-radius: 9999px;
-  padding: 8px 18px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 10px rgba(220, 176, 111, 0.2);
-  transition: opacity 0.3s ease, border-color 0.2s ease, transform 0.2s ease;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .scrollHint:hover {
-  border-color: #DCB06F;
-  background: rgba(18, 12, 8, 0.8);
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .scrollHint span {
@@ -252,7 +251,7 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #F6E7CC;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 10px rgba(220, 176, 111, 0.3);
   line-height: 1;
 }
 
@@ -260,13 +259,14 @@
   width: clamp(14px, 2vw, 16px);
   height: clamp(14px, 2vw, 16px);
   color: #DCB06F;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
 }
 
 /* Mobile: smaller hint */
 @media (max-width: 480px) {
   .scrollHint {
     bottom: clamp(16px, 3vh, 24px);
-    padding: 6px 14px;
+    padding: 0;
     gap: 3px;
   }
 
