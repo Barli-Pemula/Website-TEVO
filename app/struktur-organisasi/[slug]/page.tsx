@@ -298,11 +298,11 @@ export default function page() {
                 </motion.h2>
               </div>
               {loadingPrograms ? (
-                <div>Loading...</div>
+                <div>Memuat program kerja...</div>
               ) : programError ? (
                 <div>{programError}</div>
               ) : programs.length === 0 ? (
-                <div>Tidak ada program.</div>
+                <div>Tidak ada program kerja.</div>
               ) : (
                 <div
                   id="hs-carousel"
@@ -350,24 +350,26 @@ export default function page() {
                   </div>
                 </div>
               )}
-
-              {/* VERSI MOBILE */}
-              <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
-                <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                  keyboard_arrow_left
-                </span>
-              </button>
-              <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
-                <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                  keyboard_arrow_right
-                </span>
-              </button>
-
+              {!loadingPrograms && !programError && programs.length > 0 && (
+                <>
+                  {/* VERSI MOBILE */}
+                  < button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
+                    <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                      keyboard_arrow_left
+                    </span>
+                  </button>
+                  <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
+                    <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                      keyboard_arrow_right
+                    </span>
+                  </button>
+                </>
+              )}
             </div>
           </motion.section>
 
         </div>
-      </div>
+      </div >
 
       <div className="bg-[#DCB06F] overflow-hidden">
         <div className="my-5 p-10 bg-[#870F0C]">
