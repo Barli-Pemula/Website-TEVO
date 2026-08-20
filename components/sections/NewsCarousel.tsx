@@ -4,46 +4,23 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { PLACEHOLDER } from "../../lib/placeholder-content";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
-import FrameCustom from "../../styles/frameCustom.module.css"
-import axios from "axios"
+import FrameCustom from "../../styles/frameCustom.module.css";
+import axios from "axios";
 import Image from "next/image";
-
-interface Birdep {
-  id: string,
-  name: string,
-  code: string,
-}
-
-interface articleDetail {
-  id: string,
-  title: string,
-  excerpt: string,
-  slug: string,
-  content: string,
-  publishedAt: string,
-  coverUrl: string,
-  category: {
-    name: string,
-    slug: string,
-  },
-  birdeps: Birdep[],
-}
-
-const formatDate = (dateString: string) => {
-  return new Intl.DateTimeFormat("id-ID", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: "Asia/Jakarta"
-  }).format(new Date(dateString))
-}
+import {
+  Article,
+  formatArticleDate,
+  getArticleCategory,
+  getArticleExcerpt,
+  formatMediaUrl,
+} from "../../lib/article-utils";
 
 export default function NewsCarousel() {
   const reduced = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-  const [articles, setArticles] = useState<articleDetail[]>([])
-  const [loading, setLoading] = useState(true)
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -51,13 +28,8 @@ export default function NewsCarousel() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getArticles = {
-          method: "GET",
-          url: "/api/nexus/public/tevo/articles",
-        }
-
-        const response = await axios.request(getArticles)
-        const rawArticles: articleDetail[] = response.data?.data || []
+        const response = await axios.get("/api/nexus/public/tevo/articles");
+        const rawArticles: Article[] = response.data?.data || [];
 
         // Urutkan berdasarkan tanggal terbaru (publishedAt descending)
         const sortedArticles = [...rawArticles].sort((a, b) => {
@@ -226,7 +198,11 @@ export default function NewsCarousel() {
             >
               {articles.map((article, i) => {
                 const isActive = i === activeIndex;
-                // const isFeatured = article.featured;
+                const cover = formatMediaUrl(article.coverUrl);
+                const categoryName = getArticleCategory(article.category);
+                const formattedDate = formatArticleDate(article.publishedAt);
+                const excerpt = getArticleExcerpt(article, 120);
+                const birdeps = Array.isArray(article.birdeps) ? article.birdeps : [];
 
                 return (
                   <motion.article
@@ -241,10 +217,16 @@ export default function NewsCarousel() {
                   >
                     <div className={`${FrameCustom.royalFrame} bg-[#F6E7CC] w-full h-full flex flex-col justify-between overflow-hidden`}>
                       <div className="relative overflow-hidden">
-                        {/* Cover image placeholder */}
-                        {article.coverUrl ? (
-                          <div className="relative h-40 overflow-hidden">
-                            <Image src={article.coverUrl} alt={article.title} fill className="object-cover" />
+                        {/* Cover image */}
+                        {cover ? (
+                          <div className="relative h-40 overflow-hidden bg-smoke">
+                            <Image
+                              src={cover}
+                              alt={article.title}
+                              fill
+                              unoptimized
+                              className="object-cover"
+                            />
                           </div>
                         ) : (
                           <div className="h-40 bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 flex items-center justify-center">
@@ -257,32 +239,49 @@ export default function NewsCarousel() {
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
 
                         {/* Meta */}
-                        <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2 font-montserrat font-semibold">
-                          <span className="bg-[#A90900]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{formatDate(article.publishedAt)}</span>
-                          <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{article.category.name}</span>
+                        <div className="absolute bottom-2 left-3 z-10 flex flex-wrap items-center gap-1.5 font-montserrat font-semibold">
+                          {formattedDate && (
+                            <span className="bg-[#A90900]/80 text-white py-0.5 px-2 text-[10px] border border-[#DCB06F] rounded-[5px]">
+                              {formattedDate}
+                            </span>
+                          )}
+                          <span className="bg-[#2C430B]/80 text-white py-0.5 px-2 text-[10px] border border-[#DCB06F] rounded-[5px]">
+                            {categoryName}
+                          </span>
                         </div>
                       </div>
 
                       <div className="px-5 py-3 md:px-6 md:py-4 flex-1 flex flex-col justify-between">
                         <div className="mb-3">
-                          <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-2
+                          <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-1.5 line-clamp-2
                                        group-hover:text-crimson transition-colors">
                             {article.title}
                           </h3>
-                          <p className="text-ink/50 text-xs leading-relaxed line-clamp-2 mb-2">
-                            {article.excerpt}
+
+                          {article.authorName && (
+                            <p className="text-bark/80 text-[11px] font-medium mb-2">
+                              Oleh: {article.authorName}
+                            </p>
+                          )}
+
+                          <p className="text-ink/60 text-xs leading-relaxed line-clamp-2 mb-3">
+                            {excerpt}
                           </p>
 
-                          {article.birdeps.length > 0 && (
-                            <div className="flex items-center justify-start gap-1">
-                              {article.birdeps.slice(0, 3).map((birdep) => (
-                                <div key={birdep.id} className="flex gap-1">
-                                  <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border-1 border-[#DCB06F] rounded-[5px]">{birdep.code}</span>
-                                </div>
+                          {birdeps.length > 0 && (
+                            <div className="flex flex-wrap items-center justify-start gap-1">
+                              {birdeps.slice(0, 3).map((birdep) => (
+                                <span
+                                  key={birdep.id || birdep.code}
+                                  className="bg-[#2C430B]/20 text-[#2C430B] font-semibold py-0.5 px-2 text-[10px] border border-[#2C430B]/30 rounded-[5px]"
+                                  title={birdep.name}
+                                >
+                                  {birdep.code || birdep.name}
+                                </span>
                               ))}
-                              {article.birdeps.length > 3 && (
-                                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2C430B]/50 px-1 text-[10px] border-1 border-[#DCB06F] text-white">
-                                  +{article.birdeps.length - 3}
+                              {birdeps.length > 3 && (
+                                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2C430B]/20 px-1 text-[10px] border border-[#2C430B]/30 text-[#2C430B] font-semibold">
+                                  +{birdeps.length - 3}
                                 </span>
                               )}
                             </div>
@@ -292,8 +291,7 @@ export default function NewsCarousel() {
                         {/* Read more */}
                         <a
                           href={`/angkasa-news/${article.slug}`}
-                          target="_blank"
-                          className="inline-flex items-center gap-1 text-crimson text-xs font-semibold hover:gap-2 transition-all"
+                          className="inline-flex items-center gap-1 text-crimson text-xs font-semibold hover:gap-2 transition-all mt-2"
                         >
                           Selengkapnya
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

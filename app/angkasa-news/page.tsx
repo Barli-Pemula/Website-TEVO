@@ -5,40 +5,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import FrameCustom from "../../styles/frameCustom.module.css";
-
-interface Birdep {
-  id: string;
-  name: string;
-  code: string;
-}
-
-interface Category {
-  id?: string;
-  name?: string;
-  slug?: string;
-}
-
-interface Article {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  content: string;
-  coverUrl: string | null;
-  publishedAt: string | null;
-  birdeps: Birdep[];
-  category?: Category | string | null;
-}
-
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return "";
-  return new Intl.DateTimeFormat("id-ID", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: "Asia/Jakarta"
-  }).format(new Date(dateString));
-};
+import {
+  Article,
+  formatArticleDate,
+  getArticleCategory,
+  getArticleExcerpt,
+  formatMediaUrl,
+} from "../../lib/article-utils";
 
 export default function AllNewsPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -128,12 +101,11 @@ export default function AllNewsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArticles.map((article) => {
-              const categoryName =
-                typeof article.category === "object" && article.category !== null
-                  ? article.category.name || "Umum"
-                  : typeof article.category === "string"
-                  ? article.category
-                  : "Umum";
+              const cover = formatMediaUrl(article.coverUrl);
+              const categoryName = getArticleCategory(article.category);
+              const formattedDate = formatArticleDate(article.publishedAt);
+              const excerpt = getArticleExcerpt(article, 140);
+              const birdeps = Array.isArray(article.birdeps) ? article.birdeps : [];
 
               return (
                 <article
@@ -142,11 +114,17 @@ export default function AllNewsPage() {
                 >
                   <div className={`${FrameCustom.royalFrame} bg-[#F6E7CC] w-full h-full flex flex-col justify-between overflow-hidden`}>
                     <div>
-                      <div className="relative h-44 overflow-hidden bg-gradient-to-br from-sky-pale/20 to-cream-soft/30">
-                        {article.coverUrl ? (
-                          <Image src={article.coverUrl} alt={article.title} fill className="object-cover" />
+                      <div className="relative h-44 overflow-hidden bg-smoke">
+                        {cover ? (
+                          <Image
+                            src={cover}
+                            alt={article.title}
+                            fill
+                            unoptimized
+                            className="object-cover"
+                          />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center">
+                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-sky-pale/20 to-cream-soft/30">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4A678" strokeWidth="1" opacity="0.4">
                               <rect x="2" y="2" width="20" height="20" rx="2" />
                               <line x1="7" y1="7" x2="17" y2="7" />
@@ -155,25 +133,51 @@ export default function AllNewsPage() {
                           </div>
                         )}
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
-                        <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2 font-montserrat font-semibold">
-                          {article.publishedAt && (
-                            <span className="bg-[#A90900]/50 text-white py-0.5 px-2 text-[10px] border border-[#DCB06F] rounded-[5px]">
-                              {formatDate(article.publishedAt)}
+                        <div className="absolute bottom-2 left-3 z-10 flex flex-wrap items-center gap-1.5 font-montserrat font-semibold">
+                          {formattedDate && (
+                            <span className="bg-[#A90900]/80 text-white py-0.5 px-2 text-[10px] border border-[#DCB06F] rounded-[5px]">
+                              {formattedDate}
                             </span>
                           )}
-                          <span className="bg-[#2C430B]/50 text-white py-0.5 px-2 text-[10px] border border-[#DCB06F] rounded-[5px]">
+                          <span className="bg-[#2C430B]/80 text-white py-0.5 px-2 text-[10px] border border-[#DCB06F] rounded-[5px]">
                             {categoryName}
                           </span>
                         </div>
                       </div>
 
                       <div className="px-5 py-4">
-                        <h2 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-2">
+                        <h2 className="font-[family-name:var(--font-display)] text-base font-bold text-ink leading-snug mb-1.5 line-clamp-2">
                           {article.title}
                         </h2>
+
+                        {article.authorName && (
+                          <p className="text-bark/80 text-[11px] font-medium mb-2">
+                            Oleh: {article.authorName}
+                          </p>
+                        )}
+
                         <p className="text-ink/60 text-xs leading-relaxed line-clamp-3 mb-3">
-                          {article.excerpt}
+                          {excerpt}
                         </p>
+
+                        {birdeps.length > 0 && (
+                          <div className="flex flex-wrap items-center justify-start gap-1">
+                            {birdeps.slice(0, 3).map((birdep) => (
+                              <span
+                                key={birdep.id || birdep.code}
+                                className="bg-[#2C430B]/20 text-[#2C430B] font-semibold py-0.5 px-2 text-[10px] border border-[#2C430B]/30 rounded-[5px]"
+                                title={birdep.name}
+                              >
+                                {birdep.code || birdep.name}
+                              </span>
+                            ))}
+                            {birdeps.length > 3 && (
+                              <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2C430B]/20 px-1 text-[10px] border border-[#2C430B]/30 text-[#2C430B] font-semibold">
+                                +{birdeps.length - 3}
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
 

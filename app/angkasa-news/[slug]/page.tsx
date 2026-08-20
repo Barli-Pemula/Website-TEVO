@@ -4,38 +4,15 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-interface Birdep {
-  id: string;
-  name: string;
-  code: string;
-  slug?: string;
-  unitType?: string;
-  unitTypeLabel?: string;
-  logoUrl?: string | null;
-}
-
-interface Category {
-  id?: string;
-  name?: string;
-  slug?: string;
-}
-
-interface Article {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  content: string;
-  contentJson?: null;
-  contentVersion?: number;
-  coverUrl: string | null;
-  authorName?: string | null;
-  publishedAt: string | null;
-  updatedAt?: string | null;
-  birdeps: Birdep[];
-  category?: Category | string | null;
-}
+import Image from "next/image";
+import {
+  Article,
+  Birdep,
+  formatArticleDate,
+  getArticleCategory,
+  formatMediaUrl,
+} from "../../../lib/article-utils";
+import RichTextRenderer from "../../../components/news/RichTextRenderer";
 
 export default function InformasiPage() {
   const params = useParams();
@@ -51,7 +28,7 @@ export default function InformasiPage() {
         setLoading(true);
         setError(null);
         const { data } = await axios.get("/api/nexus/public/tevo/articles");
-        const articles: Article[] = data.data;
+        const articles: Article[] = data?.data || [];
         const found = articles.find((item) => item.slug === slug);
         if (found) {
           setArticle(found);
@@ -108,16 +85,10 @@ export default function InformasiPage() {
     );
   }
 
-  // Daftar birdeps (fallback array kosong)
-  const birdeps: Birdep[] = article.birdeps || [];
-
-  // Helper formatting category name
-  const categoryName =
-    typeof article.category === "object" && article.category !== null
-      ? article.category.name || "Umum"
-      : typeof article.category === "string"
-      ? article.category
-      : "Umum";
+  const birdeps: Birdep[] = Array.isArray(article.birdeps) ? article.birdeps : [];
+  const categoryName = getArticleCategory(article.category);
+  const formattedDate = formatArticleDate(article.publishedAt, false);
+  const cover = formatMediaUrl(article.coverUrl);
 
   return (
     <div className="min-h-screen bg-transparent">
@@ -143,16 +114,20 @@ export default function InformasiPage() {
             Kembali ke Informasi
           </Link>
 
-          {/* Meta: Tanggal dan Kategori */}
+          {/* Meta: Tanggal, Penulis, dan Kategori */}
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            {article.publishedAt && (
+            {formattedDate && (
               <span className="text-cream-soft/60 text-sm">
-                {new Date(article.publishedAt).toLocaleDateString("id-ID", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                {formattedDate}
               </span>
+            )}
+            {article.authorName && (
+              <>
+                <span className="w-1 h-1 rounded-full bg-cream-soft/30" />
+                <span className="text-cream-soft/80 text-sm font-medium">
+                  Oleh: {article.authorName}
+                </span>
+              </>
             )}
             <span className="w-1 h-1 rounded-full bg-cream-soft/30" />
             <span className="inline-block px-3 py-1 rounded-full bg-sky-pale/25 text-cream-soft text-xs font-bold uppercase tracking-wider">
@@ -164,33 +139,36 @@ export default function InformasiPage() {
             {article.title}
           </h1>
 
-          {/* 🟡 DAFTAR BIRDEP (KONTRIBUTOR) */}
+          {/* DAFTAR BIRDEP (KONTRIBUTOR) */}
           {birdeps.length > 0 && (
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="text-cream-soft/50 text-xs uppercase tracking-wider mr-1">
                 Kontributor:
               </span>
-              {birdeps.map((unit) => (
-                <span
-                  key={unit.id || unit.code}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-warm/20 text-gold-warm text-xs font-bold uppercase tracking-wider border border-gold-warm/30"
-                  title={unit.unitTypeLabel || unit.name}
-                >
-                  {unit.logoUrl && (
-                    <img
-                      src={unit.logoUrl}
-                      alt={unit.code || unit.name}
-                      className="w-3.5 h-3.5 rounded-full object-cover"
-                    />
-                  )}
-                  {unit.name}
-                  {unit.code && (
-                    <span className="text-[0.65rem] opacity-70">
-                      ({unit.code})
-                    </span>
-                  )}
-                </span>
-              ))}
+              {birdeps.map((unit) => {
+                const logo = formatMediaUrl(unit.logoUrl);
+                return (
+                  <span
+                    key={unit.id || unit.code}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-warm/20 text-gold-warm text-xs font-bold uppercase tracking-wider border border-gold-warm/30"
+                    title={unit.unitTypeLabel || unit.name}
+                  >
+                    {logo && (
+                      <img
+                        src={logo}
+                        alt={unit.code || unit.name}
+                        className="w-3.5 h-3.5 rounded-full object-cover"
+                      />
+                    )}
+                    {unit.name}
+                    {unit.code && (
+                      <span className="text-[0.65rem] opacity-70">
+                        ({unit.code})
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>
@@ -200,10 +178,10 @@ export default function InformasiPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Featured image */}
-          <div className="aspect-video bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 rounded-2xl mb-10 flex items-center justify-center border border-gold-warm/10 overflow-hidden">
-            {article.coverUrl ? (
+          <div className="aspect-video bg-gradient-to-br from-sky-pale/20 to-cream-soft/30 rounded-2xl mb-10 flex items-center justify-center border border-gold-warm/10 overflow-hidden bg-smoke">
+            {cover ? (
               <img
-                src={article.coverUrl}
+                src={cover}
                 alt={article.title}
                 className="w-full h-full object-cover"
               />
@@ -227,26 +205,16 @@ export default function InformasiPage() {
 
           {/* Body */}
           <div className="bg-white rounded-2xl p-8 md:p-10 shadow-card border border-gold-warm/10">
-            <div className="prose prose-sm md:prose-base text-ink/70 leading-relaxed max-w-none">
-              {article.excerpt && (
-                <p className="text-lg leading-relaxed font-medium mb-4">
-                  {article.excerpt}
-                </p>
-              )}
-              {/* Render konten HTML */}
-              {article.content && (
-                <div dangerouslySetInnerHTML={{ __html: article.content }} />
-              )}
-            </div>
-
-            {/* Placeholder jika konten kosong */}
-            {!article.content && !article.excerpt && (
-              <div className="mt-8 pt-6 border-t border-gold-warm/20">
-                <p className="text-bark text-xs">
-                  ⏳ Konten lengkap sedang dipersiapkan oleh tim konten.
-                </p>
+            {article.excerpt && (
+              <div className="mb-6 p-4 rounded-xl bg-gold-warm/10 border-l-4 border-gold-warm text-ink/90 text-base md:text-lg leading-relaxed font-medium">
+                {article.excerpt}
               </div>
             )}
+
+            <RichTextRenderer
+              contentJson={article.contentJson}
+              fallbackHtml={article.content}
+            />
           </div>
 
           {/* Navigation */}

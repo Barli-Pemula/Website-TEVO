@@ -56,22 +56,14 @@ export default function AngkasaCareHub() {
             rel="noopener noreferrer"
             className="absolute left-0 flex flex-col items-start justify-center pl-10 rounded-full w-[380px] h-[380px] border-[3px] border-[#DCB06F] bg-transparent z-10 cursor-pointer hover:border-[#870F0C] transition-colors group"
           >
-            {/* Icon */}
-            <div className="shrink-0 w-14 h-14 rounded-full bg-[#870F0C] flex items-center justify-center mb-3 shadow-lg group-hover:scale-105 transition-transform">
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#FFFFFF"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
-                <line x1="12" y1="17" x2="12.01" y2="17" />
-              </svg>
+            {/* Logo Biro Ristek */}
+            <div className="shrink-0 w-16 h-16 relative mb-3 group-hover:scale-110 transition-transform">
+              <Image
+                src="/assets/logoBirdept/ristek.png"
+                alt="Biro Ristek - Angkasa Help"
+                fill
+                className="object-contain"
+              />
             </div>
             {/* Name — bold */}
             <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-lg mb-1.5">
@@ -91,20 +83,14 @@ export default function AngkasaCareHub() {
             rel="noopener noreferrer"
             className="absolute right-0 flex flex-col items-end justify-center pr-10 rounded-full w-[380px] h-[380px] border-[3px] border-[#DCB06F] bg-transparent z-10 cursor-pointer hover:border-[#870F0C] transition-colors group"
           >
-            {/* Icon */}
-            <div className="shrink-0 w-14 h-14 rounded-full bg-[#DCB06F] flex items-center justify-center mb-3 shadow-lg group-hover:scale-105 transition-transform">
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#FFFFFF"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-              </svg>
+            {/* Logo Departemen Adkesmah */}
+            <div className="shrink-0 w-16 h-16 relative mb-3 group-hover:scale-110 transition-transform">
+              <Image
+                src="/assets/logoBirdept/adkesmah.png"
+                alt="Departemen Adkesmah - MinCare"
+                fill
+                className="object-contain"
+              />
             </div>
             {/* Name — bold */}
             <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-lg mb-1.5 text-right">
@@ -143,21 +129,13 @@ export default function AngkasaCareHub() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="relative flex flex-col items-center justify-center w-[280px] max-[370px]:w-[240px] h-[280px] max-[370px]:h-[240px] rounded-full border-[3px] border-[#DCB06F] bg-transparent active:scale-[0.98] transition-all shadow-lg"
         >
-          <div className="shrink-0 w-16 h-16 rounded-full bg-[#870F0C] flex items-center justify-center mb-4 shadow-md">
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
-              <line x1="12" y1="17" x2="12.01" y2="17" />
-            </svg>
+          <div className="shrink-0 w-16 h-16 relative mb-4">
+            <Image
+              src="/assets/logoBirdept/ristek.png"
+              alt="Biro Ristek - Angkasa Help"
+              fill
+              className="object-contain"
+            />
           </div>
           <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-lg mb-2 text-center">
             {PLACEHOLDER.care.angkasaHelp.name}
@@ -188,19 +166,13 @@ export default function AngkasaCareHub() {
           transition={{ duration: 0.4, delay: 0.15 }}
           className="relative flex flex-col items-center justify-center w-[280px] max-[370px]:w-[240px] h-[280px] max-[370px]:h-[240px] rounded-full border-[3px] border-[#DCB06F] bg-transparent active:scale-[0.98] transition-all shadow-lg"
         >
-          <div className="shrink-0 w-16 h-16 rounded-full bg-[#DCB06F] flex items-center justify-center mb-4 shadow-md">
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-            </svg>
+          <div className="shrink-0 w-16 h-16 relative mb-4">
+            <Image
+              src="/assets/logoBirdept/adkesmah.png"
+              alt="Departemen Adkesmah - MinCare"
+              fill
+              className="object-contain"
+            />
           </div>
           <h3 className="font-[family-name:var(--font-display)] text-[#32210F] font-extrabold text-lg mb-2 text-center">
             {PLACEHOLDER.care.minCare.name}
