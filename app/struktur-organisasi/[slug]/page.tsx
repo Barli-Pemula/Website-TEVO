@@ -323,30 +323,26 @@ export default function page() {
                     </div>
                     {/* End Carousel Body */}
 
-                    {!loadingPrograms && !programError && programs.length > 0 && (
-                      <>
-                        {/* VERSI DESKTOP */}
-                        <button
-                          type="button"
-                          disabled={programs.length === 1}
-                          className="hidden md:inline-flex hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
-                        >
-                          <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                            keyboard_arrow_left
-                          </span>
-                        </button>
+                    {/* VERSI DESKTOP */}
+                    <button
+                      type="button"
+                      disabled={programs.length === 1}
+                      className="hidden md:inline-flex hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                        keyboard_arrow_left
+                      </span>
+                    </button>
 
-                        <button
-                          type="button"
-                          disabled={programs.length === 1}
-                          className="hidden md:inline-flex hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
-                        >
-                          <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                            keyboard_arrow_right
-                          </span>
-                        </button>
-                      </>
-                    )}
+                    <button
+                      type="button"
+                      disabled={programs.length === 1}
+                      className="hidden md:inline-flex hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                        keyboard_arrow_right
+                      </span>
+                    </button>
                   </div>
                 </div>
               )}
