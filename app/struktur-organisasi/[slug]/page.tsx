@@ -78,7 +78,7 @@ interface Member {
 function Proker({ title, summary, category, current, total }: Program) {
   const icon = categoryIcons[category.slug]
   return (
-    <section className="hs-carousel-slide mt-2 relative mx-auto w-full max-w-3xl pt-16">
+    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-16">
       <div className="relative overflow-visible rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-8 pb-7 pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] sm:px-14">
         {/* cekungan visual */}
         <div
