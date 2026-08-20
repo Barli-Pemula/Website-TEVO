@@ -323,10 +323,12 @@ export const PLACEHOLDER = {
     copyright: "© 2026 Kabinet Astana Angkasa — Ormawa Eksekutif PKU IPB",
     quickLinks: [
       { label: "Beranda", href: "#beranda" },
-      { label: "Profile", href: "#profile" },
+      { label: "Struktur Organisasi", href: "#struktur" },
       { label: "Angkasa Care", href: "#angkasa-care" },
       { label: "Angkasa Store", href: "#store" },
+      { label: "Angkasa Kost", href: "#angkasa-kost" },
       { label: "Informasi", href: "#informasi" },
+      { label: "Narahubung", href: "#narahubung" },
     ],
   },
 } as const;
