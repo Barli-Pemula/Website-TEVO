@@ -3,23 +3,20 @@
 import { motion } from "framer-motion";
 import { PLACEHOLDER } from "../../lib/placeholder-content";
 import { CONFIG } from "../../lib/config";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-cards';
-import "swiper/css/navigation";
 
 import styles from "./AngkasaStorePreview.module.css";
 
 // import required modules
-import { EffectCards, Navigation } from 'swiper/modules';
-
-// import required modules
-// import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { EffectCards } from 'swiper/modules';
 
 declare global {
   interface Window {
@@ -29,8 +26,11 @@ declare global {
   }
 }
 
-
 export default function AngkasaStorePreview() {
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const products = PLACEHOLDER.store.products || [];
+
   const fadeUp = {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
@@ -59,13 +59,14 @@ export default function AngkasaStorePreview() {
               </motion.h2>
             </div>
 
-            {/* CARAOUSEL UDH LUMAYAN AMAN */}
+            {/* CAROUSEL */}
             <div className={styles.carouselWrapper}>
               <Swiper
                 effect="cards"
                 grabCursor={true}
-                navigation={true}
-                modules={[EffectCards, Navigation]}
+                modules={[EffectCards]}
+                onSwiper={setSwiperInstance}
+                onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                 cardsEffect={{
                   perSlideOffset: 20,
                   perSlideRotate: 10,
@@ -73,15 +74,18 @@ export default function AngkasaStorePreview() {
                   slideShadows: false,
                 }}
                 className={styles.storeSwiper}
-                style={{
-                  "--swiper-navigation-color": "#DCB06F",
-                } as React.CSSProperties}
               >
-                {PLACEHOLDER.store.products.map((product, i) => (
+                {products.map((product, i) => (
                   <SwiperSlide key={i} className={styles.storeSlide}>
                     <div className="m-1">
                       <div className="relative w-[200px] h-[200px] mb-2 overflow-hidden flex">
-                        <Image src={product.image} width={192} height={80} alt={product.name} className="object-cover rounded-[10px] text-[18px] text-[#F6E7CC] justify-center items-center" />
+                        <Image
+                          src={product.image}
+                          width={192}
+                          height={80}
+                          alt={product.name}
+                          className="object-cover rounded-[10px] text-[18px] text-[#F6E7CC] justify-center items-center pointer-events-none"
+                        />
                       </div>
                       <div className="justify-start items-start font-montserrat mb-2 leading-tight">
                         <h3 className="text-[18px] text-[#DCB06F] font-semibold">{product.name}</h3>
@@ -91,6 +95,66 @@ export default function AngkasaStorePreview() {
                   </SwiperSlide>
                 ))}
               </Swiper>
+            </div>
+
+            {/* Navigation Controls: Left Arrow, Dots, Right Arrow (Matching Angkasa Kost style) */}
+            <div className="flex items-center justify-between max-w-xs mx-auto mt-5 px-2">
+              <button
+                type="button"
+                onClick={() => swiperInstance?.slidePrev()}
+                className="w-10 h-10 rounded-full bg-[#DCB06F] text-[#2C430B] flex items-center justify-center shadow-lg active:scale-90 hover:bg-[#F6E7CC] transition-all"
+                aria-label="Produk sebelumnya"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+
+              {/* Indicator Dots */}
+              <div className="flex items-center gap-2">
+                {products.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => swiperInstance?.slideTo(idx)}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      idx === activeIndex
+                        ? "w-7 bg-[#F6E7CC]"
+                        : "w-2.5 bg-[#DCB06F]/50 hover:bg-[#DCB06F]"
+                    }`}
+                    aria-label={`Lihat produk ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => swiperInstance?.slideNext()}
+                className="w-10 h-10 rounded-full bg-[#DCB06F] text-[#2C430B] flex items-center justify-center shadow-lg active:scale-90 hover:bg-[#F6E7CC] transition-all"
+                aria-label="Produk selanjutnya"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
             </div>
             {/* end carousel */}
 

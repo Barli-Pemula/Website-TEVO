@@ -169,10 +169,10 @@ export default function NewsCarousel() {
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
         >
-          {/* Navigation Arrows - Visible on Mobile and Desktop */}
+          {/* Navigation Arrows - Visible on Desktop & Tablet (>= md) */}
           <button
             onClick={goPrev}
-            className="absolute -left-2 sm:-left-3 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-gold-warm/30 flex items-center justify-center hover:bg-smoke hover:scale-105 active:scale-95 transition-all text-forest-dark"
+            className="hidden md:flex absolute -left-2 sm:-left-3 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-gold-warm/30 items-center justify-center hover:bg-smoke hover:scale-105 active:scale-95 transition-all text-forest-dark"
             aria-label="Artikel sebelumnya"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -181,7 +181,7 @@ export default function NewsCarousel() {
           </button>
           <button
             onClick={goNext}
-            className="absolute -right-2 sm:-right-3 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-gold-warm/30 flex items-center justify-center hover:bg-smoke hover:scale-105 active:scale-95 transition-all text-forest-dark"
+            className="hidden md:flex absolute -right-2 sm:-right-3 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-gold-warm/30 items-center justify-center hover:bg-smoke hover:scale-105 active:scale-95 transition-all text-forest-dark"
             aria-label="Artikel selanjutnya"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -192,9 +192,21 @@ export default function NewsCarousel() {
           {/* Cards Track */}
           <div className="overflow-hidden py-2">
             <motion.div
-              className="flex items-stretch gap-4 md:gap-6"
+              className={`flex items-stretch gap-4 md:gap-6 ${isMobile ? "cursor-grab active:cursor-grabbing" : ""}`}
               animate={{ x: getXOffset() }}
               transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
+              drag={isMobile ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, { offset, velocity }) => {
+                if (!isMobile) return;
+                const swipe = offset.x;
+                if (swipe < -40 || velocity.x < -300) {
+                  goNext();
+                } else if (swipe > 40 || velocity.x > 300) {
+                  goPrev();
+                }
+              }}
             >
               {articles.map((article, i) => {
                 const isActive = i === activeIndex;
@@ -307,8 +319,68 @@ export default function NewsCarousel() {
           </div>
         </div>
 
-        {/* Pagination dots */}
-        <div className="flex justify-center items-center gap-2 mt-8">
+        {/* Mobile Navigation Controls: Left Arrow, Dots, Right Arrow (Matching Angkasa Kost style) */}
+        <div className="md:hidden flex items-center justify-between max-w-sm mx-auto mt-6 px-4">
+          <button
+            type="button"
+            onClick={goPrev}
+            className="w-10 h-10 rounded-full bg-[#DCB06F] text-[#2C430B] flex items-center justify-center shadow-lg active:scale-90 hover:bg-[#F6E7CC] transition-all"
+            aria-label="Artikel sebelumnya"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Indicator Dots */}
+          <div className="flex items-center gap-2">
+            {articles.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => goTo(idx)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  idx === activeIndex
+                    ? "w-7 bg-[#F6E7CC]"
+                    : "w-2.5 bg-[#DCB06F]/50 hover:bg-[#DCB06F]"
+                }`}
+                aria-label={`Lihat artikel ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={goNext}
+            className="w-10 h-10 rounded-full bg-[#DCB06F] text-[#2C430B] flex items-center justify-center shadow-lg active:scale-90 hover:bg-[#F6E7CC] transition-all"
+            aria-label="Artikel selanjutnya"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Desktop/Tablet Pagination dots (>= md) */}
+        <div className="hidden md:flex justify-center items-center gap-2 mt-8">
           {articles.map((_, i) => (
             <button
               key={i}
