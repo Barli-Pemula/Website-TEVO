@@ -54,47 +54,57 @@ export default function HeroSection() {
   const hintRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let animProgress = 0;       // 0 = start, 1 = animation complete
+    let targetProgress = 0;
+    let currentProgress = 0;
     let isLocked = true;         // scroll is locked during animation
     let swordVisible = false;    // sword hidden until first scroll
-    const SENSITIVITY = 0.0008;  // how much each wheel pixel advances progress
+    let rafId: number;
+
+    const WHEEL_SENSITIVITY = 0.00045; // Silky smooth, slower wheel response
+    const TOUCH_SENSITIVITY = 0.0016;  // Gentle, deliberate mobile swipe
 
     // Lock scroll on mount
     document.documentElement.style.overflow = "hidden";
     document.documentElement.style.overscrollBehavior = "none";
 
-    // Safety timeout: auto-unlock after 5s on mobile to prevent getting stuck
+    // Safety timeout: auto-unlock after 6s if idle
     const safetyTimer = setTimeout(() => {
       if (isLocked) {
         unlockScroll();
-        // Also reveal sword and complete animation
         if (!swordVisible) revealSword();
-        animProgress = 1;
-        renderFrame(1);
+        targetProgress = 1;
       }
-    }, 5000);
+    }, 6000);
 
-    // Initially hide sword container
+    // Initially hide sword container until revealed
     if (containerRef.current) {
       containerRef.current.style.opacity = "0";
-      containerRef.current.style.transition = "opacity 0.6s ease-out";
+      containerRef.current.style.transition = "opacity 0.8s ease-out";
     }
 
     /* --- Fade in sword on first scroll --- */
     function revealSword() {
+      if (swordVisible) return;
       swordVisible = true;
       if (containerRef.current) {
         containerRef.current.style.opacity = "1";
-        // Remove CSS transition after fade-in so manual animation can take over
         setTimeout(() => {
           if (containerRef.current) {
             containerRef.current.style.transition = "";
           }
-        }, 650);
+        }, 800);
       }
       if (glowRef.current) {
         glowRef.current.style.opacity = "0.8";
       }
+    }
+
+    /* --- Unlock scroll immediately when animation complete --- */
+    function unlockScroll() {
+      if (!isLocked) return;
+      isLocked = false;
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.overscrollBehavior = "";
     }
 
     /* --- Render a single animation frame --- */
@@ -116,51 +126,49 @@ export default function HeroSection() {
       }
 
       /*
-       * ANIMATION TIMELINE:
+       * ANIMATION TIMELINE (Cinematic & Smooth):
        *
-       * Phase 1 — Sword separation       : 0.00 → 0.75
-       * Phase 2 — Text reveals center-out : 0.04 → 0.22
-       * Phase 3 — Subtitle appears       : 0.40 → 0.55
-       * Phase 4 — HOLD (text visible)    : 0.55 → 1.00
-       *         → scroll unlocked, user scrolls naturally
+       * Phase 1 — Sword separation       : 0.00 → 0.85
+       * Phase 2 — Text reveals center-out : 0.06 → 0.40
+       * Phase 3 — Subtitle appears       : 0.45 → 0.70
+       * Phase 4 — HOLD (text visible)    : 0.70 → 1.00
        */
 
-      /* Phase 1: Sword & sheath separate — slower, bigger gap */
-      const sepProgress = Math.min(1, p / 0.75);
+      /* Phase 1: Sword & sheath separate — slower, gradual slide */
+      const sepProgress = Math.min(1, p / 0.85);
       const easedSep = easeOutCubic(sepProgress);
-      const INITIAL_GAP = 11; // vw — right sword offset, handle visible
-      const maxSlide = 120;   // vw — far enough to fully exit viewport
+      const INITIAL_GAP = 11; // vw
+      const maxSlide = 120;   // vw
       sheathRef.current.style.transform = `translateX(${-INITIAL_GAP + easedSep * -(maxSlide - INITIAL_GAP)}vw)`;
       swordRef.current.style.transform = `translateX(${INITIAL_GAP + easedSep * (maxSlide - INITIAL_GAP)}vw)`;
 
-      /* Both sword & sheath fade out — starts later to match slower separation */
+      /* Sword container fades out gradually */
       let containerFade = 1;
       if (p >= 0.50) {
-        containerFade = Math.max(0, 1 - (p - 0.50) / 0.12);
+        containerFade = Math.max(0, 1 - (p - 0.50) / 0.22);
       }
       containerRef.current.style.opacity = String(containerFade);
 
-      /* Blade glow fades with the container */
+      /* Blade glow fades with container */
       glowRef.current.style.opacity = String(containerFade * easedSep * 0.8);
 
-      /* Phase 2: Title center-out clip reveal — starts as soon as swords part */
+      /* Phase 2: Title center-out clip reveal */
       let textReveal = 0;
-      if (p >= 0.04) {
-        textReveal = Math.min(1, (p - 0.04) / 0.18);
+      if (p >= 0.06) {
+        textReveal = Math.min(1, (p - 0.06) / 0.34);
         textReveal = easeOutCubic(textReveal);
       }
-      const clipInset = 50 - (textReveal * 50); // 50% → 0% (reveals from center outward)
+      const clipInset = 50 - (textReveal * 50); // 50% → 0%
       let titleOpacity = textReveal > 0.01 ? 1 : 0;
 
       /* Phase 3: Subtitle fades in */
       let subtitleOpacity = 0;
-      if (p >= 0.40) {
-        subtitleOpacity = Math.min(1, (p - 0.40) / 0.15);
+      if (p >= 0.45) {
+        subtitleOpacity = Math.min(1, (p - 0.45) / 0.25);
         subtitleOpacity = easeOutCubic(subtitleOpacity);
       }
 
-      /* Phase 4: Hold — nothing changes (0.55 → 1.00), hero stays visible */
-
+      /* Phase 4: Hold — text stays visible */
       titleRef.current.style.opacity = String(titleOpacity);
       titleRef.current.style.clipPath = `inset(0 ${clipInset}% 0 ${clipInset}%)`;
       titleRef.current.style.transform = `translate(-50%, -50%)`;
@@ -170,45 +178,49 @@ export default function HeroSection() {
         subtitleEl.style.opacity = String(subtitleOpacity);
       }
 
-      /* Scroll hint: visible at start, hides during separation, reappears when title is visible */
+      /* Scroll hint */
       let hintOpacity = 0.9;
-      if (p > 0.05 && p < 0.60) {
+      if (p > 0.05 && p < 0.65) {
         hintOpacity = Math.max(0, 0.9 * (1 - (p - 0.05) / 0.25));
-      } else if (p >= 0.60) {
-        hintOpacity = Math.min(0.9, (p - 0.60) / 0.25);
+      } else if (p >= 0.65) {
+        hintOpacity = Math.min(0.9, (p - 0.65) / 0.25);
       }
       hintRef.current.style.opacity = String(hintOpacity);
     }
 
-    /* --- Unlock scroll --- */
-    function unlockScroll() {
-      isLocked = false;
-      document.documentElement.style.overflow = "";
-      document.documentElement.style.overscrollBehavior = "";
-    }
+    /* --- LERP Animation Loop for 60/120fps ultra smooth gliding --- */
+    function animateLoop() {
+      const diff = targetProgress - currentProgress;
+      if (Math.abs(diff) > 0.0004) {
+        currentProgress += diff * 0.075; // 7.5% per frame for smooth deceleration
+        renderFrame(currentProgress);
+      } else if (currentProgress !== targetProgress) {
+        currentProgress = targetProgress;
+        renderFrame(currentProgress);
+      }
 
-    /* --- Wheel handler (drives animation while locked) --- */
+      // When animation reaches completion, unlock scroll immediately
+      if (currentProgress >= 0.97 && isLocked) {
+        unlockScroll();
+      }
+
+      rafId = requestAnimationFrame(animateLoop);
+    }
+    rafId = requestAnimationFrame(animateLoop);
+
+    /* --- Wheel handler (drives animation on desktop while locked) --- */
     function handleWheel(e: WheelEvent) {
       if (!isLocked) return;
 
       e.preventDefault();
 
-      // First scroll → reveal sword, don't advance animation
       if (!swordVisible) {
         revealSword();
-        return;
       }
 
       const delta = e.deltaY;
-      animProgress += delta * SENSITIVITY;
-      animProgress = Math.max(0, Math.min(1, animProgress));
-
-      renderFrame(animProgress);
-
-      // Animation complete → unlock scroll
-      if (animProgress >= 1) {
-        unlockScroll();
-      }
+      targetProgress += delta * WHEEL_SENSITIVITY;
+      targetProgress = Math.max(0, Math.min(1, targetProgress));
     }
 
     /* --- Touch support for mobile --- */
@@ -216,53 +228,48 @@ export default function HeroSection() {
 
     function handleTouchStart(e: TouchEvent) {
       touchStartY = e.touches[0].clientY;
+      if (isLocked && !swordVisible) {
+        revealSword();
+      }
     }
 
     function handleTouchMove(e: TouchEvent) {
-      if (!isLocked) return;
+      if (!isLocked) {
+        // When unlocked, allow native scroll completely
+        return;
+      }
 
+      // While locked, prevent default to drive animation
       e.preventDefault();
 
-      // First touch swipe → reveal sword, don't advance animation
       if (!swordVisible) {
         revealSword();
-        return;
       }
 
       const touchY = e.touches[0].clientY;
       const delta = touchStartY - touchY;
       touchStartY = touchY;
 
-      animProgress += delta * SENSITIVITY * 3;
-      animProgress = Math.max(0, Math.min(1, animProgress));
-
-      renderFrame(animProgress);
-
-      if (animProgress >= 1) {
-        unlockScroll();
+      if (delta > 0) {
+        targetProgress += delta * TOUCH_SENSITIVITY;
+        targetProgress = Math.max(0, Math.min(1, targetProgress));
       }
-    }
-
-    /* --- Regular scroll handler (no-op — animation plays once) --- */
-    function handleScroll() {
-      // No re-lock — animation plays once, then user scrolls freely
     }
 
     /* --- Attach all listeners --- */
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Render initial state
     renderFrame(0);
 
     return () => {
       clearTimeout(safetyTimer);
+      cancelAnimationFrame(rafId);
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("scroll", handleScroll);
       document.documentElement.style.overflow = "";
       document.documentElement.style.overscrollBehavior = "";
     };
@@ -297,11 +304,9 @@ export default function HeroSection() {
         <div className={styles.bgOverlay} />
 
         {/* Title — positioned at sword center, emerges from within */}
-        <div ref={titleRef} className={`${styles.heroTitle}`}>
-          <h1 className="[-webkit-text-stroke:1px_#fff]" style={{
-            textShadow: "0 6px 20px rgba(0,0,0,0.4), 0 0 3px rgba(255,255,255,0.8)",
-          }}>Astana Angkasa</h1>
-          <p className="px-5 py-3 bg-[var(--text-secondary)]/20">Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
+        <div ref={titleRef} className={styles.heroTitle}>
+          <h1>Astana Angkasa</h1>
+          <p>Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
         </div>
 
         {/* Sword Assembly */}
