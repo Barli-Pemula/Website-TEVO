@@ -102,8 +102,8 @@ function getUnitLogo(unit: unitDetail): string {
 
 function handleBreakSeal(unit: unitDetail) {
   setTimeout(() => {
-    window.open(`/struktur-organisasi/${unit.slug}`, "_blank", "noopener,noreferrer");
-  }, 700);
+    window.location.href = `/struktur-organisasi/${unit.slug}`;
+  }, 400);
 }
 
 type ModalCardBirDepProps = {
