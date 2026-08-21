@@ -147,7 +147,7 @@ export default function ProfileSection() {
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-kapakana text-center text-[#701011] text-[clamp(1.5rem,4.5vw,54px)] md:text-[clamp(2.5rem,7vw,100px)] tracking-tight drop-shadow mb-3 md:mb-6"
+              className="font-kapakana text-center text-[#701011] text-[clamp(2.8rem,9vw,54px)] sm:text-[clamp(3.6rem,8vw,80px)] md:text-[clamp(4.5rem,7vw,100px)] tracking-tight drop-shadow-sm mb-3 md:mb-6"
             >
               Astana Angkasa
             </motion.h2>
@@ -172,18 +172,18 @@ export default function ProfileSection() {
 
         {/* Subsection 4: Visi */}
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 mb-10">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px]">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px] mb-6 md:mb-10">
             <div />
 
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#2C430B] leading-none mb-10"
+              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#2C430B] leading-none"
             >
               Visi
             </motion.h2>
 
-            <div className="h-[5px] bg-[#2C430B]" />
+            <div className="h-[4px] md:h-[5px] bg-[#2C430B] rounded-full" />
           </div>
           <motion.p
             {...fadeUp}
@@ -196,12 +196,12 @@ export default function ProfileSection() {
 
         {/* Subsection 5: Misi */}
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 pb-16 md:pb-30">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px]">
-            <div className="h-[5px] bg-[#701011]" />
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px] mb-6 md:mb-10">
+            <div className="h-[4px] md:h-[5px] bg-[#701011] rounded-full" />
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#701011] leading-none text-center mb-10"
+              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#701011] leading-none text-center"
             >
               Misi
             </motion.h2>

@@ -102,8 +102,8 @@ function getUnitLogo(unit: unitDetail): string {
 
 function handleBreakSeal(unit: unitDetail) {
   setTimeout(() => {
-    window.open(`/struktur-organisasi/${unit.slug}`, "_blank", "noopener,noreferrer");
-  }, 700);
+    window.location.href = `/struktur-organisasi/${unit.slug}`;
+  }, 400);
 }
 
 type ModalCardBirDepProps = {
@@ -120,7 +120,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
     <AnimatePresence>
       {unit && (
         <motion.div
-          className="fixed inset-0 z-[999] flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm md:p-8"
+          className="fixed inset-0 z-[999] flex items-center justify-center overflow-y-auto bg-black/60 p-3 sm:p-6 md:p-8 backdrop-blur-sm"
           initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
           animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
           exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
@@ -128,7 +128,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
           onClick={() => setUnit(null)}
         >
           <motion.div
-            className="relative my-auto w-full max-w-[760px]"
+            className="relative my-auto w-full max-w-[340px] sm:max-w-[420px] md:max-w-[450px] flex flex-col items-center px-2 sm:px-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{
@@ -140,22 +140,22 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
           >
             {/* Gulungan atas */}
             <motion.div
-              className="relative z-30 mx-auto h-14 w-[calc(100%+36px)] rounded-full bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
-              initial={{ y: 38 }}
+              className="relative z-30 mx-auto h-10 sm:h-12 w-full rounded-full bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
+              initial={{ y: 32 }}
               animate={{ y: 0 }}
-              exit={{ y: 38, transition: { delay: 0.2, duration: 0.35 } }}
+              exit={{ y: 32, transition: { delay: 0.2, duration: 0.35 } }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <div className="absolute inset-x-8 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
-              <div className="absolute left-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
-              <div className="absolute right-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute inset-x-5 sm:inset-x-6 top-1/2 h-[2.5px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
+              <div className="absolute left-1.5 sm:left-2 top-1/2 size-6 sm:size-7 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute right-1.5 sm:right-2 top-1/2 size-6 sm:size-7 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
             </motion.div>
 
             {/* Kertas */}
             <motion.div
-              className="relative z-20 mx-5 overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+              className="relative z-20 w-[calc(100%-28px)] sm:w-[calc(100%-36px)] mx-auto overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               initial={{ height: 0, opacity: 0.85 }}
-              animate={{ height: "min(70vh, 620px)", opacity: 1 }}
+              animate={{ height: "min(65vh, 480px)", opacity: 1 }}
               exit={{
                 height: 0,
                 opacity: 0.85,
@@ -175,7 +175,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
               />
 
               <motion.div
-                className="relative h-full overflow-y-auto px-5 py-8 sm:px-12 sm:py-10 text-[#4B2B18]"
+                className="relative h-full overflow-y-auto px-4 py-5 sm:px-7 sm:py-6 text-[#4B2B18] flex flex-col"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{
@@ -188,17 +188,17 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                 <button
                   type="button"
                   onClick={() => setUnit(null)}
-                  className="absolute right-5 top-5 z-20 flex size-10 items-center justify-center rounded-full border border-[#9B5C25] bg-[#F1D49A] text-[#701011] shadow-md transition hover:scale-105 hover:bg-[#E7BF76]"
+                  className="absolute right-2.5 top-2.5 sm:right-3 sm:top-3 z-20 flex size-7 sm:size-8 items-center justify-center rounded-full border border-[#9B5C25] bg-[#F1D49A] text-[#701011] shadow-md transition hover:scale-105 hover:bg-[#E7BF76] cursor-pointer"
                   aria-label="Tutup modal"
                 >
-                  <X className="size-5" />
+                  <X className="size-3.5 sm:size-4" />
                 </button>
 
-                <div className="pr-12">
-                  <p className="mb-2 text-sm font-semibold font-montserrat uppercase tracking-[0.2em] text-[#9B5C25]">
+                <div className="pr-8 sm:pr-9 text-left">
+                  <p className="mb-1 text-[10px] sm:text-xs font-semibold font-montserrat uppercase tracking-[0.2em] text-[#9B5C25]">
                     Struktur Organisasi
                   </p>
-                  <h2 className="text-3xl font-bold font-asimovian uppercase leading-tight text-[#701011] sm:text-5xl">
+                  <h2 className="text-base sm:text-xl md:text-2xl font-bold font-asimovian uppercase leading-tight text-[#701011]">
                     {unit.unitType === "BIRO"
                       ? `Biro ${unit.name.replace(/biro/gi, "").trim()}`
                       : unit.unitType === "DEPARTEMEN"
@@ -207,41 +207,32 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                   </h2>
                 </div>
 
-                <div className="my-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
+                <div className="my-3 sm:my-3.5 h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
 
-                <p className="text-justify text-base leading-relaxed sm:text-md font-montserrat">
-                  {unit.description} {unit.focusArea}
-                </p>
+                <div className="flex-1 flex flex-col justify-start">
+                  <p className="text-justify text-xs sm:text-[13.5px] leading-relaxed font-montserrat">
+                    {unit.description} {unit.focusArea}
+                  </p>
+                </div>
 
                 {/* Logo + Cap lilin */}
-                <div className="mt-10 flex justify-end items-center gap-6">
-                  {/* Unit Logo */}
-                  {/* <div className="relative size-28 rounded-full border-3 border-[#DCB06F] bg-[#FBF5EA] flex items-center justify-center overflow-hidden shadow-md">
-                    <Image
-                      src={logoPath}
-                      alt={unit.name}
-                      width={90}
-                      height={90}
-                      className="object-contain p-2"
-                    />
-                  </div> */}
-
+                <div className="mt-4 sm:mt-5 flex justify-end items-center gap-3">
                   <div className="relative">
                     <motion.button
                       whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
-                      className="group flex size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)]"
+                      className="group flex size-14 sm:size-16 rotate-[-8deg] items-center justify-center rounded-full border-3 sm:border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)] cursor-pointer"
                       onClick={() => handleBreakSeal(unit)}
                     >
-                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[10px] uppercase text-center leading-tight">
+                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[8px] sm:text-[9px] uppercase text-center leading-tight px-1">
                         Lihat Detail
                       </span>
                       <Image
                         src={unit.logoUrl}
                         alt={unit.name}
-                        width={64}
-                        height={64}
-                        className="hidden group-hover:block object-contain"
+                        width={46}
+                        height={46}
+                        className="hidden group-hover:block object-contain p-0.5"
                       />
                     </motion.button>
                   </div>
@@ -251,15 +242,15 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
 
             {/* Gulungan bawah */}
             <motion.div
-              className="relative z-30 mx-auto h-14 w-[calc(100%+36px)] rounded-full border-2 border-[#9B5C25] bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
-              initial={{ y: -38 }}
+              className="relative z-30 mx-auto h-10 sm:h-12 w-full rounded-full border-2 border-[#9B5C25] bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
+              initial={{ y: -32 }}
               animate={{ y: 0 }}
-              exit={{ y: -38, transition: { delay: 0.2, duration: 0.35 } }}
+              exit={{ y: -32, transition: { delay: 0.2, duration: 0.35 } }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <div className="absolute inset-x-8 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
-              <div className="absolute left-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
-              <div className="absolute right-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute inset-x-5 sm:inset-x-6 top-1/2 h-[2.5px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
+              <div className="absolute left-1.5 sm:left-2 top-1/2 size-6 sm:size-7 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute right-1.5 sm:right-2 top-1/2 size-6 sm:size-7 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -364,21 +355,21 @@ export default function StructureHub() {
                   </motion.button>
                 ))}
 
-                {/* Connector: BPH → Biro */}
-                <div className="w-[2px] h-8 bg-[#DCB06F]/60" />
-                <div className="w-1/2 md:w-5/9 h-[2px] bg-[#DCB06F]/60 relative">
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]" />
-                </div>
+                {/* Connector: BPH → Biro Stem */}
+                <div className="w-[2px] h-8 bg-[#DCB06F]" />
 
-                {/* ---- Level 2: Biro (centered, consistent format) ---- */}
-                <div className="relative w-full flex flex-col items-center pb-8">
-                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/40 z-0" />
+                {/* ---- Level 2: Biro (centered, 100% connected) ---- */}
+                <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center pb-8">
+                  {/* Central vertical trunk behind */}
+                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/60 z-0" />
 
-                  <div className="flex flex-wrap justify-center gap-2 min-[400px]:gap-3 md:gap-4 w-full relative z-10">
-                    {biroUnits.map((biro) => {
+                  {/* Central golden junction node */}
+                  <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 size-3 rounded-full bg-[#DCB06F] z-20 shadow-sm" />
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 w-full relative z-10">
+                    {biroUnits.map((biro, i) => {
                       const cleanName = biro.name.replace(/biro/gi, "").trim();
                       const nameLen = cleanName.length;
-                      // Tiered font sizing: short / medium / long
                       const nameFontClass =
                         nameLen <= 9
                           ? "text-[12px] sm:text-[14px] md:text-[16px]"
@@ -388,7 +379,7 @@ export default function StructureHub() {
                       return (
                         <div
                           key={biro.id}
-                          className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[150px] md:w-[155px] lg:w-[210px]"
+                          className="flex flex-col items-center w-full"
                         >
                           <motion.div
                             {...fadeUp}
@@ -396,7 +387,30 @@ export default function StructureHub() {
                             onClick={() => setModal(biro)}
                             className="flex flex-col items-center cursor-pointer w-full h-full flex-1"
                           >
-                            <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
+                            {/* Intra-column connector: guaranteed 100% seamless intersection */}
+                            <div className="relative w-full h-6 flex justify-center shrink-0">
+                              {/* Desktop (4 cols) horizontal connector */}
+                              {i === 0 && (
+                                <div className="hidden md:block absolute top-0 left-1/2 -right-4 h-[2px] bg-[#DCB06F]" />
+                              )}
+                              {i === biroUnits.length - 1 && (
+                                <div className="hidden md:block absolute top-0 -left-4 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              )}
+                              {i > 0 && i < biroUnits.length - 1 && (
+                                <div className="hidden md:block absolute top-0 -left-4 -right-4 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Mobile (2 cols) horizontal connector */}
+                              {i % 2 === 0 ? (
+                                <div className="md:hidden absolute top-0 left-1/2 -right-3 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="md:hidden absolute top-0 -left-3 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Vertical stem */}
+                              <div className="w-[2px] h-full bg-[#DCB06F]" />
+                            </div>
+
                             <div className="group bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 transition-shadow shadow-lg hover:bg-[#DCB06F] hover:border-[#870F0C] hover:-translate-y-1 active:scale-105">
                               <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full group-hover:bg-[#DCB06F] group-hover:border-[#870F0C]">
                                 {/* Biro Logo */}
@@ -422,26 +436,25 @@ export default function StructureHub() {
                             </div>
                           </motion.div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
 
-                {/* Connector: Biro → Departemen */}
-                <div className="w-[2px] h-4 bg-[#DCB06F]/60" />
-                <div className="w-1/2 md:w-8/9 h-[2px] bg-[#DCB06F]/60 relative">
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]" />
-                </div>
+                {/* Connector: Biro → Departemen Stem */}
+                <div className="w-[2px] h-8 bg-[#DCB06F] relative z-10" />
 
-                {/* ---- Level 3: Departemen (2/4/8 cols) ---- */}
-                <div className="relative w-full flex flex-col items-center pb-8">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1 md:gap-2 w-full relative z-10">
-                    {deptUnits.map((dept) => {
+                {/* ---- Level 3: Departemen (2/4/8 cols, 100% connected) ---- */}
+                <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center pb-8">
+                  {/* Central golden junction node */}
+                  <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 size-3 rounded-full bg-[#DCB06F] z-20 shadow-sm" />
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 md:gap-2 w-full relative z-10">
+                    {deptUnits.map((dept, i) => {
                       const cleanDeptName = dept.name
                         .replace(/departemen/gi, "")
                         .trim();
                       const deptNameLen = cleanDeptName.length;
-                      // Tiered font sizing for desktop/tablet
                       const deptNameFontClass =
                         deptNameLen <= 10
                           ? "text-[11px] sm:text-[13px] md:text-[14px]"
@@ -453,15 +466,54 @@ export default function StructureHub() {
                       return (
                         <div
                           key={dept.id}
-                          className="flex flex-col items-center w-full h-full"
+                          className="relative flex flex-col items-center w-full h-full"
                         >
+                          {/* Mobile central vertical line between rows (Row 1->2, 2->3, 3->4) */}
+                          {(i === 0 || i === 2 || i === 4) && (
+                            <div className="sm:hidden absolute top-0 -right-[4px] w-[2px] h-[calc(100%+6px)] bg-[#DCB06F] z-0 pointer-events-none" />
+                          )}
+
+                          {/* Tablet central vertical line between rows (Row 1->2) */}
+                          {i === 1 && (
+                            <div className="hidden sm:block lg:hidden absolute top-0 -right-[4px] md:-right-[5px] w-[2px] h-[calc(100%+8px)] bg-[#DCB06F] z-0 pointer-events-none" />
+                          )}
                           <motion.div
                             {...fadeUp}
                             transition={{ ...stagger, delay: 0.1 }}
                             onClick={() => setModal(dept)}
                             className="flex flex-col flex-1 h-full w-full items-center cursor-pointer"
                           >
-                            <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
+                            {/* Intra-column connector: guaranteed 100% seamless intersection */}
+                            <div className="relative w-full h-6 flex justify-center shrink-0">
+                              {/* Desktop (8 cols) horizontal connector */}
+                              {i === 0 ? (
+                                <div className="hidden lg:block absolute top-0 left-1/2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              ) : i === deptUnits.length - 1 ? (
+                                <div className="hidden lg:block absolute top-0 -left-2 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="hidden lg:block absolute top-0 -left-2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Tablet (4 cols) horizontal connector */}
+                              {i % 4 === 0 ? (
+                                <div className="hidden sm:block lg:hidden absolute top-0 left-1/2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              ) : i % 4 === 3 ? (
+                                <div className="hidden sm:block lg:hidden absolute top-0 -left-2 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="hidden sm:block lg:hidden absolute top-0 -left-2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Mobile (2 cols) horizontal connector */}
+                              {i % 2 === 0 ? (
+                                <div className="sm:hidden absolute top-0 left-1/2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="sm:hidden absolute top-0 -left-2 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Vertical stem */}
+                              <div className="w-[2px] h-full bg-[#DCB06F]" />
+                            </div>
+
                             <div className="group bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 shadow-lg transition-shadow hover:bg-[#DCB06F] hover:border-[#2C430B] hover:-translate-y-1 active:scale-105">
                               <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px] group-hover:bg-[#DCB06F] group-hover:border-[#2C430B]">
                                 {/* Departemen Logo */}
@@ -487,7 +539,7 @@ export default function StructureHub() {
                             </div>
                           </motion.div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>

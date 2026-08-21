@@ -320,7 +320,7 @@ export const PLACEHOLDER = {
 
   /** Footer */
   footer: {
-    copyright: "© 2026 Kabinet Astana Angkasa — Ormawa Eksekutif PKU IPB",
+    copyright: "© 2026 Kabinet Astana Angkasa | Biro Riset dan Teknologi - Ormawa Eksekutif PKU",
     quickLinks: [
       { label: "Beranda", href: "#beranda" },
       { label: "Struktur Organisasi", href: "#struktur" },
