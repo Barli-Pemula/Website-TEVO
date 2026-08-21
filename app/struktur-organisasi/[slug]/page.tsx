@@ -218,7 +218,7 @@ export default function page() {
   }, [slug])
 
   if (loading) return <div className="p-10 font-montserrat text-center mt-50">Memuat halaman...</div>
-  if (!birdep) return <div className="p-10 font-montserrat text-center mt-50">Data tidak ditemukan.</div>
+  if (!birdep) return <div className="p-10 font-montserrat text-center mt-50">Data biro atau departemen ini belum tersedia.</div>
 
   if (loadingMembers) return (<div className="py-20 text-center font-montserrat">Memuat struktur pengurus...</div>)
   if (memberError) return (<div className="py-20 text-center font-montserrat text-red-700">{memberError}</div>)
@@ -300,16 +300,16 @@ export default function page() {
                 </motion.h2>
               </div>
               {loadingPrograms ? (
-                <div>Memuat program kerja...</div>
+                <div className="py-20 text-center font-montserrat text-white">Memuat program kerja...</div>
               ) : programError ? (
                 <div>{programError}</div>
               ) : programs.length === 0 ? (
-                <div>Tidak ada program kerja.</div>
+                <div className="py-20 text-center font-montserrat text-white">Data program kerja belum tersedia.</div>
               ) : (
                 <div
                   id="hs-carousel"
                   className="relative my-10"
-                  data-hs-carousel='{"isInfiniteLoop": true}'
+                  data-hs-carousel='{"loadingClasses": "opacity-0", "isInfiniteLoop": true}'
                 >
                   <div className="hs-carousel relative min-h-120 w-full overflow-hidden md:min-h-96 md:overflow-visible">
                     {/* Carousel Body */}

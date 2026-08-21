@@ -11,7 +11,7 @@
 
   background-image: url("/assets/Sub-Page.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% auto;
   background-position: top;
 
   filter: blur(8px);
