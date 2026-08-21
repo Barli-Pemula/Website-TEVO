@@ -78,34 +78,38 @@ interface Member {
 }
 
 function Proker({ title, summary, category, current, total }: Program) {
-  const icon = category?.slug && categoryIcons[category.slug] ? categoryIcons[category.slug] : "event_available";
-
+  const icon = categoryIcons[category.slug]
   return (
     <section className="text-center hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-14 sm:pt-16 px-2 sm:px-4">
       <div className="relative overflow-visible rounded-[26px] sm:rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-10 md:px-14 pb-6 sm:pb-8 pt-14 sm:pt-18 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
         {/* Cekungan visual */}
         <div
-          className="absolute left-1/2 top-0 h-[65px] sm:h-[85px] md:h-[100px] w-[160px] sm:w-[210px] md:w-[250px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] rounded-b-[40px] sm:rounded-b-[60px]"
+          className="absolute left-1/2 top-0 h-[100px] w-[280px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] scale-[0.68] sm:scale-[0.82] md:scale-100 origin-top"
           aria-hidden="true"
+          style={{
+            clipPath:
+              "path('M0 0 H280 V20 H260 C220 20 195 100 140 100 C85 100 60 20 20 20 H0 Z')",
+          }}
         />
-
         {/* LINGKARAN ICON */}
-        <div className="absolute left-1/2 top-0 z-20 flex size-24 sm:size-28 md:size-34 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 sm:border-3 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
-          <span className="material-symbols-outlined !text-[44px] sm:!text-[60px] md:!text-[72px] !leading-none text-[#DCB06F]">
+        <div className="absolute left-1/2 top-0 z-20 flex size-24 sm:size-28 md:size-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
+          <span className="material-symbols-outlined !text-[48px] sm:!text-[64px] md:!text-[100px] !leading-none text-[#DCB06F]">
             {icon}
           </span>
         </div>
 
         {/* Konten */}
-        <div className="relative z-10 mt-4 sm:mt-6 font-montserrat">
-          <h3 className="inline-block border-b-2 border-[#A90900] pb-1 font-bold text-[#A90900] text-lg sm:text-2xl md:text-3xl max-w-full break-words">
-            {title}
-          </h3>
-          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-[#32210F]">
-            {summary}
-          </p>
+        <div className="relative z-10 mt-3 sm:mt-5 md:mt-8 font-montserrat flex flex-col items-center justify-between flex-1 w-full h-[calc(100%-10px)] md:h-auto">
+          <div className="flex flex-col items-center justify-center w-full flex-1 my-auto">
+            <h3 className="inline-block border-b-2 border-[#A90900] pb-0.5 font-bold text-[#A90900] text-base sm:text-xl md:text-[clamp(22px,2.2vw,32px)] text-center line-clamp-2 md:line-clamp-none">
+              {title}
+            </h3>
+            <p className="mx-auto mt-2 sm:mt-3 md:mt-4 max-w-2xl text-[11px] sm:text-xs md:text-base leading-relaxed text-[#32210F] text-center line-clamp-4 sm:line-clamp-5 md:line-clamp-none overflow-hidden text-ellipsis">
+              {summary}
+            </p>
+          </div>
 
-          <div className="mx-auto shadow-md mt-4 sm:mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-5 sm:px-7 py-1 sm:py-1.5 text-[#870F0C] font-semibold text-xs sm:text-sm shadow-[0_4px_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
+          <div className="mx-auto shadow-md mt-2 sm:mt-4 md:mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-5 sm:px-7 py-1 sm:py-2 text-[#870F0C] text-xs sm:text-sm font-semibold shadow-[0_4px_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)] shrink-0">
             <span className="me-1">{current}</span>
             /
             <span className="ms-1">{total}</span>
@@ -113,7 +117,7 @@ function Proker({ title, summary, category, current, total }: Program) {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 export default function Page() {
@@ -315,19 +319,19 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Program Kerja */}
+              {/* Program Kerja / Unit Kerja Supervisi */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-2 sm:px-6">
                 <div className="border-2 sm:border-3 border-[#DCB06F] bg-[#F6E7CC] rounded-[16px] sm:rounded-[22px] p-2 sm:p-2.5 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined !text-[30px] sm:!text-[44px] md:!text-[52px] text-[#870F0C]">
-                    assignment
+                    {slug === "bph" && programs.length === 0 ? "account_balance" : "assignment"}
                   </span>
                 </div>
                 <div className="font-montserrat leading-none text-center sm:text-left">
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F9D253] mb-1">
-                    {programs.length}
+                    {slug === "bph" && programs.length === 0 ? 12 : programs.length}
                   </p>
                   <p className="uppercase font-semibold text-[10px] sm:text-xs md:text-sm tracking-wide text-white/90">
-                    Program Kerja
+                    {slug === "bph" && programs.length === 0 ? "Biro & Departemen" : "Program Kerja"}
                   </p>
                 </div>
               </div>
@@ -337,32 +341,54 @@ export default function Page() {
           {/* Program Kerja Section */}
           <motion.section
             id="program-kerja"
-            className="relative p-1 md:p-1.5 bg-[#DCB06F] rounded-[24px] sm:rounded-[28px]"
+            className="relative p-1 md:p-2 bg-[#DCB06F] mx-2 sm:mx-4 md:mx-5 rounded-[22px] sm:rounded-[28px]"
           >
-            <div className="mx-auto p-4 sm:p-8 md:p-12 bg-[#2C430B] rounded-[20px] sm:rounded-[25px]">
-              <div className="text-center mb-4">
+            <div className="mx-auto p-4 sm:p-8 md:p-12 bg-[#2C430B] rounded-[18px] sm:rounded-[25px]">
+              <div className="text-center">
                 <motion.h2
                   {...fadeUp}
                   transition={{ duration: 0.4 }}
-                  className="font-asimovian uppercase leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FBF5EA]"
+                  className="font-asimovian uppercase leading-tight text-3xl sm:text-4xl md:text-[clamp(50px,5vw,65px)] text-[#FBF5EA]"
                 >
                   Program Kerja
                 </motion.h2>
               </div>
-
               {loadingPrograms ? (
-                <div className="py-20 text-center font-montserrat text-white">Memuat program kerja...</div>
+                <div className="py-12 sm:py-16 text-center font-montserrat text-white">
+                  <div className="size-8 rounded-full border-2 border-[#DCB06F] border-t-white animate-spin mx-auto mb-2" />
+                  <p className="text-xs sm:text-sm">Memuat program kerja...</p>
+                </div>
               ) : programError ? (
-                <div>{programError}</div>
+                <div className="py-8 text-center font-montserrat text-red-300 text-xs sm:text-sm">
+                  {programError}
+                </div>
               ) : programs.length === 0 ? (
-                <div className="py-20 text-center font-montserrat text-white">Data program kerja belum tersedia.</div>
+                <div className="my-4 sm:my-8 max-w-2xl mx-auto rounded-[20px] sm:rounded-[26px] border-2 border-[#DCB06F] bg-[#F6E7CC] p-5 sm:p-8 text-center shadow-[0_6px_0_#A86D21,0_12px_24px_rgba(0,0,0,0.18)]">
+                  <div className="size-14 sm:size-18 md:size-20 rounded-full border-2 border-[#DCB06F] bg-[#870F0C] text-[#DCB06F] flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-md">
+                    <span className="material-symbols-outlined !text-[28px] sm:!text-[36px] md:!text-[40px] text-[#DCB06F]">
+                      {slug === "bph" ? "account_balance" : "assignment_turned_in"}
+                    </span>
+                  </div>
+                  <h3 className="font-asimovian text-lg sm:text-xl md:text-2xl text-[#870F0C] uppercase tracking-wide mb-2">
+                    {slug === "bph" ? "Supervisi & Tata Kelola Organisasi" : "Program Kerja Terpusat"}
+                  </h3>
+                  <p className="font-montserrat text-xs sm:text-sm text-[#32210F] leading-relaxed max-w-lg mx-auto">
+                    {slug === "bph"
+                      ? "Badan Pengurus Harian (BPH) memegang mandat kepemimpinan eksekutif, koordinasi lintas biro & departemen, serta supervisi strategis seluruh program kerja organisasi."
+                      : "Seluruh pelaksanaan program strategis dikoordinasikan secara komprehensif bersama seluruh elemen kepengurusan organisasi."}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-[#DCB06F] bg-[#870F0C] px-3.5 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold text-[#F9D253] shadow-xs">
+                    <span className="material-symbols-outlined !text-[14px] sm:!text-[16px]">verified</span>
+                    <span>{slug === "bph" ? "Badan Pengurus Harian" : "Ormawa Eksekutif PKU"}</span>
+                  </div>
+                </div>
               ) : (
                 <div
                   id="hs-carousel"
-                  className="relative my-10"
+                  className="relative my-6 sm:my-8 md:my-10"
                   data-hs-carousel='{"loadingClasses": "opacity-0", "isInfiniteLoop": true}'
                 >
-                  <div className="hs-carousel relative min-h-[360px] sm:min-h-[380px] md:min-h-[350px] w-full overflow-hidden">
+                  <div className="hs-carousel relative min-h-[380px] sm:min-h-[420px] md:min-h-96 w-full overflow-hidden md:overflow-visible">
                     {/* Carousel Body */}
                     <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap transition-transform duration-700">
                       {programs.map((program, i) => (
@@ -374,25 +400,27 @@ export default function Page() {
                         />
                       ))}
                     </div>
+                    {/* End Carousel Body */}
 
-                    {/* Carousel Controls */}
+                    {/* Navigation Buttons (Responsive: Mobile & Desktop) */}
                     {programs.length > 1 && (
                       <>
                         <button
                           type="button"
-                          className="hs-carousel-prev absolute top-1/2 left-1 sm:left-2 -translate-y-1/2 z-20 flex size-9 sm:size-11 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform"
-                          aria-label="Proker sebelumnya"
+                          className="hs-carousel-prev absolute top-1/2 left-0 sm:left-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                          aria-label="Previous Program"
                         >
-                          <span className="material-symbols-outlined !text-[28px] sm:!text-[36px]">
+                          <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
                             keyboard_arrow_left
                           </span>
                         </button>
+
                         <button
                           type="button"
-                          className="hs-carousel-next absolute top-1/2 right-1 sm:right-2 -translate-y-1/2 z-20 flex size-9 sm:size-11 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform"
-                          aria-label="Proker selanjutnya"
+                          className="hs-carousel-next absolute top-1/2 right-0 sm:right-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                          aria-label="Next Program"
                         >
-                          <span className="material-symbols-outlined !text-[28px] sm:!text-[36px]">
+                          <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
                             keyboard_arrow_right
                           </span>
                         </button>
