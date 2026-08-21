@@ -10,12 +10,12 @@ import { CONFIG } from "../../lib/config";
 
 const MENU = [
   { id: "beranda", label: "Beranda" },
-  { id: "profile", label: "Profile" },
   { id: "struktur", label: "Struktur Organisasi" },
   { id: "angkasa-care", label: "Angkasa Care" },
   { id: "store", label: "Angkasa Store" },
   { id: "angkasa-kost", label: "Angkasa Kost" },
   { id: "informasi", label: "Informasi" },
+  { id: "narahubung", label: "Narahubung" },
 ];
 
 // Color palette
