@@ -147,7 +147,7 @@ export default function ProfileSection() {
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-kapakana text-center text-[#701011] text-[clamp(1.5rem,4.5vw,54px)] md:text-[clamp(2.5rem,7vw,100px)] tracking-tight drop-shadow mb-3 md:mb-6"
+              className="font-kapakana text-center text-[#701011] text-[clamp(2.8rem,9vw,54px)] sm:text-[clamp(3.6rem,8vw,80px)] md:text-[clamp(4.5rem,7vw,100px)] tracking-tight drop-shadow-sm mb-3 md:mb-6"
             >
               Astana Angkasa
             </motion.h2>

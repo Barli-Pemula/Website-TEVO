@@ -446,9 +446,6 @@ export default function StructureHub() {
 
                 {/* ---- Level 3: Departemen (2/4/8 cols, 100% connected) ---- */}
                 <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center pb-8">
-                  {/* Central vertical trunk behind */}
-                  <div className="absolute top-0 bottom-8 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/60 z-0" />
-
                   {/* Central golden junction node */}
                   <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 size-3 rounded-full bg-[#DCB06F] z-20 shadow-sm" />
 
@@ -469,8 +466,17 @@ export default function StructureHub() {
                       return (
                         <div
                           key={dept.id}
-                          className="flex flex-col items-center w-full h-full"
+                          className="relative flex flex-col items-center w-full h-full"
                         >
+                          {/* Mobile central vertical line between rows (Row 1->2, 2->3, 3->4) */}
+                          {(i === 0 || i === 2 || i === 4) && (
+                            <div className="sm:hidden absolute top-0 -right-[4px] w-[2px] h-[calc(100%+6px)] bg-[#DCB06F] z-0 pointer-events-none" />
+                          )}
+
+                          {/* Tablet central vertical line between rows (Row 1->2) */}
+                          {i === 1 && (
+                            <div className="hidden sm:block lg:hidden absolute top-0 -right-[4px] md:-right-[5px] w-[2px] h-[calc(100%+8px)] bg-[#DCB06F] z-0 pointer-events-none" />
+                          )}
                           <motion.div
                             {...fadeUp}
                             transition={{ ...stagger, delay: 0.1 }}
