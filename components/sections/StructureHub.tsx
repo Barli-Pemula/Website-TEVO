@@ -367,19 +367,16 @@ export default function StructureHub() {
                 {/* Connector: BPH → Biro Stem */}
                 <div className="w-[2px] h-8 bg-[#DCB06F]" />
 
-                {/* ---- Level 2: Biro (centered, perfectly connected) ---- */}
+                {/* ---- Level 2: Biro (centered, 100% connected) ---- */}
                 <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center pb-8">
                   {/* Central vertical trunk behind */}
                   <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/60 z-0" />
 
-                  {/* Top horizontal connector bar for Biro */}
-                  <div className="relative w-full h-[2px] z-10">
-                    <div className="absolute top-0 left-[25%] right-[25%] md:left-[12.5%] md:right-[12.5%] h-[2px] bg-[#DCB06F]" />
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 size-2.5 rounded-full bg-[#DCB06F]" />
-                  </div>
+                  {/* Central golden junction node */}
+                  <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 size-3 rounded-full bg-[#DCB06F] z-20 shadow-sm" />
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 w-full relative z-10">
-                    {biroUnits.map((biro) => {
+                    {biroUnits.map((biro, i) => {
                       const cleanName = biro.name.replace(/biro/gi, "").trim();
                       const nameLen = cleanName.length;
                       const nameFontClass =
@@ -399,7 +396,30 @@ export default function StructureHub() {
                             onClick={() => setModal(biro)}
                             className="flex flex-col items-center cursor-pointer w-full h-full flex-1"
                           >
-                            <div className="w-[2px] h-6 bg-[#DCB06F] shrink-0" />
+                            {/* Intra-column connector: guaranteed 100% seamless intersection */}
+                            <div className="relative w-full h-6 flex justify-center shrink-0">
+                              {/* Desktop (4 cols) horizontal connector */}
+                              {i === 0 && (
+                                <div className="hidden md:block absolute top-0 left-1/2 -right-4 h-[2px] bg-[#DCB06F]" />
+                              )}
+                              {i === biroUnits.length - 1 && (
+                                <div className="hidden md:block absolute top-0 -left-4 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              )}
+                              {i > 0 && i < biroUnits.length - 1 && (
+                                <div className="hidden md:block absolute top-0 -left-4 -right-4 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Mobile (2 cols) horizontal connector */}
+                              {i % 2 === 0 ? (
+                                <div className="md:hidden absolute top-0 left-1/2 -right-3 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="md:hidden absolute top-0 -left-3 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Vertical stem */}
+                              <div className="w-[2px] h-full bg-[#DCB06F]" />
+                            </div>
+
                             <div className="group bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 transition-shadow shadow-lg hover:bg-[#DCB06F] hover:border-[#870F0C] hover:-translate-y-1 active:scale-105">
                               <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full group-hover:bg-[#DCB06F] group-hover:border-[#870F0C]">
                                 {/* Biro Logo */}
@@ -431,18 +451,15 @@ export default function StructureHub() {
                 </div>
 
                 {/* Connector: Biro → Departemen Stem */}
-                <div className="w-[2px] h-8 bg-[#DCB06F]" />
+                <div className="w-[2px] h-8 bg-[#DCB06F] relative z-10" />
 
-                {/* ---- Level 3: Departemen (2/4/8 cols, perfectly connected) ---- */}
+                {/* ---- Level 3: Departemen (2/4/8 cols, 100% connected) ---- */}
                 <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center pb-8">
-                  {/* Top horizontal connector bar for Departemen */}
-                  <div className="relative w-full h-[2px] z-10">
-                    <div className="absolute top-0 left-[25%] right-[25%] sm:left-[12.5%] sm:right-[12.5%] lg:left-[6.25%] lg:right-[6.25%] h-[2px] bg-[#DCB06F]" />
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 size-2.5 rounded-full bg-[#DCB06F]" />
-                  </div>
+                  {/* Central golden junction node */}
+                  <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 size-3 rounded-full bg-[#DCB06F] z-20 shadow-sm" />
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 md:gap-2 w-full relative z-10">
-                    {deptUnits.map((dept) => {
+                    {deptUnits.map((dept, i) => {
                       const cleanDeptName = dept.name
                         .replace(/departemen/gi, "")
                         .trim();
@@ -466,7 +483,37 @@ export default function StructureHub() {
                             onClick={() => setModal(dept)}
                             className="flex flex-col flex-1 h-full w-full items-center cursor-pointer"
                           >
-                            <div className="w-[2px] h-6 bg-[#DCB06F] shrink-0" />
+                            {/* Intra-column connector: guaranteed 100% seamless intersection */}
+                            <div className="relative w-full h-6 flex justify-center shrink-0">
+                              {/* Desktop (8 cols) horizontal connector */}
+                              {i === 0 ? (
+                                <div className="hidden lg:block absolute top-0 left-1/2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              ) : i === deptUnits.length - 1 ? (
+                                <div className="hidden lg:block absolute top-0 -left-2 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="hidden lg:block absolute top-0 -left-2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Tablet (4 cols) horizontal connector */}
+                              {i % 4 === 0 ? (
+                                <div className="hidden sm:block lg:hidden absolute top-0 left-1/2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              ) : i % 4 === 3 ? (
+                                <div className="hidden sm:block lg:hidden absolute top-0 -left-2 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="hidden sm:block lg:hidden absolute top-0 -left-2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Mobile (2 cols) horizontal connector */}
+                              {i % 2 === 0 ? (
+                                <div className="sm:hidden absolute top-0 left-1/2 -right-2 h-[2px] bg-[#DCB06F]" />
+                              ) : (
+                                <div className="sm:hidden absolute top-0 -left-2 right-1/2 h-[2px] bg-[#DCB06F]" />
+                              )}
+
+                              {/* Vertical stem */}
+                              <div className="w-[2px] h-full bg-[#DCB06F]" />
+                            </div>
+
                             <div className="group bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 shadow-lg transition-shadow hover:bg-[#DCB06F] hover:border-[#2C430B] hover:-translate-y-1 active:scale-105">
                               <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px] group-hover:bg-[#DCB06F] group-hover:border-[#2C430B]">
                                 {/* Departemen Logo */}
