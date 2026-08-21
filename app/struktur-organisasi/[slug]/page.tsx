@@ -84,11 +84,11 @@ function Proker({ title, summary, category, current, total }: Program) {
       <div className="relative overflow-visible rounded-[24px] sm:rounded-[30px] md:rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-8 md:px-14 pb-6 sm:pb-7 pt-14 sm:pt-16 md:pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
         {/* cekungan visual */}
         <div
-          className="absolute left-1/2 top-0 h-[105px] w-[280px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] scale-[0.68] sm:scale-[0.82] md:scale-100 origin-top"
+          className="absolute left-1/2 top-0 h-[100px] w-[280px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] scale-[0.68] sm:scale-[0.82] md:scale-100 origin-top"
           aria-hidden="true"
           style={{
             clipPath:
-              "path('M0 0 H280 V20 C220 20 205 38 190 58 C170 85 145 103 120 103 C95 103 70 85 50 58 C35 38 20 20 0 20 Z')",
+              "path('M0 0 H280 V20 H260 C220 20 195 100 140 100 C85 100 60 20 20 20 H0 Z')",
           }}
         />
         {/* LINGKARAN ICON */}
