@@ -81,10 +81,10 @@ function Proker({ title, summary, category, current, total }: Program) {
   const icon = categoryIcons[category.slug]
   return (
     <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-16">
-      <div className="relative overflow-visible rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-8 pb-7 pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] sm:px-14">
+      <div className="relative overflow-visible rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] px-8 pb-7 pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] sm:px-14">
         {/* cekungan visual */}
         <div
-          className="absolute left-1/2 top-0 h-[105px] w-[240px] -translate-x-1/2 -translate-y-[2px] bg-[#28470B]"
+          className="absolute left-1/2 top-0 h-[105px] w-[240px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B]"
           // className="absolute left-1/2 top-0 h-24 w-40 -translate-x-1/2 -translate-y-[13%] bg-[#28470B]"
           aria-hidden="true"
           // style={{ clipPath: "path('M0 0 H160 V24 C160 69 124 96 80 96 C36 96 0 69 0 24 Z')", }}
