@@ -80,8 +80,8 @@ interface Member {
 function Proker({ title, summary, category, current, total }: Program) {
   const icon = categoryIcons[category.slug]
   return (
-    <section className="text-center hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-14 sm:pt-16 px-2 sm:px-4">
-      <div className="relative overflow-visible rounded-[26px] sm:rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-10 md:px-14 pb-6 sm:pb-8 pt-14 sm:pt-18 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
+    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-12 sm:pt-14 md:pt-16 px-1 sm:px-3 flex items-center justify-center">
+      <div className="relative overflow-visible rounded-[24px] sm:rounded-[30px] md:rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] w-[88%] sm:w-[86%] md:w-full h-[310px] sm:h-[340px] md:h-auto px-4 sm:px-8 md:px-14 pb-5 sm:pb-6 md:pb-7 pt-14 sm:pt-16 md:pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] flex flex-col justify-between items-center mx-auto">
         {/* Cekungan visual */}
         <div
           className="absolute left-1/2 top-0 h-[100px] w-[280px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] scale-[0.68] sm:scale-[0.82] md:scale-100 origin-top"
