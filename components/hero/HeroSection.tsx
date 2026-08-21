@@ -305,7 +305,7 @@ export default function HeroSection() {
 
         {/* Title — positioned at sword center, emerges from within */}
         <div ref={titleRef} className={styles.heroTitle}>
-          <h1>Astana Angkasa</h1>
+          <h1 className="[-webkit-text-stroke:.5px_#DCB06F] md:[-webkit-text-stroke:2px_#DCB06F]">Astana Angkasa</h1>
           <p>Menata Asa, Wujudkan Karya, Menjulang ke Angkasa.</p>
         </div>
 

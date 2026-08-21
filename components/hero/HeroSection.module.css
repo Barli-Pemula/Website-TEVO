@@ -143,14 +143,14 @@
 
 .heroTitle p {
   font-family: var(--font-heading);
-  font-size: clamp(0.75rem, 1.6vw, 1.25rem);
+  font-size: clamp(0.50rem, 1.6vw, 1rem);
   font-weight: 700;
   letter-spacing: 0.4em;
   color: #FDF6E2;
   margin-top: 1rem;
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-  background: rgba(18, 12, 8, 0.75);
+  background: rgba(18, 12, 8, 0.50);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1.5px solid rgba(220, 176, 111, 0.6);
