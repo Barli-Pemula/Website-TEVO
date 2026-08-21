@@ -120,7 +120,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
     <AnimatePresence>
       {unit && (
         <motion.div
-          className="fixed inset-0 z-[999] flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm md:p-8"
+          className="fixed inset-0 z-[999] flex items-center justify-center overflow-y-auto bg-black/60 p-3 sm:p-6 md:p-8 backdrop-blur-sm"
           initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
           animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
           exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
@@ -128,7 +128,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
           onClick={() => setUnit(null)}
         >
           <motion.div
-            className="relative my-auto w-full max-w-[760px]"
+            className="relative my-auto w-full max-w-[760px] flex flex-col items-center px-2 sm:px-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{
@@ -140,20 +140,20 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
           >
             {/* Gulungan atas */}
             <motion.div
-              className="relative z-30 mx-auto h-14 w-[calc(100%+36px)] rounded-full bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
+              className="relative z-30 mx-auto h-12 sm:h-14 w-full rounded-full bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
               initial={{ y: 38 }}
               animate={{ y: 0 }}
               exit={{ y: 38, transition: { delay: 0.2, duration: 0.35 } }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <div className="absolute inset-x-8 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
-              <div className="absolute left-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
-              <div className="absolute right-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute inset-x-6 sm:inset-x-8 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
+              <div className="absolute left-2 top-1/2 size-7 sm:size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute right-2 top-1/2 size-7 sm:size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
             </motion.div>
 
             {/* Kertas */}
             <motion.div
-              className="relative z-20 mx-5 overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+              className="relative z-20 w-[calc(100%-16px)] sm:w-[calc(100%-24px)] mx-auto overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               initial={{ height: 0, opacity: 0.85 }}
               animate={{ height: "min(70vh, 620px)", opacity: 1 }}
               exit={{
@@ -175,7 +175,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
               />
 
               <motion.div
-                className="relative h-full overflow-y-auto px-5 py-8 sm:px-12 sm:py-10 text-[#4B2B18]"
+                className="relative h-full overflow-y-auto px-5 py-8 sm:px-12 sm:py-10 text-[#4B2B18] flex flex-col"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{
@@ -188,17 +188,17 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                 <button
                   type="button"
                   onClick={() => setUnit(null)}
-                  className="absolute right-5 top-5 z-20 flex size-10 items-center justify-center rounded-full border border-[#9B5C25] bg-[#F1D49A] text-[#701011] shadow-md transition hover:scale-105 hover:bg-[#E7BF76]"
+                  className="absolute right-4 top-4 sm:right-5 sm:top-5 z-20 flex size-9 sm:size-10 items-center justify-center rounded-full border border-[#9B5C25] bg-[#F1D49A] text-[#701011] shadow-md transition hover:scale-105 hover:bg-[#E7BF76] cursor-pointer"
                   aria-label="Tutup modal"
                 >
-                  <X className="size-5" />
+                  <X className="size-4 sm:size-5" />
                 </button>
 
-                <div className="pr-12">
-                  <p className="mb-2 text-sm font-semibold font-montserrat uppercase tracking-[0.2em] text-[#9B5C25]">
+                <div className="pr-10 sm:pr-12 text-center sm:text-left">
+                  <p className="mb-2 text-xs sm:text-sm font-semibold font-montserrat uppercase tracking-[0.2em] text-[#9B5C25]">
                     Struktur Organisasi
                   </p>
-                  <h2 className="text-3xl font-bold font-asimovian uppercase leading-tight text-[#701011] sm:text-5xl">
+                  <h2 className="text-2xl font-bold font-asimovian uppercase leading-tight text-[#701011] sm:text-4xl md:text-5xl">
                     {unit.unitType === "BIRO"
                       ? `Biro ${unit.name.replace(/biro/gi, "").trim()}`
                       : unit.unitType === "DEPARTEMEN"
@@ -207,33 +207,24 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                   </h2>
                 </div>
 
-                <div className="my-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
+                <div className="my-5 sm:my-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
 
-                <p className="text-justify text-base leading-relaxed sm:text-md font-montserrat">
-                  {unit.description} {unit.focusArea}
-                </p>
+                <div className="flex-1 flex flex-col justify-start">
+                  <p className="text-justify sm:text-left text-sm sm:text-base leading-relaxed font-montserrat">
+                    {unit.description} {unit.focusArea}
+                  </p>
+                </div>
 
                 {/* Logo + Cap lilin */}
-                <div className="mt-10 flex justify-end items-center gap-6">
-                  {/* Unit Logo */}
-                  {/* <div className="relative size-28 rounded-full border-3 border-[#DCB06F] bg-[#FBF5EA] flex items-center justify-center overflow-hidden shadow-md">
-                    <Image
-                      src={logoPath}
-                      alt={unit.name}
-                      width={90}
-                      height={90}
-                      className="object-contain p-2"
-                    />
-                  </div> */}
-
+                <div className="mt-8 sm:mt-10 flex justify-center sm:justify-end items-center gap-6">
                   <div className="relative">
                     <motion.button
                       whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
-                      className="group flex size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)]"
+                      className="group flex size-18 sm:size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)] cursor-pointer"
                       onClick={() => handleBreakSeal(unit)}
                     >
-                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[10px] uppercase text-center leading-tight">
+                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[10px] sm:text-[11px] uppercase text-center leading-tight px-1">
                         Lihat Detail
                       </span>
                       <Image
@@ -241,7 +232,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                         alt={unit.name}
                         width={64}
                         height={64}
-                        className="hidden group-hover:block object-contain"
+                        className="hidden group-hover:block object-contain p-1"
                       />
                     </motion.button>
                   </div>
@@ -251,15 +242,15 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
 
             {/* Gulungan bawah */}
             <motion.div
-              className="relative z-30 mx-auto h-14 w-[calc(100%+36px)] rounded-full border-2 border-[#9B5C25] bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
+              className="relative z-30 mx-auto h-12 sm:h-14 w-full rounded-full border-2 border-[#9B5C25] bg-gradient-to-b from-[#F1C578] via-[#C98E43] to-[#9B5C25] shadow-[0_10px_25px_rgba(0,0,0,0.35)]"
               initial={{ y: -38 }}
               animate={{ y: 0 }}
               exit={{ y: -38, transition: { delay: 0.2, duration: 0.35 } }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <div className="absolute inset-x-8 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
-              <div className="absolute left-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
-              <div className="absolute right-2 top-1/2 size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute inset-x-6 sm:inset-x-8 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[#744018]/50" />
+              <div className="absolute left-2 top-1/2 size-7 sm:size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
+              <div className="absolute right-2 top-1/2 size-7 sm:size-9 -translate-y-1/2 rounded-full border-2 border-[#75411B] bg-[#C8893E]" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -455,6 +446,9 @@ export default function StructureHub() {
 
                 {/* ---- Level 3: Departemen (2/4/8 cols, 100% connected) ---- */}
                 <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center pb-8">
+                  {/* Central vertical trunk behind */}
+                  <div className="absolute top-0 bottom-8 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/60 z-0" />
+
                   {/* Central golden junction node */}
                   <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 size-3 rounded-full bg-[#DCB06F] z-20 shadow-sm" />
 

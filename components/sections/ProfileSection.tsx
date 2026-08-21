@@ -172,18 +172,18 @@ export default function ProfileSection() {
 
         {/* Subsection 4: Visi */}
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 mb-10">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px]">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px] mb-6 md:mb-10">
             <div />
 
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#2C430B] leading-none mb-10"
+              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#2C430B] leading-none"
             >
               Visi
             </motion.h2>
 
-            <div className="h-[5px] bg-[#2C430B]" />
+            <div className="h-[4px] md:h-[5px] bg-[#2C430B] rounded-full" />
           </div>
           <motion.p
             {...fadeUp}
@@ -196,12 +196,12 @@ export default function ProfileSection() {
 
         {/* Subsection 5: Misi */}
         <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 pb-16 md:pb-30">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px]">
-            <div className="h-[5px] bg-[#701011]" />
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] md:gap-[50px] mb-6 md:mb-10">
+            <div className="h-[4px] md:h-[5px] bg-[#701011] rounded-full" />
             <motion.h2
               {...fadeUp}
               transition={stagger}
-              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#701011] leading-none text-center mb-10"
+              className="font-asimovian uppercase text-[clamp(2rem,8vw,64px)] text-[#701011] leading-none text-center"
             >
               Misi
             </motion.h2>
