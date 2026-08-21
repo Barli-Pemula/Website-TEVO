@@ -364,21 +364,24 @@ export default function StructureHub() {
                   </motion.button>
                 ))}
 
-                {/* Connector: BPH → Biro */}
-                <div className="w-[2px] h-8 bg-[#DCB06F]/60" />
-                <div className="w-1/2 md:w-5/9 h-[2px] bg-[#DCB06F]/60 relative">
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]" />
-                </div>
+                {/* Connector: BPH → Biro Stem */}
+                <div className="w-[2px] h-8 bg-[#DCB06F]" />
 
-                {/* ---- Level 2: Biro (centered, consistent format) ---- */}
-                <div className="relative w-full flex flex-col items-center pb-8">
-                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/40 z-0" />
+                {/* ---- Level 2: Biro (centered, perfectly connected) ---- */}
+                <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center pb-8">
+                  {/* Central vertical trunk behind */}
+                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-[#DCB06F]/60 z-0" />
 
-                  <div className="flex flex-wrap justify-center gap-2 min-[400px]:gap-3 md:gap-4 w-full relative z-10">
+                  {/* Top horizontal connector bar for Biro */}
+                  <div className="relative w-full h-[2px] z-10">
+                    <div className="absolute top-0 left-[25%] right-[25%] md:left-[12.5%] md:right-[12.5%] h-[2px] bg-[#DCB06F]" />
+                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 size-2.5 rounded-full bg-[#DCB06F]" />
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 w-full relative z-10">
                     {biroUnits.map((biro) => {
                       const cleanName = biro.name.replace(/biro/gi, "").trim();
                       const nameLen = cleanName.length;
-                      // Tiered font sizing: short / medium / long
                       const nameFontClass =
                         nameLen <= 9
                           ? "text-[12px] sm:text-[14px] md:text-[16px]"
@@ -388,7 +391,7 @@ export default function StructureHub() {
                       return (
                         <div
                           key={biro.id}
-                          className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[150px] md:w-[155px] lg:w-[210px]"
+                          className="flex flex-col items-center w-full"
                         >
                           <motion.div
                             {...fadeUp}
@@ -396,7 +399,7 @@ export default function StructureHub() {
                             onClick={() => setModal(biro)}
                             className="flex flex-col items-center cursor-pointer w-full h-full flex-1"
                           >
-                            <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
+                            <div className="w-[2px] h-6 bg-[#DCB06F] shrink-0" />
                             <div className="group bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 transition-shadow shadow-lg hover:bg-[#DCB06F] hover:border-[#870F0C] hover:-translate-y-1 active:scale-105">
                               <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full group-hover:bg-[#DCB06F] group-hover:border-[#870F0C]">
                                 {/* Biro Logo */}
@@ -422,26 +425,28 @@ export default function StructureHub() {
                             </div>
                           </motion.div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
 
-                {/* Connector: Biro → Departemen */}
-                <div className="w-[2px] h-4 bg-[#DCB06F]/60" />
-                <div className="w-1/2 md:w-8/9 h-[2px] bg-[#DCB06F]/60 relative">
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#DCB06F]" />
-                </div>
+                {/* Connector: Biro → Departemen Stem */}
+                <div className="w-[2px] h-8 bg-[#DCB06F]" />
 
-                {/* ---- Level 3: Departemen (2/4/8 cols) ---- */}
-                <div className="relative w-full flex flex-col items-center pb-8">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1 md:gap-2 w-full relative z-10">
+                {/* ---- Level 3: Departemen (2/4/8 cols, perfectly connected) ---- */}
+                <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center pb-8">
+                  {/* Top horizontal connector bar for Departemen */}
+                  <div className="relative w-full h-[2px] z-10">
+                    <div className="absolute top-0 left-[25%] right-[25%] sm:left-[12.5%] sm:right-[12.5%] lg:left-[6.25%] lg:right-[6.25%] h-[2px] bg-[#DCB06F]" />
+                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 size-2.5 rounded-full bg-[#DCB06F]" />
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 md:gap-2 w-full relative z-10">
                     {deptUnits.map((dept) => {
                       const cleanDeptName = dept.name
                         .replace(/departemen/gi, "")
                         .trim();
                       const deptNameLen = cleanDeptName.length;
-                      // Tiered font sizing for desktop/tablet
                       const deptNameFontClass =
                         deptNameLen <= 10
                           ? "text-[11px] sm:text-[13px] md:text-[14px]"
@@ -461,7 +466,7 @@ export default function StructureHub() {
                             onClick={() => setModal(dept)}
                             className="flex flex-col flex-1 h-full w-full items-center cursor-pointer"
                           >
-                            <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
+                            <div className="w-[2px] h-6 bg-[#DCB06F] shrink-0" />
                             <div className="group bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 shadow-lg transition-shadow hover:bg-[#DCB06F] hover:border-[#2C430B] hover:-translate-y-1 active:scale-105">
                               <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px] group-hover:bg-[#DCB06F] group-hover:border-[#2C430B]">
                                 {/* Departemen Logo */}
@@ -487,7 +492,7 @@ export default function StructureHub() {
                             </div>
                           </motion.div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
