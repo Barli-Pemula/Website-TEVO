@@ -81,7 +81,7 @@ function Proker({ title, summary, category, current, total }: Program) {
   const icon = category?.slug && categoryIcons[category.slug] ? categoryIcons[category.slug] : "event_available";
 
   return (
-    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-14 sm:pt-16 px-2 sm:px-4">
+    <section className="text-center hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-14 sm:pt-16 px-2 sm:px-4">
       <div className="relative overflow-visible rounded-[26px] sm:rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-10 md:px-14 pb-6 sm:pb-8 pt-14 sm:pt-18 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
         {/* Cekungan visual */}
         <div
