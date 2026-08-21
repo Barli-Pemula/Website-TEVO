@@ -80,8 +80,8 @@ interface Member {
 function Proker({ title, summary, category, current, total }: Program) {
   const icon = categoryIcons[category.slug]
   return (
-    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-12 sm:pt-14 md:pt-16 px-1 sm:px-3">
-      <div className="relative overflow-visible rounded-[24px] sm:rounded-[30px] md:rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-8 md:px-14 pb-6 sm:pb-7 pt-14 sm:pt-16 md:pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
+    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-12 sm:pt-14 md:pt-16 px-1 sm:px-3 flex items-center justify-center">
+      <div className="relative overflow-visible rounded-[24px] sm:rounded-[30px] md:rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] w-[88%] sm:w-[86%] md:w-full h-[310px] sm:h-[340px] md:h-auto px-4 sm:px-8 md:px-14 pb-5 sm:pb-6 md:pb-7 pt-14 sm:pt-16 md:pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] flex flex-col justify-between items-center mx-auto">
         {/* cekungan visual */}
         <div
           className="absolute left-1/2 top-0 h-[100px] w-[280px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] scale-[0.68] sm:scale-[0.82] md:scale-100 origin-top"
@@ -99,15 +99,17 @@ function Proker({ title, summary, category, current, total }: Program) {
         </div>
 
         {/* Konten */}
-        <div className="relative z-10 mt-4 sm:mt-6 md:mt-8 font-montserrat">
-          <h3 className="inline-block border-b-2 border-[#A90900] pb-1 font-bold text-[#A90900] text-lg sm:text-2xl md:text-[clamp(22px,2.2vw,32px)]">
-            {title}
-          </h3>
-          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-[#32210F]">
-            {summary}
-          </p>
+        <div className="relative z-10 mt-3 sm:mt-5 md:mt-8 font-montserrat flex flex-col items-center justify-between flex-1 w-full h-[calc(100%-10px)] md:h-auto">
+          <div className="flex flex-col items-center justify-center w-full flex-1 my-auto">
+            <h3 className="inline-block border-b-2 border-[#A90900] pb-0.5 font-bold text-[#A90900] text-base sm:text-xl md:text-[clamp(22px,2.2vw,32px)] text-center line-clamp-2 md:line-clamp-none">
+              {title}
+            </h3>
+            <p className="mx-auto mt-2 sm:mt-3 md:mt-4 max-w-2xl text-[11px] sm:text-xs md:text-base leading-relaxed text-[#32210F] text-center line-clamp-4 sm:line-clamp-5 md:line-clamp-none overflow-hidden text-ellipsis">
+              {summary}
+            </p>
+          </div>
 
-          <div className="mx-auto shadow-lg mt-4 sm:mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-5 sm:px-7 py-1.5 sm:py-2 text-[#870F0C] text-xs sm:text-sm font-semibold shadow-[0_4px_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
+          <div className="mx-auto shadow-md mt-2 sm:mt-4 md:mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-5 sm:px-7 py-1 sm:py-2 text-[#870F0C] text-xs sm:text-sm font-semibold shadow-[0_4px_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)] shrink-0">
             <span className="me-1">{current}</span>
             /
             <span className="ms-1">{total}</span>
