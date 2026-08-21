@@ -128,7 +128,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
           onClick={() => setUnit(null)}
         >
           <motion.div
-            className="relative my-auto w-full max-w-[760px] flex flex-col items-center px-2 sm:px-4"
+            className="relative my-auto w-full max-w-[580px] flex flex-col items-center px-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{
@@ -153,9 +153,9 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
 
             {/* Kertas */}
             <motion.div
-              className="relative z-20 w-[calc(100%-16px)] sm:w-[calc(100%-24px)] mx-auto overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+              className="relative z-20 w-[calc(100%-32px)] sm:w-[calc(100%-44px)] mx-auto overflow-hidden border-x-2 border-[#B77A38] bg-[#F5E2B7] shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               initial={{ height: 0, opacity: 0.85 }}
-              animate={{ height: "min(70vh, 620px)", opacity: 1 }}
+              animate={{ height: "min(70vh, 560px)", opacity: 1 }}
               exit={{
                 height: 0,
                 opacity: 0.85,
@@ -175,7 +175,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
               />
 
               <motion.div
-                className="relative h-full overflow-y-auto px-5 py-8 sm:px-12 sm:py-10 text-[#4B2B18] flex flex-col"
+                className="relative h-full overflow-y-auto px-5 py-7 sm:px-9 sm:py-8 text-[#4B2B18] flex flex-col"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{
@@ -188,17 +188,17 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                 <button
                   type="button"
                   onClick={() => setUnit(null)}
-                  className="absolute right-4 top-4 sm:right-5 sm:top-5 z-20 flex size-9 sm:size-10 items-center justify-center rounded-full border border-[#9B5C25] bg-[#F1D49A] text-[#701011] shadow-md transition hover:scale-105 hover:bg-[#E7BF76] cursor-pointer"
+                  className="absolute right-3.5 top-3.5 sm:right-4 sm:top-4 z-20 flex size-8 sm:size-9 items-center justify-center rounded-full border border-[#9B5C25] bg-[#F1D49A] text-[#701011] shadow-md transition hover:scale-105 hover:bg-[#E7BF76] cursor-pointer"
                   aria-label="Tutup modal"
                 >
-                  <X className="size-4 sm:size-5" />
+                  <X className="size-4" />
                 </button>
 
-                <div className="pr-10 sm:pr-12 text-center sm:text-left">
-                  <p className="mb-2 text-xs sm:text-sm font-semibold font-montserrat uppercase tracking-[0.2em] text-[#9B5C25]">
+                <div className="pr-10 sm:pr-12 text-left">
+                  <p className="mb-1.5 text-xs font-semibold font-montserrat uppercase tracking-[0.2em] text-[#9B5C25]">
                     Struktur Organisasi
                   </p>
-                  <h2 className="text-2xl font-bold font-asimovian uppercase leading-tight text-[#701011] sm:text-4xl md:text-5xl">
+                  <h2 className="text-xl sm:text-3xl md:text-4xl font-bold font-asimovian uppercase leading-tight text-[#701011]">
                     {unit.unitType === "BIRO"
                       ? `Biro ${unit.name.replace(/biro/gi, "").trim()}`
                       : unit.unitType === "DEPARTEMEN"
@@ -207,31 +207,31 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                   </h2>
                 </div>
 
-                <div className="my-5 sm:my-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
+                <div className="my-4 sm:my-5 h-[2px] w-full bg-gradient-to-r from-transparent via-[#B77A38] to-transparent" />
 
                 <div className="flex-1 flex flex-col justify-start">
-                  <p className="text-justify sm:text-left text-sm sm:text-base leading-relaxed font-montserrat">
+                  <p className="text-justify text-sm sm:text-base leading-relaxed font-montserrat">
                     {unit.description} {unit.focusArea}
                   </p>
                 </div>
 
                 {/* Logo + Cap lilin */}
-                <div className="mt-8 sm:mt-10 flex justify-center sm:justify-end items-center gap-6">
+                <div className="mt-6 sm:mt-8 flex justify-end items-center gap-4">
                   <div className="relative">
                     <motion.button
                       whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
-                      className="group flex size-18 sm:size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)] cursor-pointer"
+                      className="group flex size-16 sm:size-18 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)] cursor-pointer"
                       onClick={() => handleBreakSeal(unit)}
                     >
-                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[10px] sm:text-[11px] uppercase text-center leading-tight px-1">
+                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[9px] sm:text-[10px] uppercase text-center leading-tight px-1">
                         Lihat Detail
                       </span>
                       <Image
                         src={unit.logoUrl}
                         alt={unit.name}
-                        width={64}
-                        height={64}
+                        width={56}
+                        height={56}
                         className="hidden group-hover:block object-contain p-1"
                       />
                     </motion.button>
