@@ -13,7 +13,7 @@ export const CONFIG = {
   storeUrl: "https://angkasastore.ormawaeksekutifpku.com",
 
   // Angkasa Kost subdomain
-  angkasaKostUrl: "https://angkasakost.ormawaeksekutifpku.com/",
+  angkasaKostUrl: "https://ipb.link/jaslab-angkasa1",
 
   /** Narahubung */
   contact: {
