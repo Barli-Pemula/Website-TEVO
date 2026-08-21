@@ -216,7 +216,7 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                 {/* Logo + Cap lilin */}
                 <div className="mt-10 flex justify-end items-center gap-6">
                   {/* Unit Logo */}
-                  <div className="relative size-28 rounded-full border-3 border-[#DCB06F] bg-[#FBF5EA] flex items-center justify-center overflow-hidden shadow-md">
+                  {/* <div className="relative size-28 rounded-full border-3 border-[#DCB06F] bg-[#FBF5EA] flex items-center justify-center overflow-hidden shadow-md">
                     <Image
                       src={logoPath}
                       alt={unit.name}
@@ -224,26 +224,25 @@ function ModalCardBirDep({ unit, setUnit }: ModalCardBirDepProps) {
                       height={90}
                       className="object-contain p-2"
                     />
-                  </div>
+                  </div> */}
 
                   <div className="relative">
-                    <motion.div
-                      animate={{ x: [0, 8, 0] }}
-                      transition={{ repeat: Infinity, duration: 0.8 }}
-                      className="hidden md:block absolute right-24 top-1/2 -translate-y-1/2 whitespace-nowrap font-montserrat uppercase text-xl text-[#A90900]"
-                    >
-                      Tekan Logo Ini →
-                    </motion.div>
-
                     <motion.button
                       whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
-                      className="flex size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)]"
+                      className="group flex size-20 rotate-[-8deg] items-center justify-center rounded-full border-4 border-[#7E0909] bg-[#A90900] shadow-[0_8px_16px_rgba(0,0,0,.28)]"
                       onClick={() => handleBreakSeal(unit)}
                     >
-                      <span className="text-white font-montserrat font-bold text-[10px] uppercase text-center leading-tight">
+                      <span className="group-hover:hidden text-white font-montserrat font-bold text-[10px] uppercase text-center leading-tight">
                         Lihat Detail
                       </span>
+                      <Image
+                        src={unit.logoUrl}
+                        alt={unit.name}
+                        width={64}
+                        height={64}
+                        className="hidden group-hover:block object-contain"
+                      />
                     </motion.button>
                   </div>
                 </div>
@@ -281,7 +280,7 @@ export default function StructureHub() {
           method: "GET",
           url: "/api/nexus/public/tevo/birdeps",
         };
-        
+
         const response = await axios.request(getBirdep);
         setUnit(response.data.data.birdeps);
         console.log(response.data.data.birdeps);
@@ -387,43 +386,44 @@ export default function StructureHub() {
                             ? "text-[11px] sm:text-[13px] md:text-[14px]"
                             : "text-[10px] sm:text-[11px] md:text-[12px]";
                       return (
-                      <div
-                        key={biro.id}
-                        className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[150px] md:w-[155px] lg:w-[210px]"
-                      >
-                        <motion.div
-                          {...fadeUp}
-                          transition={{ ...stagger, delay: 0.1 }}
-                          onClick={() => setModal(biro)}
-                          className="flex flex-col items-center cursor-pointer w-full h-full flex-1"
+                        <div
+                          key={biro.id}
+                          className="flex flex-col items-center w-[calc(50%-8px)] min-[400px]:w-[140px] sm:w-[150px] md:w-[155px] lg:w-[210px]"
                         >
-                          <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
-                          <div className="group bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 transition-shadow shadow-lg hover:bg-[#DCB06F] hover:border-[#870F0C] hover:-translate-y-1 active:scale-105">
-                            <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full group-hover:bg-[#DCB06F] group-hover:border-[#870F0C]">
-                              {/* Biro Logo */}
-                              <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-2 border-[#F9D253]/30 bg-[#701011] group-hover:bg-[#F6E7CC] group-hover:border-[#870F0C]/50 flex items-center justify-center overflow-hidden">
-                                <Image
-                                  src={biro.logoUrl}
-                                  alt={biro.name}
-                                  width={50}
-                                  height={50}
-                                  className="object-contain p-1"
-                                />
-                              </div>
-                              <div className="text-center font-montserrat uppercase leading-tight px-1">
-                                <span className="text-[#F9D253] font-semibold text-[11px] sm:text-[13px] md:text-[14px] group-hover:text-white">
-                                  Biro
-                                </span>
-                                <br />
-                                <span className={`text-white font-semibold ${nameFontClass} group-hover:text-[#870F0C]`}>
-                                  {cleanName}
-                                </span>
+                          <motion.div
+                            {...fadeUp}
+                            transition={{ ...stagger, delay: 0.1 }}
+                            onClick={() => setModal(biro)}
+                            className="flex flex-col items-center cursor-pointer w-full h-full flex-1"
+                          >
+                            <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
+                            <div className="group bg-[#870F0C] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] w-full h-full flex flex-col flex-1 transition-shadow shadow-lg hover:bg-[#DCB06F] hover:border-[#870F0C] hover:-translate-y-1 active:scale-105">
+                              <div className="flex flex-col items-center justify-center gap-1 bg-[#870F0C] px-2 py-2 border-2 border-[#DCB06F] rounded-[10px] h-full group-hover:bg-[#DCB06F] group-hover:border-[#870F0C]">
+                                {/* Biro Logo */}
+                                <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-2 border-[#F9D253]/30 bg-[#701011] group-hover:bg-[#F6E7CC] group-hover:border-[#870F0C]/50 flex items-center justify-center overflow-hidden">
+                                  <Image
+                                    src={biro.logoUrl}
+                                    alt={biro.name}
+                                    width={50}
+                                    height={50}
+                                    className="object-contain p-1"
+                                  />
+                                </div>
+                                <div className="text-center font-montserrat uppercase leading-tight px-1">
+                                  <span className="text-[#F9D253] font-semibold text-[11px] sm:text-[13px] md:text-[14px] group-hover:text-white">
+                                    Biro
+                                  </span>
+                                  <br />
+                                  <span className={`text-white font-semibold ${nameFontClass} group-hover:text-[#870F0C]`}>
+                                    {cleanName}
+                                  </span>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      </div>
-                    )})}
+                          </motion.div>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
 
@@ -451,43 +451,44 @@ export default function StructureHub() {
                               ? "text-[9px] sm:text-[11px] md:text-[11px]"
                               : "text-[9px] sm:text-[10px] md:text-[10px]";
                       return (
-                      <div
-                        key={dept.id}
-                        className="flex flex-col items-center w-full h-full"
-                      >
-                        <motion.div
-                          {...fadeUp}
-                          transition={{ ...stagger, delay: 0.1 }}
-                          onClick={() => setModal(dept)}
-                          className="flex flex-col flex-1 h-full w-full items-center cursor-pointer"
+                        <div
+                          key={dept.id}
+                          className="flex flex-col items-center w-full h-full"
                         >
-                          <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
-                          <div className="group bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 shadow-lg transition-shadow hover:bg-[#DCB06F] hover:border-[#2C430B] hover:-translate-y-1 active:scale-105">
-                            <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px] group-hover:bg-[#DCB06F] group-hover:border-[#2C430B]">
-                              {/* Departemen Logo */}
-                              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#F9D253]/20 bg-[#1A2E06] flex items-center justify-center overflow-hidden mb-1 group-hover:bg-[#F6E7CC] group-hover:border-[#2C430B]/50">
-                                <Image
-                                  src={dept.logoUrl}
-                                  alt={dept.name}
-                                  width={40}
-                                  height={40}
-                                  className="object-contain p-1"
-                                />
-                              </div>
-                              <div className="font-montserrat uppercase leading-tight mt-1 mb-1 text-center">
-                                <span className="text-[#F9D253] font-semibold text-[10px] md:text-[14px] group-hover:text-white">
-                                  Departemen
-                                </span>
-                                <br />
-                                <span className={`text-white font-semibold ${deptNameFontClass} group-hover:text-[#2C430B]`}>
-                                  {cleanDeptName}
-                                </span>
+                          <motion.div
+                            {...fadeUp}
+                            transition={{ ...stagger, delay: 0.1 }}
+                            onClick={() => setModal(dept)}
+                            className="flex flex-col flex-1 h-full w-full items-center cursor-pointer"
+                          >
+                            <div className="w-[2px] h-6 bg-[#DCB06F]/60 shrink-0" />
+                            <div className="group bg-[#2C430B] p-[3px] text-[#F9D253] border-1 border-[#DCB06F] rounded-[10px] h-full w-full flex flex-1 shadow-lg transition-shadow hover:bg-[#DCB06F] hover:border-[#2C430B] hover:-translate-y-1 active:scale-105">
+                              <div className="flex flex-col justify-center items-center w-full bg-[#2C430B] p-1 md:p-2 border-2 border-[#DCB06F] rounded-[10px] group-hover:bg-[#DCB06F] group-hover:border-[#2C430B]">
+                                {/* Departemen Logo */}
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#F9D253]/20 bg-[#1A2E06] flex items-center justify-center overflow-hidden mb-1 group-hover:bg-[#F6E7CC] group-hover:border-[#2C430B]/50">
+                                  <Image
+                                    src={dept.logoUrl}
+                                    alt={dept.name}
+                                    width={40}
+                                    height={40}
+                                    className="object-contain p-1"
+                                  />
+                                </div>
+                                <div className="font-montserrat uppercase leading-tight mt-1 mb-1 text-center">
+                                  <span className="text-[#F9D253] font-semibold text-[10px] md:text-[14px] group-hover:text-white">
+                                    Departemen
+                                  </span>
+                                  <br />
+                                  <span className={`text-white font-semibold ${deptNameFontClass} group-hover:text-[#2C430B]`}>
+                                    {cleanDeptName}
+                                  </span>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      </div>
-                    )})}
+                          </motion.div>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               </div>
