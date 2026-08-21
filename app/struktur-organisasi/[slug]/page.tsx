@@ -80,37 +80,37 @@ interface Member {
 function Proker({ title, summary, category, current, total }: Program) {
   const icon = categoryIcons[category.slug]
   return (
-    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-16">
-      <div className="relative overflow-visible rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] px-8 pb-7 pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] sm:px-14">
+    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-12 sm:pt-14 md:pt-16 px-1 sm:px-3">
+      <div className="relative overflow-visible rounded-[24px] sm:rounded-[30px] md:rounded-[34px] border-x-2 border-b-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-8 md:px-14 pb-6 sm:pb-7 pt-14 sm:pt-16 md:pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
         {/* cekungan visual */}
         <div
-          className="absolute left-1/2 top-0 h-[105px] w-[240px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B]"
-          // className="absolute left-1/2 top-0 h-24 w-40 -translate-x-1/2 -translate-y-[13%] bg-[#28470B]"
+          className="absolute left-1/2 top-0 h-[105px] w-[280px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] scale-[0.68] sm:scale-[0.82] md:scale-100 origin-top"
           aria-hidden="true"
-          // style={{ clipPath: "path('M0 0 H160 V24 C160 69 124 96 80 96 C36 96 0 69 0 24 Z')", }}
           style={{
             clipPath:
               "path('M0 0 H280 V20 C220 20 205 38 190 58 C170 85 145 103 120 103 C95 103 70 85 50 58 C35 38 20 20 0 20 Z')",
           }}
         />
-        {/* LINGKARAN ICON  */}
-        <div className="absolute left-1/2 top-0 z-20 flex size-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
-          <span className="material-symbols-outlined !text-[70px] md:!text-[100px] !leading-none text-[#DCB06F]">
+        {/* LINGKARAN ICON */}
+        <div className="absolute left-1/2 top-0 z-20 flex size-24 sm:size-28 md:size-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
+          <span className="material-symbols-outlined !text-[48px] sm:!text-[64px] md:!text-[100px] !leading-none text-[#DCB06F]">
             {icon}
           </span>
         </div>
 
         {/* Konten */}
-        <div className="relative z-10 mt-8 font-montserrat">
-          <h3 className="inline-block border-b-2 border-[#A90900] pb-1 font-bold text-[#A90900] text-[clamp(22px,2.2vw,32px)]">{title}</h3>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-5 md:leading-7 text-[clamp(14px,1.2vw,18px)]">{summary}</p>
+        <div className="relative z-10 mt-4 sm:mt-6 md:mt-8 font-montserrat">
+          <h3 className="inline-block border-b-2 border-[#A90900] pb-1 font-bold text-[#A90900] text-lg sm:text-2xl md:text-[clamp(22px,2.2vw,32px)]">
+            {title}
+          </h3>
+          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-[#32210F]">
+            {summary}
+          </p>
 
-          <div className="mx-auto shadow-lg mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-7 py-2 text-[#870F0C] shadow-[0_4x_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
-            {/* <div className="hs-carousel-info inline-flex justify-center px-4 bottom-3 inset-s-1/2 -translate-x-1/2 bg-layer text-layer-foreground rounded-lg"> */}
+          <div className="mx-auto shadow-lg mt-4 sm:mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-5 sm:px-7 py-1.5 sm:py-2 text-[#870F0C] text-xs sm:text-sm font-semibold shadow-[0_4px_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
             <span className="me-1">{current}</span>
             /
             <span className="ms-1">{total}</span>
-            {/* </div> */}
           </div>
         </div>
       </div>
@@ -339,14 +339,14 @@ export default function Page() {
           {/* Program Kerja Section */}
           <motion.section
             id="program-kerja"
-            className="relative p-1 md:p-2 bg-[#DCB06F] mx-5"
+            className="relative p-1 md:p-2 bg-[#DCB06F] mx-2 sm:mx-4 md:mx-5 rounded-[22px] sm:rounded-[28px]"
           >
-            <div className="mx-auto p-8 md:p-12 bg-[#2C430B] rounded-[25px]">
+            <div className="mx-auto p-4 sm:p-8 md:p-12 bg-[#2C430B] rounded-[18px] sm:rounded-[25px]">
               <div className="text-center">
                 <motion.h2
                   {...fadeUp}
                   transition={{ duration: 0.4 }}
-                  className="font-asimovian uppercase leading-tight text-[clamp(50px,5vw,65px)] text-[#FBF5EA]"
+                  className="font-asimovian uppercase leading-tight text-3xl sm:text-4xl md:text-[clamp(50px,5vw,65px)] text-[#FBF5EA]"
                 >
                   Program Kerja
                 </motion.h2>
@@ -360,10 +360,10 @@ export default function Page() {
               ) : (
                 <div
                   id="hs-carousel"
-                  className="relative my-10"
+                  className="relative my-6 sm:my-8 md:my-10"
                   data-hs-carousel='{"loadingClasses": "opacity-0", "isInfiniteLoop": true}'
                 >
-                  <div className="hs-carousel relative min-h-120 w-full overflow-hidden md:min-h-96 md:overflow-visible">
+                  <div className="hs-carousel relative min-h-[380px] sm:min-h-[420px] md:min-h-96 w-full overflow-hidden md:overflow-visible">
                     {/* Carousel Body */}
                     <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap transition-transform duration-700">
                       {programs.map((program, i) => (
@@ -377,13 +377,14 @@ export default function Page() {
                     </div>
                     {/* End Carousel Body */}
 
-                    {/* VERSI DESKTOP */}
+                    {/* Navigation Buttons (Responsive: Mobile & Desktop) */}
                     <button
                       type="button"
                       disabled={programs.length === 1}
-                      className="hidden md:inline-flex hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                      className="hs-carousel-prev absolute top-1/2 left-0 sm:left-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                      aria-label="Previous Program"
                     >
-                      <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                      <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
                         keyboard_arrow_left
                       </span>
                     </button>
@@ -391,29 +392,15 @@ export default function Page() {
                     <button
                       type="button"
                       disabled={programs.length === 1}
-                      className="hidden md:inline-flex hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                      className="hs-carousel-next absolute top-1/2 right-0 sm:right-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                      aria-label="Next Program"
                     >
-                      <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                      <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
                         keyboard_arrow_right
                       </span>
                     </button>
                   </div>
                 </div>
-              )}
-              {!loadingPrograms && !programError && programs.length > 0 && (
-                <>
-                  {/* VERSI MOBILE */}
-                  <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
-                    <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                      keyboard_arrow_left
-                    </span>
-                  </button>
-                  <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
-                    <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
-                      keyboard_arrow_right
-                    </span>
-                  </button>
-                </>
               )}
             </div>
           </motion.section>
