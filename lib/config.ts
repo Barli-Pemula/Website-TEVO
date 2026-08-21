@@ -10,10 +10,10 @@ export const CONFIG = {
   minCareUrl: "https://linktr.ee/mincare_astana",
 
   /** Angkasa Store subdomain */
-  storeUrl: "https://angkasastore.ormawaeksekutifpku.com",
+  storeUrl: "https://ipb.link/jaslab-angkasa1",
 
   // Angkasa Kost subdomain
-  angkasaKostUrl: "https://ipb.link/jaslab-angkasa1",
+  angkasaKostUrl: "https://angkasakost.ormawaeksekutifpku.com/",
 
   /** Narahubung */
   contact: {
