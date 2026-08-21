@@ -319,19 +319,19 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Program Kerja */}
+              {/* Program Kerja / Unit Kerja Supervisi */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-2 sm:px-6">
                 <div className="border-2 sm:border-3 border-[#DCB06F] bg-[#F6E7CC] rounded-[16px] sm:rounded-[22px] p-2 sm:p-2.5 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined !text-[30px] sm:!text-[44px] md:!text-[52px] text-[#870F0C]">
-                    assignment
+                    {slug === "bph" && programs.length === 0 ? "account_balance" : "assignment"}
                   </span>
                 </div>
                 <div className="font-montserrat leading-none text-center sm:text-left">
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F9D253] mb-1">
-                    {programs.length}
+                    {slug === "bph" && programs.length === 0 ? 12 : programs.length}
                   </p>
                   <p className="uppercase font-semibold text-[10px] sm:text-xs md:text-sm tracking-wide text-white/90">
-                    Program Kerja
+                    {slug === "bph" && programs.length === 0 ? "Biro & Departemen" : "Program Kerja"}
                   </p>
                 </div>
               </div>
@@ -354,11 +354,34 @@ export default function Page() {
                 </motion.h2>
               </div>
               {loadingPrograms ? (
-                <div className="py-20 text-center font-montserrat text-white">Memuat program kerja...</div>
+                <div className="py-12 sm:py-16 text-center font-montserrat text-white">
+                  <div className="size-8 rounded-full border-2 border-[#DCB06F] border-t-white animate-spin mx-auto mb-2" />
+                  <p className="text-xs sm:text-sm">Memuat program kerja...</p>
+                </div>
               ) : programError ? (
-                <div className="py-10 text-center font-montserrat text-red-300">{programError}</div>
+                <div className="py-8 text-center font-montserrat text-red-300 text-xs sm:text-sm">
+                  {programError}
+                </div>
               ) : programs.length === 0 ? (
-                <div className="py-20 text-center font-montserrat text-white">Data program kerja belum tersedia.</div>
+                <div className="my-4 sm:my-8 max-w-2xl mx-auto rounded-[20px] sm:rounded-[26px] border-2 border-[#DCB06F] bg-[#F6E7CC] p-5 sm:p-8 text-center shadow-[0_6px_0_#A86D21,0_12px_24px_rgba(0,0,0,0.18)]">
+                  <div className="size-14 sm:size-18 md:size-20 rounded-full border-2 border-[#DCB06F] bg-[#870F0C] text-[#DCB06F] flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-md">
+                    <span className="material-symbols-outlined !text-[28px] sm:!text-[36px] md:!text-[40px] text-[#DCB06F]">
+                      {slug === "bph" ? "account_balance" : "assignment_turned_in"}
+                    </span>
+                  </div>
+                  <h3 className="font-asimovian text-lg sm:text-xl md:text-2xl text-[#870F0C] uppercase tracking-wide mb-2">
+                    {slug === "bph" ? "Supervisi & Tata Kelola Organisasi" : "Program Kerja Terpusat"}
+                  </h3>
+                  <p className="font-montserrat text-xs sm:text-sm text-[#32210F] leading-relaxed max-w-lg mx-auto">
+                    {slug === "bph"
+                      ? "Badan Pengurus Harian (BPH) memegang mandat kepemimpinan eksekutif, koordinasi lintas biro & departemen, serta supervisi strategis seluruh program kerja organisasi."
+                      : "Seluruh pelaksanaan program strategis dikoordinasikan secara komprehensif bersama seluruh elemen kepengurusan organisasi."}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-[#DCB06F] bg-[#870F0C] px-3.5 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold text-[#F9D253] shadow-xs">
+                    <span className="material-symbols-outlined !text-[14px] sm:!text-[16px]">verified</span>
+                    <span>{slug === "bph" ? "Badan Pengurus Harian" : "Ormawa Eksekutif PKU"}</span>
+                  </div>
+                </div>
               ) : (
                 <div
                   id="hs-carousel"
@@ -380,27 +403,29 @@ export default function Page() {
                     {/* End Carousel Body */}
 
                     {/* Navigation Buttons (Responsive: Mobile & Desktop) */}
-                    <button
-                      type="button"
-                      disabled={programs.length === 1}
-                      className="hs-carousel-prev absolute top-1/2 left-0 sm:left-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
-                      aria-label="Previous Program"
-                    >
-                      <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
-                        keyboard_arrow_left
-                      </span>
-                    </button>
+                    {programs.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          className="hs-carousel-prev absolute top-1/2 left-0 sm:left-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                          aria-label="Previous Program"
+                        >
+                          <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
+                            keyboard_arrow_left
+                          </span>
+                        </button>
 
-                    <button
-                      type="button"
-                      disabled={programs.length === 1}
-                      className="hs-carousel-next absolute top-1/2 right-0 sm:right-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
-                      aria-label="Next Program"
-                    >
-                      <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
-                        keyboard_arrow_right
-                      </span>
-                    </button>
+                        <button
+                          type="button"
+                          className="hs-carousel-next absolute top-1/2 right-0 sm:right-2 -translate-y-1/2 z-20 flex size-9 sm:size-10 md:size-12 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                          aria-label="Next Program"
+                        >
+                          <span className="material-symbols-outlined !text-[28px] sm:!text-[34px] md:!text-[40px] text-[#870F0C]">
+                            keyboard_arrow_right
+                          </span>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
