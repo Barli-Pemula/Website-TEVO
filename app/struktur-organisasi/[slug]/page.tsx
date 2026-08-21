@@ -78,42 +78,44 @@ interface Member {
 }
 
 function Proker({ title, summary, category, current, total }: Program) {
-  const icon = category?.slug && categoryIcons[category.slug] ? categoryIcons[category.slug] : "event_available";
-
+  const icon = categoryIcons[category.slug]
   return (
-    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-14 sm:pt-16 px-2 sm:px-4">
-      <div className="relative overflow-visible rounded-[26px] sm:rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-4 sm:px-10 md:px-14 pb-6 sm:pb-8 pt-14 sm:pt-18 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)]">
-        {/* Cekungan visual */}
+    <section className="hs-carousel-slide mt-2 relative mx-auto w-full shrink-0 max-w-3xl pt-16">
+      <div className="relative overflow-visible rounded-[34px] border-2 border-[#DCB06F] bg-[#F6E7CC] px-8 pb-7 pt-20 text-center shadow-[0_8px_0_#A86D21,0_16px_28px_rgba(0,0,0,0.18)] sm:px-14">
+        {/* cekungan visual */}
         <div
-          className="absolute left-1/2 top-0 h-[65px] sm:h-[85px] md:h-[100px] w-[160px] sm:w-[210px] md:w-[250px] -translate-x-1/2 -translate-y-[2px] bg-[#2C430B] rounded-b-[40px] sm:rounded-b-[60px]"
+          className="absolute left-1/2 top-0 h-[105px] w-[240px] -translate-x-1/2 -translate-y-[2px] bg-[#28470B]"
+          // className="absolute left-1/2 top-0 h-24 w-40 -translate-x-1/2 -translate-y-[13%] bg-[#28470B]"
           aria-hidden="true"
+          // style={{ clipPath: "path('M0 0 H160 V24 C160 69 124 96 80 96 C36 96 0 69 0 24 Z')", }}
+          style={{
+            clipPath:
+              "path('M0 0 H280 V20 C220 20 205 38 190 58 C170 85 145 103 120 103 C95 103 70 85 50 58 C35 38 20 20 0 20 Z')",
+          }}
         />
-
-        {/* LINGKARAN ICON */}
-        <div className="absolute left-1/2 top-0 z-20 flex size-24 sm:size-28 md:size-34 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 sm:border-3 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
-          <span className="material-symbols-outlined !text-[44px] sm:!text-[60px] md:!text-[72px] !leading-none text-[#DCB06F]">
+        {/* LINGKARAN ICON  */}
+        <div className="absolute left-1/2 top-0 z-20 flex size-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#870F0C] shadow-[0_8px_18px_rgba(0,0,0,0.24)]">
+          <span className="material-symbols-outlined !text-[70px] md:!text-[100px] !leading-none text-[#DCB06F]">
             {icon}
           </span>
         </div>
 
         {/* Konten */}
-        <div className="relative z-10 mt-4 sm:mt-6 font-montserrat">
-          <h3 className="inline-block border-b-2 border-[#A90900] pb-1 font-bold text-[#A90900] text-lg sm:text-2xl md:text-3xl max-w-full break-words">
-            {title}
-          </h3>
-          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-[#32210F]">
-            {summary}
-          </p>
+        <div className="relative z-10 mt-8 font-montserrat">
+          <h3 className="inline-block border-b-2 border-[#A90900] pb-1 font-bold text-[#A90900] text-[clamp(22px,2.2vw,32px)]">{title}</h3>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-5 md:leading-7 text-[clamp(14px,1.2vw,18px)]">{summary}</p>
 
-          <div className="mx-auto shadow-md mt-4 sm:mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-5 sm:px-7 py-1 sm:py-1.5 text-[#870F0C] font-semibold text-xs sm:text-sm shadow-[0_4px_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
+          <div className="mx-auto shadow-lg mt-5 flex w-fit items-center gap-2 rounded-full border-2 border-[#DEB374] bg-[#F6E7CC] px-7 py-2 text-[#870F0C] shadow-[0_4x_0_#B98035,0_8px_14px_rgba(0,0,0,0.16)]">
+            {/* <div className="hs-carousel-info inline-flex justify-center px-4 bottom-3 inset-s-1/2 -translate-x-1/2 bg-layer text-layer-foreground rounded-lg"> */}
             <span className="me-1">{current}</span>
             /
             <span className="ms-1">{total}</span>
+            {/* </div> */}
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 export default function Page() {
@@ -337,23 +339,22 @@ export default function Page() {
           {/* Program Kerja Section */}
           <motion.section
             id="program-kerja"
-            className="relative p-1 md:p-1.5 bg-[#DCB06F] rounded-[24px] sm:rounded-[28px]"
+            className="relative p-1 md:p-2 bg-[#DCB06F] mx-5"
           >
-            <div className="mx-auto p-4 sm:p-8 md:p-12 bg-[#2C430B] rounded-[20px] sm:rounded-[25px]">
-              <div className="text-center mb-4">
+            <div className="mx-auto p-8 md:p-12 bg-[#2C430B] rounded-[25px]">
+              <div className="text-center">
                 <motion.h2
                   {...fadeUp}
                   transition={{ duration: 0.4 }}
-                  className="font-asimovian uppercase leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FBF5EA]"
+                  className="font-asimovian uppercase leading-tight text-[clamp(50px,5vw,65px)] text-[#FBF5EA]"
                 >
                   Program Kerja
                 </motion.h2>
               </div>
-
               {loadingPrograms ? (
                 <div className="py-20 text-center font-montserrat text-white">Memuat program kerja...</div>
               ) : programError ? (
-                <div>{programError}</div>
+                <div className="py-10 text-center font-montserrat text-red-300">{programError}</div>
               ) : programs.length === 0 ? (
                 <div className="py-20 text-center font-montserrat text-white">Data program kerja belum tersedia.</div>
               ) : (
@@ -362,7 +363,7 @@ export default function Page() {
                   className="relative my-10"
                   data-hs-carousel='{"loadingClasses": "opacity-0", "isInfiniteLoop": true}'
                 >
-                  <div className="hs-carousel relative min-h-[360px] sm:min-h-[380px] md:min-h-[350px] w-full overflow-hidden">
+                  <div className="hs-carousel relative min-h-120 w-full overflow-hidden md:min-h-96 md:overflow-visible">
                     {/* Carousel Body */}
                     <div className="hs-carousel-body absolute inset-s-0 top-0 bottom-0 flex flex-nowrap transition-transform duration-700">
                       {programs.map((program, i) => (
@@ -374,32 +375,45 @@ export default function Page() {
                         />
                       ))}
                     </div>
+                    {/* End Carousel Body */}
 
-                    {/* Carousel Controls */}
-                    {programs.length > 1 && (
-                      <>
-                        <button
-                          type="button"
-                          className="hs-carousel-prev absolute top-1/2 left-1 sm:left-2 -translate-y-1/2 z-20 flex size-9 sm:size-11 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform"
-                          aria-label="Proker sebelumnya"
-                        >
-                          <span className="material-symbols-outlined !text-[28px] sm:!text-[36px]">
-                            keyboard_arrow_left
-                          </span>
-                        </button>
-                        <button
-                          type="button"
-                          className="hs-carousel-next absolute top-1/2 right-1 sm:right-2 -translate-y-1/2 z-20 flex size-9 sm:size-11 items-center justify-center rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] text-[#870F0C] shadow-md hover:scale-105 active:scale-95 transition-transform"
-                          aria-label="Proker selanjutnya"
-                        >
-                          <span className="material-symbols-outlined !text-[28px] sm:!text-[36px]">
-                            keyboard_arrow_right
-                          </span>
-                        </button>
-                      </>
-                    )}
+                    {/* VERSI DESKTOP */}
+                    <button
+                      type="button"
+                      disabled={programs.length === 1}
+                      className="hidden md:inline-flex hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                        keyboard_arrow_left
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      disabled={programs.length === 1}
+                      className="hidden md:inline-flex hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 -translate-y-1/2 rounded-full border-2 border-[#DCB06F] bg-[#F6E7CC] shadow-2xs disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                        keyboard_arrow_right
+                      </span>
+                    </button>
                   </div>
                 </div>
+              )}
+              {!loadingPrograms && !programError && programs.length > 0 && (
+                <>
+                  {/* VERSI MOBILE */}
+                  <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-prev absolute top-1/2 inset-s-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
+                    <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                      keyboard_arrow_left
+                    </span>
+                  </button>
+                  <button type="button" disabled={programs.length == 1} className="md:hidden mt-20 hs-carousel-next absolute top-1/2 inset-e-2 justify-center items-center size-10 bg-layer text-layer-foreground rounded-full shadow-2xs hover:bg-layer-hover -translate-y-1/2 focus:outline-hidden bg-[#F6E7CC] border-2 border-[#DCB06F] rounded-full disabled:cursor-not-allowed disabled:opacity-40">
+                    <span className="material-symbols-outlined !text-[40px] text-[#870F0C]">
+                      keyboard_arrow_right
+                    </span>
+                  </button>
+                </>
               )}
             </div>
           </motion.section>
