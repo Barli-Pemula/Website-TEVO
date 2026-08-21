@@ -299,7 +299,13 @@ export default function page() {
                   Program Kerja
                 </motion.h2>
               </div>
-              {programs.length > 0 && (
+              {loadingPrograms ? (
+                <div>Memuat program kerja...</div>
+              ) : programError ? (
+                <div>{programError}</div>
+              ) : programs.length === 0 ? (
+                <div>Tidak ada program kerja.</div>
+              ) : (
                 <div
                   id="hs-carousel"
                   className="relative my-10"
